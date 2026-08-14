@@ -1,0 +1,73 @@
+schema_version: 1
+stage: Stage-5F cellular-IP application-report energy bridge audit
+stage5_status: source_aligned_component_authorised_canonical_target_blocked_pending_transfer_evidence
+scientific_policy:
+  preserve_stage4_matrix: true
+  source_payload_bytes: 1024
+  source_active_phases: [Connection Establishment, Data Request, Data Download, Postprocessing]
+  source_tail_phases: [Standby, Idle]
+  materialise_source_aligned_active_component: true
+  treat_source_active_component_as_application_report_energy: false
+  scale_payload_without_validated_model: false
+  infer_ltem_mqtt_from_nbiot_mqtt_delta: false
+  infer_coap_from_http: false
+  infer_tls_dtls_lwm2m_overhead_from_source_protocol_label: false
+  scale_idle_or_standby_to_reporting_interval_without_state_model: false
+  preserve_within_block_bootstrap_dependence: true
+  canonical_target_materialisation_authorised: false
+  preference_scoring_authorised: false
+  publication_mcda_authorised: false
+
+source_reference_contexts:
+  - reference_id: vomhoff_nb_iot_http_1kb_active
+    technology: NB-IoT
+    source_application_protocol: HTTP
+    payload_bytes: 1024
+    active_phases: [Connection Establishment, Data Request, Data Download, Postprocessing]
+    role: source_aligned_active_transaction_component
+  - reference_id: vomhoff_lte_m_http_1kb_active
+    technology: LTE-M
+    source_application_protocol: HTTP
+    payload_bytes: 1024
+    active_phases: [Connection Establishment, Data Request, Data Download, Postprocessing]
+    role: source_aligned_active_transaction_component
+  - reference_id: vomhoff_nb_iot_mqtt_1kb_active
+    technology: NB-IoT
+    source_application_protocol: MQTT
+    payload_bytes: 1024
+    active_phases: [Connection Establishment, Data Request, Data Download, Postprocessing]
+    role: source_aligned_active_transaction_component
+
+scenario_contexts:
+  smart_meter_public_cellular: {application_payload_bytes: 200, reporting_interval_s: 900}
+  asset_tracking_periodic_cross_cell: {application_payload_bytes: 64, reporting_interval_s: 60}
+  asset_tracking_connected_handover: {application_payload_bytes: 64, reporting_interval_s: 60}
+
+candidate_contexts:
+  nbiot_ip_coap_dtls_lwm2m:
+    technology: NB-IoT
+    candidate_application_family: CoAP
+    preferred_source_reference_id: vomhoff_nb_iot_http_1kb_active
+    source_application_alignment: mismatched_http_to_coap
+  ltem_ip_coap_dtls_lwm2m:
+    technology: LTE-M
+    candidate_application_family: CoAP
+    preferred_source_reference_id: vomhoff_lte_m_http_1kb_active
+    source_application_alignment: mismatched_http_to_coap
+  nbiot_ip_mqtt_tls_lwm2m:
+    technology: NB-IoT
+    candidate_application_family: MQTT
+    preferred_source_reference_id: vomhoff_nb_iot_mqtt_1kb_active
+    source_application_alignment: partial_mqtt_context_alignment
+  ltem_ip_mqtt_tls_lwm2m:
+    technology: LTE-M
+    candidate_application_family: MQTT
+    preferred_source_reference_id: vomhoff_lte_m_http_1kb_active
+    source_application_alignment: missing_ltem_mqtt_source_use_http_rat_reference_only
+
+expected:
+  feasible_cellular_ip_candidate_incidences: 10
+  source_reference_contexts: 3
+  canonical_target_ready_rows: 0
+  payload_mismatch_rows: 10
+  exact_application_context_rows: 0

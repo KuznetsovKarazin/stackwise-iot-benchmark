@@ -1,0 +1,242 @@
+schema_version: 1
+stage: Stage-5E decision-readiness and evidence-gap prioritisation
+stage5_status: decision_targets_audited_no_publication_ranking_authorised
+
+scientific_policy:
+  preserve_stage4_matrix: true
+  include_feasible_and_unresolved_candidates_in_audit: true
+  treat_bridgeable_as_ready: false
+  treat_conditional_input_as_target_metric: false
+  infer_missing_operating_profile: false
+  infer_missing_costs: false
+  reuse_hard_feasibility_as_soft_score: false
+  require_common_metric_boundary_for_comparison: true
+  preference_scoring_authorised: false
+  publication_mcda_authorised: false
+  fleet_optimisation_authorised: false
+
+decision_targets:
+  - target_metric_id: expected_device_energy_per_application_report_j
+    role: soft_candidate_for_first_decision_slice
+    first_slice_required: true
+  - target_metric_id: lifecycle_cost_eur
+    role: soft_candidate_for_first_decision_slice
+    first_slice_required: true
+  - target_metric_id: end_to_end_application_latency_ms
+    role: hard_or_contextual_until_comparable_soft_evidence_exists
+    first_slice_required: false
+  - target_metric_id: delivery_probability
+    role: optional_soft_only_when_attempt_denominator_is_identified
+    first_slice_required: false
+  - target_metric_id: feasible_link_probability
+    role: hard_or_contextual_until_scenario_link_model_is_identified
+    first_slice_required: false
+
+readiness_semantics:
+  READY_DIRECT: Target estimand is directly measured at a compatible boundary and its uncertainty semantics are usable for the declared decision use.
+  READY_BRIDGED: A validated and materialised bridge produces the target estimand under a complete declared operating profile.
+  PROFILE_UNRESOLVED: Existing evidence is potentially bridgeable, but one or more decision-relevant operating-profile fields are not frozen.
+  BRIDGEABLE: Existing evidence supports a scientifically defined bridge, but the numerical bridge has not yet been validated/materialised.
+  ROBUSTNESS_ONLY: Existing evidence can condition or stress-test a model but does not identify the target estimand or a probability distribution for it.
+  MISSING: No current core-four evidence identifies the target estimand for this stack.
+  INCOMPATIBLE: Related evidence exists but its mode/boundary cannot be transferred to this candidate without new evidence or a separately validated transfer model.
+
+# Rules deliberately separate source-evidence relation from target readiness.
+# A BRIDGEABLE relation is not a READY target until a bridge is validated and materialised.
+evidence_rules:
+  # Whole-device/application-report energy
+  - rule_id: cellular_ip_report_energy
+    stack_ids: [nbiot_ip_coap_dtls_lwm2m, ltem_ip_coap_dtls_lwm2m, nbiot_ip_mqtt_tls_lwm2m, ltem_ip_mqtt_tls_lwm2m]
+    target_metric_id: expected_device_energy_per_application_report_j
+    evidence_relation: BRIDGEABLE
+    source_dataset_ids: [vomhoff_nbiot_ltem_energy_2023]
+    source_metric_ids: [device_phase_energy_j]
+    profile_required: true
+    uncertainty_state: identified_conditional_within_study_nonparametric
+    gap_id: cellular_ip_report_energy_bridge
+    blocking_reasons: [scenario_report_profile_not_materialised, source_application_stack_not_identical_to_candidate, phase_to_report_accounting_bridge_not_materialised]
+    closure_action: Define scenario-specific cellular report profiles and validate phase-to-report composition while preserving Vomhoff physical-run joint bootstrap semantics.
+  - rule_id: cellular_nonip_report_energy
+    stack_ids: [nbiot_nonip_lwm2m, ltem_nonip_lwm2m]
+    target_metric_id: expected_device_energy_per_application_report_j
+    evidence_relation: INCOMPATIBLE
+    source_dataset_ids: [vomhoff_nbiot_ltem_energy_2023]
+    source_metric_ids: [device_phase_energy_j]
+    profile_required: true
+    uncertainty_state: no_candidate_aligned_empirical_source
+    gap_id: cellular_nonip_report_energy_source
+    blocking_reasons: [vomhoff_ip_context_not_transferable_to_ciot_nonip]
+    closure_action: Obtain matched Non-IP whole-device/report evidence or validate an explicit IP-to-Non-IP transfer model; do not reuse Vomhoff IP phases directly.
+  - rule_id: classical_lora_report_energy
+    stack_ids: [lorawan_lora_lwm2m_nonip]
+    target_metric_id: expected_device_energy_per_application_report_j
+    evidence_relation: MISSING
+    source_dataset_ids: [loed_lorawan_edge_2020]
+    source_metric_ids: []
+    profile_required: true
+    uncertainty_state: no_device_energy_source
+    gap_id: lorawan_lora_report_energy_source
+    blocking_reasons: [loed_is_reception_side_only, no_classical_lora_device_energy_in_core_four]
+    closure_action: Add one matched whole-device classical-LoRa per-report energy source/model under an explicit LoRaWAN operating profile.
+  - rule_id: lrfhss_report_energy
+    stack_ids: [lorawan_lrfhss_lwm2m_nonip]
+    target_metric_id: expected_device_energy_per_application_report_j
+    evidence_relation: BRIDGEABLE
+    source_dataset_ids: [lorawan_lrfhss_energy_2024]
+    source_metric_ids: [radio_incremental_transaction_energy_j]
+    profile_required: true
+    uncertainty_state: explicit_single_trace_epistemic_gap_plus_unweighted_variant_robustness
+    gap_id: lrfhss_whole_device_report_energy_bridge
+    blocking_reasons: [radio_only_boundary, generic_deployment_variant_unidentified, whole_device_residual_energy_unidentified]
+    closure_action: Preserve the Stage-5D unweighted variant family; activate a whole-device bridge only with deployment/profile evidence and explicit residual-energy treatment.
+  - rule_id: thread_report_energy
+    stack_ids: [thread_coap_dtls_lwm2m]
+    target_metric_id: expected_device_energy_per_application_report_j
+    evidence_relation: BRIDGEABLE
+    source_dataset_ids: [insectt_wsn_power_2023]
+    source_metric_ids: [derived_capture_energy_j, trace_charge_c]
+    profile_required: true
+    uncertainty_state: explicit_single_trace_epistemic_gap_shared_voltage_lineage
+    gap_id: thread_report_energy_bridge
+    blocking_reasons: [repeated_capture_to_report_bridge_not_materialised, upper_stack_overhead_not_isolated, single_trace_population_variability_unidentified]
+    closure_action: Define a matched Thread reporting profile and convert the repeated-workload capture to per-report energy without inventing population variance.
+
+  # End-to-end latency
+  - rule_id: cellular_ip_latency
+    stack_ids: [nbiot_ip_coap_dtls_lwm2m, ltem_ip_coap_dtls_lwm2m, nbiot_ip_mqtt_tls_lwm2m, ltem_ip_mqtt_tls_lwm2m]
+    target_metric_id: end_to_end_application_latency_ms
+    evidence_relation: BRIDGEABLE
+    source_dataset_ids: [vomhoff_nbiot_ltem_energy_2023]
+    source_metric_ids: [device_phase_duration_s]
+    profile_required: true
+    uncertainty_state: identified_conditional_within_study_nonparametric
+    gap_id: cellular_ip_application_latency_bridge
+    blocking_reasons: [phase_to_application_endpoint_mapping_not_materialised, candidate_stack_not_identical_to_source_context]
+    closure_action: Define the application-to-application endpoint and validate a phase-composition timing bridge; do not call capture/phase duration end-to-end latency directly.
+  - rule_id: cellular_nonip_latency
+    stack_ids: [nbiot_nonip_lwm2m, ltem_nonip_lwm2m]
+    target_metric_id: end_to_end_application_latency_ms
+    evidence_relation: INCOMPATIBLE
+    source_dataset_ids: [vomhoff_nbiot_ltem_energy_2023]
+    source_metric_ids: [device_phase_duration_s]
+    profile_required: true
+    uncertainty_state: no_candidate_aligned_empirical_source
+    gap_id: cellular_nonip_application_latency_source
+    blocking_reasons: [vomhoff_ip_context_not_transferable_to_ciot_nonip]
+    closure_action: Obtain matched Non-IP end-to-end timing evidence or a separately validated transfer model.
+  - rule_id: classical_lora_latency
+    stack_ids: [lorawan_lora_lwm2m_nonip]
+    target_metric_id: end_to_end_application_latency_ms
+    evidence_relation: MISSING
+    source_dataset_ids: [loed_lorawan_edge_2020]
+    source_metric_ids: []
+    profile_required: true
+    uncertainty_state: no_end_to_end_timing_source
+    gap_id: lorawan_lora_application_latency_source
+    blocking_reasons: [gateway_reception_timestamps_do_not_define_application_latency]
+    closure_action: Obtain application-to-application latency measurements/model under a frozen LoRaWAN profile if latency is used beyond hard feasibility.
+  - rule_id: lrfhss_latency
+    stack_ids: [lorawan_lrfhss_lwm2m_nonip]
+    target_metric_id: end_to_end_application_latency_ms
+    evidence_relation: MISSING
+    source_dataset_ids: [lorawan_lrfhss_energy_2024]
+    source_metric_ids: []
+    profile_required: true
+    uncertainty_state: no_end_to_end_timing_source
+    gap_id: lrfhss_application_latency_source
+    blocking_reasons: [capture_duration_is_not_application_latency]
+    closure_action: Obtain matched stack-level timing evidence only if latency is needed as a soft decision criterion.
+  - rule_id: thread_latency
+    stack_ids: [thread_coap_dtls_lwm2m]
+    target_metric_id: end_to_end_application_latency_ms
+    evidence_relation: MISSING
+    source_dataset_ids: [insectt_wsn_power_2023]
+    source_metric_ids: []
+    profile_required: true
+    uncertainty_state: no_end_to_end_timing_source
+    gap_id: thread_stack_latency_source_or_model
+    blocking_reasons: [insectt_power_trace_not_latency_evidence, stage5a_thread_latency_bridge_blocked]
+    closure_action: Add matched end-to-end Thread+DTLS+CoAP+LwM2M latency evidence/model under the frozen industrial operating profile.
+
+  # Delivery probability
+  - rule_id: classical_lora_delivery
+    stack_ids: [lorawan_lora_lwm2m_nonip]
+    target_metric_id: delivery_probability
+    evidence_relation: CONDITIONAL_INPUT_ONLY
+    source_dataset_ids: [loed_lorawan_edge_2020]
+    source_metric_ids: [gateway_rssi_dbm, gateway_snr_db]
+    profile_required: true
+    uncertainty_state: campaign_blocklength_robustness_not_delivery_probability
+    gap_id: lorawan_lora_delivery_attempt_denominator
+    blocking_reasons: [attempted_transmission_denominator_absent, outcome_linked_delivery_model_absent, crc_fraction_prohibited_as_pdr]
+    closure_action: Add attempted-transmission outcomes or an externally validated outcome-linked LoRaWAN model; retain LoED only as conditional link evidence.
+  - rule_id: generic_delivery_missing
+    stack_ids: [nbiot_ip_coap_dtls_lwm2m, ltem_ip_coap_dtls_lwm2m, nbiot_ip_mqtt_tls_lwm2m, ltem_ip_mqtt_tls_lwm2m, nbiot_nonip_lwm2m, ltem_nonip_lwm2m, lorawan_lrfhss_lwm2m_nonip, thread_coap_dtls_lwm2m]
+    target_metric_id: delivery_probability
+    evidence_relation: MISSING
+    source_dataset_ids: []
+    source_metric_ids: []
+    profile_required: true
+    uncertainty_state: no_attempt_outcome_source
+    gap_id: non_lora_delivery_probability_source
+    blocking_reasons: [core_four_contains_no_attempt_denominator_for_candidate]
+    closure_action: Add candidate-specific attempted-transmission outcome evidence only if delivery probability is retained as a soft criterion.
+
+  # Feasible-link probability / coverage
+  - rule_id: classical_lora_coverage
+    stack_ids: [lorawan_lora_lwm2m_nonip]
+    target_metric_id: feasible_link_probability
+    evidence_relation: CONDITIONAL_INPUT_ONLY
+    source_dataset_ids: [loed_lorawan_edge_2020]
+    source_metric_ids: [gateway_rssi_dbm, gateway_snr_db]
+    profile_required: true
+    uncertainty_state: campaign_blocklength_robustness
+    gap_id: lorawan_lora_scenario_link_model
+    blocking_reasons: [scenario_geometry_not_bound, technology_specific_link_threshold_model_not_materialised]
+    closure_action: Build a scenario-conditioned LoRaWAN link model only when geometry/deployment assumptions are explicit; do not normalize RSSI/SNR across RATs.
+  - rule_id: generic_coverage_missing
+    stack_ids: [nbiot_ip_coap_dtls_lwm2m, ltem_ip_coap_dtls_lwm2m, nbiot_ip_mqtt_tls_lwm2m, ltem_ip_mqtt_tls_lwm2m, nbiot_nonip_lwm2m, ltem_nonip_lwm2m, lorawan_lrfhss_lwm2m_nonip, thread_coap_dtls_lwm2m]
+    target_metric_id: feasible_link_probability
+    evidence_relation: MISSING
+    source_dataset_ids: []
+    source_metric_ids: []
+    profile_required: true
+    uncertainty_state: no_scenario_link_source
+    gap_id: non_lora_scenario_link_probability_source
+    blocking_reasons: [core_four_contains_no_candidate_aligned_scenario_coverage_model]
+    closure_action: Keep site/service availability in hard feasibility for the first decision slice; add technology-specific field/link models only if probabilistic coverage becomes decision-critical.
+
+  # Lifecycle cost
+  - rule_id: lifecycle_cost_all_candidates
+    stack_ids: [nbiot_ip_coap_dtls_lwm2m, ltem_ip_coap_dtls_lwm2m, nbiot_ip_mqtt_tls_lwm2m, ltem_ip_mqtt_tls_lwm2m, nbiot_nonip_lwm2m, ltem_nonip_lwm2m, lorawan_lora_lwm2m_nonip, lorawan_lrfhss_lwm2m_nonip, thread_coap_dtls_lwm2m]
+    target_metric_id: lifecycle_cost_eur
+    evidence_relation: MISSING
+    source_dataset_ids: []
+    source_metric_ids: []
+    profile_required: true
+    uncertainty_state: no_cost_evidence_contract
+    gap_id: lifecycle_cost_model
+    blocking_reasons: [ownership_boundary_not_frozen, cost_horizon_not_frozen, hardware_infrastructure_subscription_maintenance_evidence_missing]
+    closure_action: Define a dated lifecycle-cost contract and source-backed low/reference/high cost evidence; keep smoke-test costs out of publication analysis.
+
+priority_policy:
+  first_decision_slice_id: feasibility_conditioned_energy_and_lifecycle_cost_v1
+  interpretation: Hard feasibility remains upstream. For the first publication decision slice, energy/report and lifecycle cost are mandatory soft quantities; latency/link/delivery are not re-scored unless comparable target evidence is later established.
+  do_not_authorise_mcda: true
+  preferred_next_existing_evidence_bridge: cellular_ip_report_energy_bridge
+  mandatory_parallel_contract: lifecycle_cost_model
+  rationale: This bridge uses replicated Grade-A Vomhoff evidence and, if completed for the four IP cellular candidates, creates an energy-comparable set of at least two feasible candidates in three frozen benchmark scenarios without adding a new dataset.
+
+expected:
+  stage4_feasible_rows: 21
+  stage4_infeasible_rows: 39
+  stage4_unresolved_rows: 3
+  candidate_stacks: 9
+  decision_targets: 5
+  audited_candidate_rows: 24
+  audited_target_rows: 120
+  ready_target_rows: 0
+  feasible_candidate_rows: 21
+  feasible_first_slice_fully_ready_rows: 0
+  feasible_cellular_ip_rows: 10
+  cellular_ip_energy_unlock_scenarios: 3

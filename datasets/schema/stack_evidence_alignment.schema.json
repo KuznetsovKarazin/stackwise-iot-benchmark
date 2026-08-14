@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "STACKWISE evidence-to-component alignment record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "alignment_id",
+    "dataset_id",
+    "component_id",
+    "status",
+    "measurement_scope_note"
+  ],
+  "properties": {
+    "alignment_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+    },
+    "dataset_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "component_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+    },
+    "status": {
+      "enum": [
+        "direct_measurement_boundary_match",
+        "partial_stack_context",
+        "implementation_or_revision_unresolved",
+        "experimental_source_only",
+        "mode_mismatch",
+        "no_direct_core_evidence"
+      ]
+    },
+    "measurement_scope_note": {
+      "type": "string",
+      "minLength": 1
+    },
+    "decision_use_note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

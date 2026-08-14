@@ -1,0 +1,23 @@
+name: stackwise
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy
+  - pandas
+  - tabulate
+  - scipy
+  - statsmodels
+  - scikit-learn
+  - matplotlib
+  - pyyaml
+  - requests
+  - jsonschema
+  - typer
+  - rich
+  - pyarrow
+  - pytest
+  - jupyter
+  - pip
+  - pip:
+      - -e .

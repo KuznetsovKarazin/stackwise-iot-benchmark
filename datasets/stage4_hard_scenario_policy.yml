@@ -1,0 +1,22 @@
+stage: Stage-4D quantitative benchmark scenarios and tri-state hard feasibility
+stage4_status: benchmark_scenarios_materialised_hard_screening_complete
+expected:
+  scenarios: 6
+  candidates: 9
+  screening_rows: 54
+  feasible_rows: 12
+  infeasible_rows: 33
+  unresolved_rows: 9
+  unknown_hard_results: 27
+  decision_blocking_unknown_results: 9
+  candidate_capability_rows: 9
+scientific_guards:
+  quantitative_context_auto_promoted_to_hard: false
+  missing_candidate_capability_passes: false
+  infeasible_candidate_can_be_ranked: false
+  unresolved_candidate_can_be_called_feasible: false
+  feasible_implies_full_empirical_support: false
+  mcda_authorised: false
+  ranking_authorised: false
+  stakeholder_weights_authorised: false
+next_scientific_step: Stage-4E verify/materialise the hard capability facts that are decision-blocking where possible (latency, mobility, common per-report energy, payload/coverage/regulatory facts as needed); retain unresolved where primary evidence is absent. Still no preference scoring.

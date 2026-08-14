@@ -1,0 +1,25 @@
+stage: Stage-4B primary-source-verified component catalog
+stage4_status: core_component_catalog_materialised_with_explicit_gaps
+expected:
+  primary_sources: 23
+  verified_claims: 23
+  catalog_components: 25
+  primary_source_verified_components: 24
+  evidence_only_pending_components: 1
+  verified_compatibility_edges: 32
+  evidence_alignment_records: 8
+  unresolved_catalog_gaps: 6
+  structural_verification_stacks: 6
+  compatible_verification_stacks: 4
+  incompatible_verification_stacks: 2
+scientific_guards:
+  standards_claim_without_primary_source_authorised: false
+  unverified_binding_counts_as_compatible: false
+  evidence_alignment_implies_component_causality: false
+  ephesos_verified_stack_authorised: false
+  lora_link_evidence_reused_for_lrfhss_authorised: false
+  insectt_ble_reused_as_ipsp_energy_authorised: false
+  mcda_authorised: false
+  ranking_authorised: false
+  stakeholder_weights_authorised: false
+next_scientific_step: Stage-4C assemble a small set of verified candidate end-to-end stacks from the catalog, then define hard scenario facts/constraints; still no preference scoring or ranking.

@@ -1,0 +1,70 @@
+stage: Stage-5C LR-FHSS source-aligned operating-profile variants
+stage5_status: lrfhss_versioned_profile_variants_materialised_generic_candidate_preserved
+variant_family:
+  family_id: lrfhss_agriculture_source_aligned_v1
+  parent_profile_id: profile_lorawan_lrfhss_agriculture_energy
+  scenario_id: remote_agriculture_energy_budget
+  stack_id: lorawan_lrfhss_lwm2m_nonip
+  variant_version: 1
+  source_model_domain:
+    data_rates: [8, 9, 10, 11]
+    confirmation_modes: [unconfirmed, confirmed]
+    tx_power_dbm: 14
+    application_payload_bytes: 16
+    reporting_interval_s: 600
+    radio_hardware: Semtech LR1121 development kit/radio
+    receive_window_policy: class_a_source_model_rx1_rx2
+    accounting_boundary: radio_module_incremental_single_class_a_transaction
+    minimum_uplink_transactions_per_report: 1
+  exhaustive_within_declared_source_model_domain: true
+  exhaustive_for_generic_candidate: false
+  probability_weights_assigned: false
+  deployment_selection_evidence_available: false
+  selection_policy: enumerate_all_declared_source_aligned_variants_without_preference
+lower_bound_decision_contract:
+  match_fields:
+    - application_payload_bytes
+    - lrfhss_data_rate
+    - confirmation_mode
+    - tx_power_dbm
+    - radio_hardware
+    - receive_window_policy
+    - accounting_boundary
+    - minimum_uplink_transactions_per_report
+  unresolved_fields_not_required_for_one_sided_exclusion:
+    - retry_policy
+    - end_device_hardware
+    - reporting_cycle_definition
+  rationale: >-
+    A validated incremental radio transaction above the whole-device/report budget is a monotone lower-bound exclusion.
+    Unknown residual whole-device energy, additional retries, sensing/processing energy and reporting-cycle baseline cannot reduce
+    the already-observed/modelled radio component below that lower bound. These unresolved fields still block any whole-device
+    numeric estimate or feasibility claim when the radio component is at or below budget.
+scientific_policy:
+  preserve_frozen_stage4_matrix: true
+  preserve_generic_lrfhss_candidate_unresolved: true
+  choose_best_dr_post_hoc: false
+  choose_confirmation_mode_post_hoc: false
+  infer_deployment_variant_from_energy_result: false
+  variant_probability_weights_assigned: false
+  variant_level_conditional_infeasibility_authorised: true
+  variant_level_feasibility_from_radio_below_budget_authorised: false
+  whole_device_numeric_bridge_authorised: false
+  confirmed_source_model_extrapolation_authorised: false
+  population_uncertainty_sampling_authorised: false
+  preference_scoring_authorised: false
+  publication_mcda_authorised: false
+expected:
+  stage4_feasible_rows: 21
+  stage4_infeasible_rows: 39
+  stage4_unresolved_rows: 3
+  profile_variants: 8
+  profile_variant_field_rows: 96
+  known_variant_fields: 72
+  unresolved_variant_fields: 24
+  lower_bound_decision_sufficient_variants: 2
+  conditionally_infeasible_variants: 2
+  unresolved_residual_energy_variants: 2
+  unresolved_confirmed_model_variants: 4
+  conditionally_feasible_variants: 0
+  generic_candidate_status: unresolved

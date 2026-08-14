@@ -1,0 +1,157 @@
+schema_version: '1.0'
+benchmark_id: stackwise_empirical_evidence_benchmark
+benchmark_version: 1.0.0-rc1
+project_version: 0.1.50.post2
+prepared_on: '2026-08-12'
+release_profile: compact_research_release
+publication_mcda_authorised: false
+raw_external_data_included: false
+zenodo_upload_authorised: false
+manual_review_required: true
+core_source_ids:
+  - insectt_wsn_power_2023
+  - vomhoff_nbiot_ltem_energy_2023
+  - loed_lorawan_edge_2020
+  - lorawan_lrfhss_energy_2024
+expected:
+  core_evidence_records: 398
+  core_datasets: 4
+  core_metrics: 14
+  source_grade_A_records: 398
+  shared_parameters: 1
+  benchmark_scenarios: 7
+  candidate_stacks: 9
+  feasibility_rows: 63
+  feasible_rows: 21
+  infeasible_rows: 39
+  unresolved_rows: 3
+layers:
+  L0_analysis_ready:
+    description: Source-specific analysis-ready data derived from real published measurements; no raw external archives.
+    empirical_basis: real_measurements
+  L1_evidence_records:
+    description: Canonical typed cross-source evidence records with measurement boundaries, provenance and uncertainty semantics.
+    empirical_basis: real_measurements_and_validated_derivations
+  L2_uncertainty:
+    description: Calibrated or explicitly non-identifiable uncertainty/dependence contracts.
+    empirical_basis: mixed_empirical_and_methodological
+  L3_benchmark_definitions:
+    description: STACKWISE-authored candidate-stack and scenario definitions.
+    empirical_basis: benchmark_definition
+  L4_feasibility_and_support:
+    description: Deterministic feasibility and evidence-support results derived from L1-L3.
+    empirical_basis: derived_from_benchmark_and_evidence
+  L5_synthetic_sensitivity:
+    description: Explicit synthetic/protocol/cost sensitivity artifacts; never empirical measurements and never pooled as probabilities.
+    empirical_basis: synthetic_or_model_derived
+artifacts:
+  - source: data/analysis_ready/core_four_evidence/core_four_evidence_matrix.csv
+    destination: tables/L1_evidence_records/core_four_evidence_matrix.csv
+    layer: L1_evidence_records
+    required: true
+    row_count: 398
+  - source: data/analysis_ready/core_four_evidence/core_four_evidence_matrix.jsonl
+    destination: tables/L1_evidence_records/core_four_evidence_matrix.jsonl
+    layer: L1_evidence_records
+    required: true
+  - source: data/analysis_ready/core_four_evidence/core_four_evidence_matrix.parquet
+    destination: tables/L1_evidence_records/core_four_evidence_matrix.parquet
+    layer: L1_evidence_records
+    required: true
+  - source: data/analysis_ready/core_four_evidence/shared_parameters.json
+    destination: tables/L1_evidence_records/shared_parameters.json
+    layer: L1_evidence_records
+    required: true
+
+  - source: data/analysis_ready/vomhoff_nbiot_ltem_energy_2023/logical_phase_observations.parquet
+    destination: tables/L0_analysis_ready/vomhoff_logical_phase_observations.parquet
+    layer: L0_analysis_ready
+    required: true
+  - source: data/analysis_ready/insectt_wsn_power_2023/configuration_observations.parquet
+    destination: tables/L0_analysis_ready/insectt_configuration_observations.parquet
+    layer: L0_analysis_ready
+    required: true
+  - source: data/analysis_ready/lorawan_lrfhss_energy_2024/configuration_observations.parquet
+    destination: tables/L0_analysis_ready/lrfhss_configuration_observations.parquet
+    layer: L0_analysis_ready
+    required: true
+  - source: data/analysis_ready/lorawan_lrfhss_energy_2024/ack_rx_contrasts.csv
+    destination: tables/L0_analysis_ready/lrfhss_ack_rx_contrasts.csv
+    layer: L0_analysis_ready
+    required: true
+  - source: data/analysis_ready/loed_lorawan_edge_2020/reception_phy_summary.csv
+    destination: tables/L0_analysis_ready/loed_reception_phy_summary.csv
+    layer: L0_analysis_ready
+    required: true
+  - source: data/analysis_ready/loed_lorawan_edge_2020/gateway_phy_summary.csv
+    destination: tables/L0_analysis_ready/loed_gateway_phy_summary.csv
+    layer: L0_analysis_ready
+    required: true
+  - source: data/analysis_ready/loed_lorawan_edge_2020/logical_frame_phy_summary.csv
+    destination: tables/L0_analysis_ready/loed_logical_frame_phy_summary.csv
+    layer: L0_analysis_ready
+    required: true
+  - source: data/analysis_ready/loed_lorawan_edge_2020/gateway_day_summary.csv
+    destination: tables/L0_analysis_ready/loed_gateway_day_summary.csv
+    layer: L0_analysis_ready
+    required: true
+
+  - source: results/validation/core_four_uncertainty/uncertainty_plan.csv
+    destination: tables/L2_uncertainty/uncertainty_plan.csv
+    layer: L2_uncertainty
+    required: true
+  - source: results/validation/core_four_uncertainty/dependence_groups.csv
+    destination: tables/L2_uncertainty/dependence_groups.csv
+    layer: L2_uncertainty
+    required: true
+  - source: results/validation/loed_uncertainty_robustness/robustness_family_summary.csv
+    destination: tables/L2_uncertainty/loed_robustness_family_summary.csv
+    layer: L2_uncertainty
+    required: true
+
+  - source: datasets/stage4_benchmark_scenarios.yml
+    destination: tables/L3_benchmark_definitions/benchmark_scenarios.csv
+    layer: L3_benchmark_definitions
+    required: true
+    transform: stage4_refined_scenarios
+    row_count: 7
+  - source: results/validation/stage4_candidate_stacks/candidate_stack_catalog.csv
+    destination: tables/L3_benchmark_definitions/candidate_stack_catalog.csv
+    layer: L3_benchmark_definitions
+    required: true
+    row_count: 9
+  - source: results/validation/stage4_component_catalog/component_catalog.csv
+    destination: tables/L3_benchmark_definitions/component_catalog.csv
+    layer: L3_benchmark_definitions
+    required: true
+
+  - source: results/validation/stage4_hard_capability_review/refined_hard_feasibility_matrix.csv
+    destination: tables/L4_feasibility_and_support/refined_hard_feasibility_matrix.csv
+    layer: L4_feasibility_and_support
+    required: true
+    row_count: 63
+  - source: results/validation/stage4_candidate_stacks/candidate_evidence_support.csv
+    destination: tables/L4_feasibility_and_support/candidate_evidence_support.csv
+    layer: L4_feasibility_and_support
+    required: true
+  - source: results/validation/stage6a_decision_slice_consolidation/candidate_criterion_readiness.csv
+    destination: tables/L4_feasibility_and_support/candidate_criterion_readiness.csv
+    layer: L4_feasibility_and_support
+    required: true
+
+  - source: results/validation/stage5m_lwm2m_serialization_envelope/serialization_size_table.csv
+    destination: tables/L5_synthetic_sensitivity/lwm2m_serialization_size_table.csv
+    layer: L5_synthetic_sensitivity
+    required: true
+  - source: results/validation/stage5n_security_session_control_envelope/session_control_allowance_robustness.csv
+    destination: tables/L5_synthetic_sensitivity/session_control_allowance_robustness.csv
+    layer: L5_synthetic_sensitivity
+    required: true
+  - source: results/validation/stage6c_lifecycle_cost_robustness/preferred_subset_cost_summary.csv
+    destination: tables/L5_synthetic_sensitivity/preferred_subset_cost_summary.csv
+    layer: L5_synthetic_sensitivity
+    required: true
+  - source: results/validation/stage6c_lifecycle_cost_robustness/preferred_subset_lifecycle_cost_family.csv
+    destination: tables/L5_synthetic_sensitivity/preferred_subset_lifecycle_cost_family.csv
+    layer: L5_synthetic_sensitivity
+    required: true

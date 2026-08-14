@@ -1,0 +1,87 @@
+stage: Stage-4E targeted blocker review and mobility-semantics refinement
+stage4_status: decision_blockers_reviewed_mobility_split_remaining_latency_energy_unresolved
+scientific_policy:
+  original_asset_mobility_boolean_is_sufficiently_operational: false
+  choose_one_mobility_semantics_post_hoc: false
+  replace_asset_scenario_with_explicit_mobility_variants: true
+  infer_numeric_latency_from_qualitative_low_latency: false
+  infer_whole_device_energy_from_radio_only_energy: false
+  publication_mcda_authorised: false
+
+capability_claims:
+  - claim_id: nbiot_idle_cell_reselection
+    access_family: NB-IoT
+    capability_key: idle_cell_reselection_supported_verified
+    value: true
+    verification_status: primary_source_verified
+    source_authority: ETSI/3GPP
+    source_identifier: ETSI TS 136 304 V18.1.0 / 3GPP TS 36.304 Release 18
+    source_url: https://www.etsi.org/deliver/etsi_ts/136300_136399/136304/18.01.00_60/ts_136304v180100p.pdf
+    interpretation: NB-IoT has specified intra/inter-frequency cell-reselection procedures in idle/inactive operation.
+  - claim_id: nbiot_connected_handover
+    access_family: NB-IoT
+    capability_key: connected_mode_handover_supported_verified
+    value: false
+    verification_status: primary_source_verified_scope_specific
+    source_authority: ETSI/3GPP
+    source_identifier: ETSI TS 136 331 V18.8.0 / 3GPP TS 36.331 Release 18
+    source_url: https://www.etsi.org/deliver/etsi_TS/136300_136399/136331/18.08.00_60/ts_136331v180800p.pdf
+    interpretation: The RRC connection-mobility handover function is not generally applicable to NB-IoT; the specification note limits the NB-IoT applicability within that function.
+  - claim_id: ltem_idle_cell_reselection
+    access_family: LTE-M
+    capability_key: idle_cell_reselection_supported_verified
+    value: true
+    verification_status: primary_source_verified
+    source_authority: ETSI/3GPP
+    source_identifier: ETSI TS 136 304 V18.1.0 / 3GPP TS 36.304 Release 18
+    source_url: https://www.etsi.org/deliver/etsi_ts/136300_136399/136304/18.01.00_60/ts_136304v180100p.pdf
+    interpretation: LTE-M is an E-UTRA UE class and uses the standardized E-UTRA idle-mode cell-reselection machinery.
+  - claim_id: ltem_connected_handover
+    access_family: LTE-M
+    capability_key: connected_mode_handover_supported_verified
+    value: true
+    verification_status: primary_source_verified
+    source_authority: 3GPP
+    source_identifier: TS 36.133 Cat-M1 intra-frequency handover requirements / RAN4 change-controlled requirements
+    source_url: https://www.3gpp.org/DynaReport/TDocExMtg--R4-79--31680.htm
+    interpretation: Cat-M1 has standardized connected-mode handover requirements.
+  - claim_id: thread_500ms_e2e_guarantee
+    access_family: Thread
+    capability_key: guaranteed_max_end_to_end_latency_ms
+    value: null
+    verification_status: no_public_primary_numeric_bound_identified
+    source_authority: Thread Group
+    source_identifier: Thread public technical material
+    source_url: https://www.threadgroup.org/Portals/0/documents/support/ThreadBorderRouterWhitePaper_07192022_4001_1.pdf
+    interpretation: Reviewed Thread material characterizes Thread as low-latency but does not establish a stack-level guaranteed 500 ms end-to-end bound for the candidate composition.
+  - claim_id: lorawan_lora_whole_device_energy_per_report
+    access_family: LoRaWAN-LoRa
+    capability_key: expected_device_energy_per_report_j
+    value: null
+    verification_status: core_four_boundary_gap
+    source_authority: STACKWISE core-four evidence
+    source_identifier: LoED reception-side evidence has no device-energy measurement
+    source_url: null
+    interpretation: No common whole-device per-report energy estimand is available for the classical-LoRa candidate.
+  - claim_id: lorawan_lrfhss_whole_device_energy_per_report
+    access_family: LoRaWAN-LR-FHSS
+    capability_key: expected_device_energy_per_report_j
+    value: null
+    verification_status: core_four_boundary_gap
+    source_authority: STACKWISE core-four evidence
+    source_identifier: LR-FHSS evidence is radio-interface-only
+    source_url: null
+    interpretation: Radio-only capture/transaction energy cannot verify a 0.2 J whole-device per-report budget.
+
+expected:
+  original_decision_blockers: 9
+  reviewed_claims: 7
+  refined_scenarios: 7
+  candidates: 9
+  screening_rows: 63
+  feasible_rows: 21
+  infeasible_rows: 39
+  unresolved_rows: 3
+  unknown_hard_results: 24
+  decision_blocking_unknown_results: 3
+  remaining_blocker_dimensions: 2

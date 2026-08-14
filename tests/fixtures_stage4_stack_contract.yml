@@ -1,0 +1,165 @@
+components:
+  - component_id: fixture_access_ip
+    name: Fixture IP-capable access
+    roles: [access_link, network_protocol]
+    supported_placements: [device]
+    provides: [ip_packet_service, native_access_security]
+    requires: []
+    forbids: []
+    scientific_status: contract_fixture
+    provenance_status: fixture_only
+  - component_id: fixture_tcp
+    name: Fixture reliable transport
+    roles: [transport]
+    supported_placements: [device, application_backend]
+    provides: [reliable_byte_stream]
+    requires: [ip_packet_service]
+    forbids: []
+    scientific_status: contract_fixture
+    provenance_status: fixture_only
+  - component_id: fixture_udp
+    name: Fixture datagram transport
+    roles: [transport]
+    supported_placements: [device, application_backend]
+    provides: [datagram_transport]
+    requires: [ip_packet_service]
+    forbids: []
+    scientific_status: contract_fixture
+    provenance_status: fixture_only
+  - component_id: fixture_tls
+    name: Fixture stream security
+    roles: [end_to_end_security]
+    supported_placements: [device, application_backend]
+    provides: [secure_reliable_byte_stream]
+    requires: [reliable_byte_stream]
+    forbids: []
+    scientific_status: contract_fixture
+    provenance_status: fixture_only
+  - component_id: fixture_http
+    name: Fixture request response application
+    roles: [application_messaging]
+    supported_placements: [device, application_backend]
+    provides: [application_request_response]
+    requires: [secure_reliable_byte_stream]
+    forbids: []
+    scientific_status: contract_fixture
+    provenance_status: fixture_only
+  - component_id: fixture_nonip_access
+    name: Fixture non-IP access
+    roles: [access_link]
+    supported_placements: [device]
+    provides: [nonip_access_payload, native_access_security]
+    requires: []
+    forbids: []
+    scientific_status: contract_fixture
+    provenance_status: fixture_only
+  - component_id: fixture_gateway_bridge
+    name: Fixture gateway bridge
+    roles: [gateway_function, backend_integration]
+    supported_placements: [gateway_edge]
+    provides: [ip_packet_service]
+    requires: [nonip_access_payload]
+    forbids: []
+    scientific_status: contract_fixture
+    provenance_status: fixture_only
+  - component_id: fixture_messaging
+    name: Fixture backend messaging
+    roles: [application_messaging]
+    supported_placements: [application_backend]
+    provides: [backend_message_service]
+    requires: [datagram_transport]
+    forbids: []
+    scientific_status: contract_fixture
+    provenance_status: fixture_only
+  - component_id: fixture_manager
+    name: Fixture management overlay
+    roles: [device_management]
+    supported_placements: [management_backend]
+    provides: [management_service]
+    requires: [application_request_response]
+    forbids: []
+    scientific_status: contract_fixture
+    provenance_status: fixture_only
+
+stacks:
+  valid_composed_security:
+    stack_id: fixture_valid_composed_security
+    name: Valid fixture with native and end-to-end security
+    component_instances:
+      - {instance_id: access, component_id: fixture_access_ip, placement: device}
+      - {instance_id: tcp, component_id: fixture_tcp, placement: device}
+      - {instance_id: tls, component_id: fixture_tls, placement: device}
+      - {instance_id: app, component_id: fixture_http, placement: device}
+    bindings:
+      - {from_instance_id: access, to_instance_id: tcp, interface: ip_packet_service, relation: carries}
+      - {from_instance_id: tcp, to_instance_id: tls, interface: reliable_byte_stream, relation: secures}
+      - {from_instance_id: tls, to_instance_id: app, interface: secure_reliable_byte_stream, relation: carries}
+    environment_capabilities: []
+    primary_access_instance_id: access
+    scientific_status: contract_fixture
+  valid_gateway_mediated:
+    stack_id: fixture_valid_gateway_mediated
+    name: Valid fixture with explicit gateway mediation
+    component_instances:
+      - {instance_id: access, component_id: fixture_nonip_access, placement: device}
+      - {instance_id: bridge, component_id: fixture_gateway_bridge, placement: gateway_edge}
+      - {instance_id: udp, component_id: fixture_udp, placement: application_backend}
+      - {instance_id: msg, component_id: fixture_messaging, placement: application_backend}
+    bindings:
+      - {from_instance_id: access, to_instance_id: bridge, interface: nonip_access_payload, relation: bridges}
+      - {from_instance_id: bridge, to_instance_id: udp, interface: ip_packet_service, relation: carries}
+      - {from_instance_id: udp, to_instance_id: msg, interface: datagram_transport, relation: carries}
+    environment_capabilities: []
+    primary_access_instance_id: access
+    scientific_status: contract_fixture
+  invalid_transport_security:
+    stack_id: fixture_invalid_transport_security
+    name: Invalid fixture binding datagram service to stream security
+    component_instances:
+      - {instance_id: access, component_id: fixture_access_ip, placement: device}
+      - {instance_id: udp, component_id: fixture_udp, placement: device}
+      - {instance_id: tls, component_id: fixture_tls, placement: device}
+    bindings:
+      - {from_instance_id: access, to_instance_id: udp, interface: ip_packet_service, relation: carries}
+      - {from_instance_id: udp, to_instance_id: tls, interface: datagram_transport, relation: secures}
+    environment_capabilities: []
+    primary_access_instance_id: access
+    scientific_status: contract_fixture
+  invalid_missing_gateway:
+    stack_id: fixture_invalid_missing_gateway
+    name: Invalid fixture pretending non-IP access directly provides IP transport
+    component_instances:
+      - {instance_id: access, component_id: fixture_nonip_access, placement: device}
+      - {instance_id: udp, component_id: fixture_udp, placement: device}
+    bindings: []
+    environment_capabilities: []
+    primary_access_instance_id: access
+    scientific_status: contract_fixture
+
+hard_constraints:
+  - constraint_id: fixture_payload_min
+    dimension: payload
+    fact_key: max_application_payload_bytes
+    operator: gte
+    value: 32
+    unit: B
+    unknown_policy: block
+    severity: hard
+    provenance_status: contract_fixture
+  - constraint_id: fixture_owned_infrastructure
+    dimension: ownership
+    fact_key: owned_infrastructure_allowed
+    operator: eq
+    value: true
+    unit: null
+    unknown_policy: block
+    severity: hard
+    provenance_status: contract_fixture
+
+hard_constraint_cases:
+  feasible:
+    facts: {max_application_payload_bytes: 64, owned_infrastructure_allowed: true}
+  infeasible:
+    facts: {max_application_payload_bytes: 16, owned_infrastructure_allowed: true}
+  unresolved:
+    facts: {owned_infrastructure_allowed: true}

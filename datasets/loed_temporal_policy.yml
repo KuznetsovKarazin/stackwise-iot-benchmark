@@ -1,0 +1,33 @@
+version: 1
+dataset_id: loed_lorawan_edge_2020
+stage: Stage-3D campaign/nonstationarity audit
+campaign_definition:
+  source_day_basis: source_file_name
+  gap_threshold_days: 30
+  rationale: >-
+    The threshold is used only to identify clearly separated acquisition windows. It is not a stationarity threshold
+    and does not imply that shorter missing-day gaps would be ignorable in a future sampler.
+  expected_full_corpus_campaigns: 2
+  expected_source_days_by_campaign:
+    - 57
+    - 131
+  expected_max_inter_observation_gap_days: 386
+resampling_guardrails:
+  candidate_primary_cluster: source_day_with_all_gateway_phy_cells
+  cross_campaign_day_pooling_authorised: false
+  campaign_random_effect_authorised: false
+  independent_gateway_bootstrap_authorised: false
+  iid_reception_bootstrap_authorised: false
+  iid_gateway_day_cell_bootstrap_authorised: false
+  iid_day_bootstrap_authorised: false
+  campaign_stratified_block_bootstrap_authorised: false
+  block_length_selected: false
+  hierarchical_sampling_authorised: false
+  publication_uncertainty_sampling_authorised: false
+  publication_mcda_authorised: false
+review_requirements:
+  - Compare raw and linearly detrended within-campaign autocorrelation through multiple lags.
+  - Quantify consecutive-day gateway-set stability and campaign-specific gateway participation.
+  - Quantify descriptive RSSI/SNR shift between the two observed campaigns without treating two campaigns as a random sample.
+  - Select a block length only after production diagnostics; do not bridge the 386-day gap with temporal blocks.
+  - If within-campaign stationarity remains indefensible, retain the campaigns/trajectories as sensitivity scenarios rather than force a bootstrap model.

@@ -1,0 +1,46 @@
+version: 1
+principles:
+- Uncertainty is attached to a declared estimand and sampling unit, not to a file row count.
+- High-frequency samples within one trace do not create between-run replication.
+- Stage-2 evidence means are not resampled as if they were independent raw observations when lower-level run or
+  hierarchical data exist.
+- Shared calibration parameters induce correlated uncertainty across every derived record that references them.
+- Records derived from the same parent trace/run are statistically dependent and must not be sampled independently.
+- Study effects are not estimable when study identity is confounded with technology, hardware implementation or
+  measurement boundary.
+- Bridge/model structural uncertainty is distinct from empirical measurement uncertainty and must be added only
+  when a bridge is defined.
+- No default coefficient of variation, fallback standard deviation, or generic distribution family is permitted.
+- Partially overlapping repeated-run blocks should preserve the observed run-level missingness structure rather
+  than use listwise deletion solely to force a rectangular matrix.
+uncertainty_layers:
+  measurement_calibration: Instrument, scale, supply-voltage or other measurement-system uncertainty.
+  within_unit: Temporal/sample variation within one physical run, trace, reception campaign block or other empirical
+    unit.
+  between_unit: Variation across genuinely replicated independent units under matched conditions.
+  study_implementation: Variation attributable to study, device, firmware, deployment or implementation context.
+  shared_parameter: Uncertainty shared by multiple derived evidence records through a common parameter.
+  bridge_structural: Uncertainty introduced when converting evidence boundaries into a future common decision estimand.
+regimes:
+  replicated_run_level: Replicated physical/source runs exist; calibration should preserve within-run dependence
+    across phases/metrics.
+  single_configuration_trace: Exactly one independent trace exists for a configuration; population repeatability
+    is not identified.
+  hierarchical_observational_campaign: Large observational corpus with nested/repeated structure; row-count standard
+    errors are prohibited.
+  shared_parameter_derived: Derived record inherits parent uncertainty plus a shared calibration parameter.
+  single_matched_contrast: Contrast is formed from one matched configuration pair; population contrast distribution
+    is not identified.
+  descriptive_only: Metric is retained descriptively and is not assigned a population uncertainty distribution for
+    decision use.
+forbidden_shortcuts:
+- sqrt_n_from_high_frequency_samples
+- iid_bootstrap_of_source_segments
+- iid_bootstrap_of_receptions
+- default_cv_or_default_sd
+- independent_sampling_of_shared_parameter_derivatives
+- independent_sampling_of_parent_and_child_evidence
+- generic_study_random_effect_from_confounded_core_four
+- population_ci_from_single_trace
+- population_ci_from_single_ack_contrast
+- listwise_deletion_to_force_rectangular_block

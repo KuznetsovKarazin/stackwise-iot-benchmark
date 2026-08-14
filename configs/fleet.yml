@@ -1,0 +1,54 @@
+years: 5
+technology_complexity_penalty_usd: 0
+
+device_groups:
+  room_sensors:
+    count: 400
+    feasible: [Thread, Wi-Fi, NB-IoT, LTE-M]
+  mobile_badges:
+    count: 120
+    feasible: [BLE, Wi-Fi, LTE-M]
+  outdoor_meters:
+    count: 600
+    feasible: [LoRaWAN, NB-IoT, LTE-M]
+  remote_pumps:
+    count: 80
+    feasible: [LoRaWAN, NB-IoT, LTE-M]
+
+technologies:
+  BLE:
+    hardware_usd: 4
+    annual_service_usd: 0
+    annual_maintenance_usd: 0.5
+    infrastructure_usd: 10000
+    ownership: private
+  Thread:
+    hardware_usd: 6
+    annual_service_usd: 0
+    annual_maintenance_usd: 0.7
+    infrastructure_usd: 12000
+    ownership: private
+  Wi-Fi:
+    hardware_usd: 5
+    annual_service_usd: 0
+    annual_maintenance_usd: 0.9
+    infrastructure_usd: 5000
+    ownership: private
+  LoRaWAN:
+    hardware_usd: 11
+    annual_service_usd: 0.5
+    annual_maintenance_usd: 0.8
+    infrastructure_usd: 16000
+    ownership: private
+  NB-IoT:
+    hardware_usd: 18
+    annual_service_usd: 7
+    annual_maintenance_usd: 0.5
+    infrastructure_usd: 0
+    ownership: operator
+  LTE-M:
+    hardware_usd: 22
+    annual_service_usd: 9
+    annual_maintenance_usd: 0.5
+    infrastructure_usd: 0
+    ownership: operator

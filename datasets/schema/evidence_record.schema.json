@@ -1,0 +1,536 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "STACKWISE empirical evidence record",
+  "description": "A typed, provenance-preserving claim about one empirical or derived quantity under an explicit measurement boundary, implementation context, independence unit and applicability domain.",
+  "type": "object",
+  "required": [
+    "evidence_id",
+    "dataset_id",
+    "technology",
+    "metric_id",
+    "metric_family",
+    "unit",
+    "value_semantics",
+    "system_scope",
+    "temporal_scope",
+    "accounting_basis",
+    "conditioning",
+    "payload_basis",
+    "baseline_accounting",
+    "ack_rx_accounting",
+    "retry_accounting",
+    "path_start",
+    "path_end",
+    "empirical_unit",
+    "independence_unit",
+    "source_grade",
+    "validation_status",
+    "derivation_class",
+    "uncertainty_basis",
+    "applicability_domain",
+    "study_id",
+    "source_doi",
+    "source_license",
+    "source_artifact",
+    "summary_statistic",
+    "n_source_observations",
+    "n_independent_units",
+    "dependence_structure",
+    "parent_evidence_ids",
+    "shared_parameter_ids",
+    "intended_use"
+  ],
+  "properties": {
+    "evidence_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dataset_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "study_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_doi": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_license": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_artifact": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "technology": {
+      "type": "string",
+      "minLength": 1
+    },
+    "access_network": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "transport_protocol": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "application_protocol": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "security_mode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "management_protocol": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "implementation_context_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "device_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "radio_module": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "firmware_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "measurement_instrument": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "acquisition_software": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "implementation_notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "metric_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "metric_family": {
+      "enum": [
+        "energy",
+        "charge",
+        "current",
+        "power",
+        "duration",
+        "latency",
+        "link_quality",
+        "reception_status",
+        "observation_diversity",
+        "coverage",
+        "delivery_reliability",
+        "cost",
+        "infrastructure",
+        "feasibility"
+      ]
+    },
+    "unit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "value_semantics": {
+      "type": "string",
+      "minLength": 1
+    },
+    "estimate": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "summary_statistic": {
+      "enum": [
+        "raw_measurement",
+        "mean",
+        "median",
+        "difference",
+        "ratio",
+        "count",
+        "proportion",
+        "distribution",
+        "model_parameter",
+        "not_materialised"
+      ]
+    },
+    "system_scope": {
+      "enum": [
+        "radio_rail",
+        "whole_device",
+        "gateway_receiver",
+        "network_path",
+        "application_path",
+        "infrastructure",
+        "lifecycle",
+        "unknown"
+      ]
+    },
+    "temporal_scope": {
+      "enum": [
+        "phase",
+        "transaction",
+        "session",
+        "trace_window",
+        "reporting_cycle",
+        "reception_event",
+        "logical_frame",
+        "day",
+        "campaign",
+        "lifecycle",
+        "unknown"
+      ]
+    },
+    "accounting_basis": {
+      "enum": [
+        "per_phase",
+        "per_transaction",
+        "per_session",
+        "per_capture",
+        "time_average",
+        "per_reporting_cycle",
+        "per_reception",
+        "per_logical_frame",
+        "per_day",
+        "per_attempt",
+        "per_success",
+        "lifecycle_total",
+        "unknown"
+      ]
+    },
+    "conditioning": {
+      "enum": [
+        "unconditional",
+        "observed_reception",
+        "crc_valid_reception",
+        "successful_delivery",
+        "source_filtered",
+        "not_applicable",
+        "unknown"
+      ]
+    },
+    "payload_basis": {
+      "enum": [
+        "application_payload",
+        "udp_payload",
+        "ip_payload",
+        "lorawan_frm_payload",
+        "phy_payload",
+        "source_message_size",
+        "not_applicable",
+        "unknown"
+      ]
+    },
+    "baseline_accounting": {
+      "enum": [
+        "included",
+        "excluded",
+        "conditional",
+        "not_applicable",
+        "unknown"
+      ]
+    },
+    "ack_rx_accounting": {
+      "enum": [
+        "included",
+        "excluded",
+        "conditional",
+        "not_applicable",
+        "unknown"
+      ]
+    },
+    "retry_accounting": {
+      "enum": [
+        "included",
+        "excluded",
+        "conditional",
+        "not_applicable",
+        "unknown"
+      ]
+    },
+    "path_start": {
+      "enum": [
+        "device_application",
+        "device_radio",
+        "radio_antenna",
+        "gateway_receiver",
+        "network_server",
+        "application_endpoint",
+        "infrastructure",
+        "not_applicable",
+        "unknown"
+      ]
+    },
+    "path_end": {
+      "enum": [
+        "device_application",
+        "device_radio",
+        "radio_antenna",
+        "gateway_receiver",
+        "network_server",
+        "application_endpoint",
+        "infrastructure",
+        "not_applicable",
+        "unknown"
+      ]
+    },
+    "payload_bytes": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "reporting_interval_s": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "exclusiveMinimum": 0
+    },
+    "direction": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "confirmation_mode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tx_power_dbm": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "environment": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "phase_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "data_rate_mode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "frequency_hz": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "exclusiveMinimum": 0
+    },
+    "bandwidth_hz": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "exclusiveMinimum": 0
+    },
+    "spreading_factor": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "coding_rate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "bit_rate_bps": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "exclusiveMinimum": 0
+    },
+    "operator": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "empirical_unit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "independence_unit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "n_source_observations": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "n_independent_units": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "dependence_structure": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_grade": {
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "TEST_ONLY"
+      ]
+    },
+    "validation_status": {
+      "enum": [
+        "validated",
+        "validated_with_limitations",
+        "source_reproduced",
+        "pending",
+        "not_applicable"
+      ]
+    },
+    "derivation_class": {
+      "enum": [
+        "direct_empirical",
+        "source_reproduced",
+        "validated_derived",
+        "analytical",
+        "literature_derived",
+        "assumption",
+        "expert_prior"
+      ]
+    },
+    "parent_evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "shared_parameter_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "uncertainty_basis": {
+      "enum": [
+        "replicated_independent_units",
+        "single_independent_unit",
+        "hierarchical_observational",
+        "shared_parameter",
+        "deterministic_bound",
+        "external_prior_required",
+        "none"
+      ]
+    },
+    "uncertainty_notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "applicability_domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "intended_use": {
+      "enum": [
+        "direct_comparison",
+        "bridge_input",
+        "descriptive",
+        "feasibility",
+        "uncertainty_calibration",
+        "target_only"
+      ]
+    },
+    "bridge_requirements": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "limitations": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

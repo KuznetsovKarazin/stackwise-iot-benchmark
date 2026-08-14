@@ -1,0 +1,92 @@
+version: 1
+review_stage: Stage-3H targeted single-trace external evidence review
+review_date: '2026-08-11'
+principles:
+  - External documentation may identify measurement context, metrology limits, or qualitative repeatability.
+  - A qualitative statement such as negligible differences is not converted into a numerical CV or probability distribution.
+  - Instrument accuracy is not equivalent to between-run or between-device variability.
+  - High-frequency samples within one trace do not create independent replication.
+  - Researcher-selected stress-test envelopes, if introduced later, must be labelled non-evidence-derived model-uncertainty scenarios rather than priors inferred from these sources.
+
+datasets:
+  insectt_wsn_power_2023:
+    metric_ids:
+      - trace_mean_current_a
+      - trace_charge_c
+      - derived_mean_power_w
+      - derived_capture_energy_j
+    source_dataset_doi: 10.5281/zenodo.7762712
+    source_publication_doi: 10.1007/978-3-031-54049-3_14
+    source_publication_title: Solar-Based Energy Harvesting and Low-Power Wireless Networks
+    measurement_instrument: Nordic Power Profiler Kit II
+    source_measurement_design:
+      independent_configuration_traces: 1
+      trace_duration_s: 60
+      sampling_rate_samples_per_s: 100000
+      publication_reports_repeated_independent_runs: false
+      publication_reports_numeric_between_run_dispersion: false
+      publication_reports_standard_deviation_or_ci: false
+    external_metrology:
+      source: Nordic Semiconductor Power Profiler Kit II User Guide
+      source_url: https://docs.nordicsemi.com/r/bundle/ug_ppk2/page/ug/ppk/ppk_user_guide_intro.html
+      resolution_a: 2.0e-7
+      average_current_accuracy_statement: better_than_plus_or_minus_20_percent
+      probabilistic_distribution_identified: false
+      interpretation: The vendor accuracy statement is a coarse metrology specification for average-current measurement, not an estimate of run-to-run or device-population variability and not a Gaussian standard deviation.
+    repeatability_evidence_status: none_reported
+    numeric_population_variability_identified: false
+    numeric_probabilistic_prior_identified: false
+    instrument_sensitivity_status: coarse_vendor_accuracy_statement_available
+    primary_uncertainty_action: retain_single_trace_status_and_do_not_infer_population_cv
+    notes: The publication explicitly states that power is averaged over 60 s. It does not report independent replicate runs, variance, standard deviation, or confidence intervals for the 20 protocol x reporting-period configurations.
+
+  lorawan_lrfhss_energy_2024:
+    metric_ids:
+      - radio_full_capture_energy_j
+      - radio_incremental_transaction_energy_j
+    source_dataset_doi: 10.5281/zenodo.13838241
+    source_publication_doi: 10.3390/s24175770
+    source_publication_title: "Energy Performance of LR-FHSS: Analysis and Evaluation"
+    measurement_hardware: Keysight N6705A DC Power Analyzer
+    acquisition_software: Keysight 14585A Control and Analysis Software
+    instrumentation_reconciliation:
+      dataset_label: 'Power Analyzer: Keysight 14585A'
+      publication_hardware_statement: Keysight N6705A DC Power Analyzer
+      manufacturer_14585a_statement: Keysight 14585A is control and analysis software for advanced power supplies and supports N6705A/N6705-series instruments.
+      resolution: Treat N6705A as measurement hardware and 14585A as acquisition/control-analysis software; preserve the Zenodo wording in provenance notes.
+      hardware_source_url: https://www.keysight.com/gb/en/product/N6705A/dc-power-analyzer-modular-600-w-4-slots.html
+      software_source_url: https://www.keysight.com/us/en/lib/software-detail/computer-software/14585a-control-and-analysis-software-for-advanced-power-supplies-1785860.html
+    source_measurement_design:
+      independent_configuration_traces_in_open_dataset: 1
+      publication_reports_several_individual_transmission_processes: true
+      publication_repeatability_statement: differences_were_negligible
+      publication_reports_repeat_count: false
+      publication_reports_numeric_between_run_dispersion: false
+      publication_reports_standard_deviation_or_ci: false
+    external_metrology:
+      source: Keysight N6705A product information
+      generic_ammeter_accuracy_statement: up_to_0.03_percent_plus_15_uA
+      exact_power_module_identified_in_source: false
+      probabilistic_distribution_identified: false
+      interpretation: The generic mainframe accuracy statement cannot be propagated as a configuration-specific probability model without the installed module/range and does not identify process repeatability.
+    repeatability_evidence_status: qualitative_low_variability_only
+    numeric_population_variability_identified: false
+    numeric_probabilistic_prior_identified: false
+    instrument_sensitivity_status: hardware_identified_but_module_specific_metrology_unresolved
+    primary_uncertainty_action: retain_single_trace_population_status_and_record_qualitative_repeatability
+    notes: The associated paper states that duration and current were measured for several individual transmission processes and that observed differences were negligible, but it does not report n, SD, CV, or raw replicate traces for those repeated processes.
+
+decision:
+  targeted_external_review_complete: true
+  reviewed_metric_families: 6
+  numeric_population_priors_identified: 0
+  default_cv_or_sd_authorised: false
+  infer_cv_from_qualitative_negligible_authorised: false
+  convert_instrument_accuracy_to_population_sd_authorised: false
+  publication_uncertainty_sampling_authorised: false
+  publication_mcda_authorised: false
+  recommended_next_step: >-
+    Close Stage 3 using mixed uncertainty semantics: empirical probability where identified (Vomhoff),
+    scenario robustness where identified (LoED), and explicit single-trace epistemic gaps for InSecTT/LR-FHSS.
+    Any later multiplicative stress-test envelope for single-trace evidence must be presented as model sensitivity,
+    not as an evidence-derived prior.

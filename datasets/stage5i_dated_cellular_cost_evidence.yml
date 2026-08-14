@@ -1,0 +1,144 @@
+schema_version: 1
+stage: Stage-5I targeted dated cellular cost evidence tranche
+stage5_status: dated_ip_cellular_price_evidence_materialised_tariff_volume_fit_not_fully_identified
+
+scientific_policy:
+  inherited_cost_contract: datasets/stage5h_lifecycle_cost_contract.yml
+  source_capture_date: '2026-08-12'
+  geographic_market: Italy/EU reference retail market
+  base_currency: EUR
+  tax_basis: VAT excluded where the source publishes an ex-VAT price
+  shipping_included: false
+  canonical_hardware_reference_quantity: 1
+  hardware_reference_policy: >-
+    Use the currently published single-unit authorised-distributor price as a reproducible retail
+    reference observation. Published quantity discounts are retained as procurement sensitivities,
+    not as statistical uncertainty and not silently selected as the benchmark price.
+  connectivity_cashflow_policy: >-
+    Prepaid connectivity is accounted as the actual upfront cash payment required for the selected
+    plan. A 10-year prepaid tariff is not prorated to 5 years when the complete plan must be purchased.
+  tariff_usage_policy: >-
+    Do not claim the prepaid tariff is sufficient for the five-year benchmark until traffic-volume
+    fit is supported by a candidate-specific session/transport profile. The source states that data
+    are measured/billed to the nearest 1 kByte but does not identify the aggregation interval for
+    rounding; therefore STACKWISE must not assume one 1-kByte billing unit per application report.
+  report_count_basis_days_per_year: 365.25
+  use_price_floor_as_canonical_lifecycle_cost: false
+  infer_nidd_or_nonip_service_support: false
+  publication_mcda_authorised: false
+
+ip_cellular_stack_ids:
+  - nbiot_ip_coap_dtls_lwm2m
+  - ltem_ip_coap_dtls_lwm2m
+  - nbiot_ip_mqtt_tls_lwm2m
+  - ltem_ip_mqtt_tls_lwm2m
+
+scenario_reporting_profiles:
+  smart_meter_public_cellular:
+    application_payload_bytes: 200
+    reporting_interval_s: 900
+  asset_tracking_periodic_cross_cell:
+    application_payload_bytes: 64
+    reporting_interval_s: 60
+  asset_tracking_connected_handover:
+    application_payload_bytes: 64
+    reporting_interval_s: 60
+
+monetary_evidence:
+  - evidence_id: digikey_it_quectel_bg95m3_unit_2026_08_12
+    evidence_role: device_module_reference_price
+    maps_to_contract_component: device_incremental_capex_eur_per_device
+    technology_or_stack_scope: cellular_ip_reference_hardware
+    source_type: manufacturer_or_authorised_distributor_quote
+    source_identifier: DigiKey Italy / Quectel BG95M3LA-64-SGNS
+    source_url: https://www.digikey.it/it/products/detail/quectel/BG95M3LA-64-SGNS/13278150
+    access_date: '2026-08-12'
+    source_currency: EUR
+    tax_status: VAT_excluded
+    unit: EUR_per_module
+    reference_quantity: 1
+    reference_value: 33.41
+    applicability_notes: >-
+      Single-unit reference price for a Quectel BG95-M3 family module. Technical applicability to
+      LTE Cat M1 and Cat NB2 is separately checked against the manufacturer product page. This is a
+      retail reference observation, not an institutional volume quote.
+    quantity_sensitivity:
+      - {quantity: 250, unit_price_eur: 26.07, role: published_procurement_sensitivity_not_canonical}
+
+  - evidence_id: one_nce_standard_sim_2026_08_12
+    evidence_role: physical_sim_reference_price
+    maps_to_contract_component: device_incremental_capex_eur_per_device
+    technology_or_stack_scope: cellular_ip_reference_hardware
+    source_type: official_operator_tariff
+    source_identifier: 1NCE IoT SIM Europe / standard SIM
+    source_url: https://www.1nce.com/en-eu/1nce-connect/features/sim-cards/iot-sim-europe
+    access_date: '2026-08-12'
+    source_currency: EUR
+    tax_status: source_page_not_used_for_tax_inference
+    unit: EUR_per_SIM
+    reference_value: 1.00
+    applicability_notes: Standard physical SIM reference. Alternative industrial SIM form factors are not silently substituted.
+
+  - evidence_id: one_nce_lifetime_flat_2026_08_12
+    evidence_role: connectivity_base_plan
+    maps_to_contract_component: operator_connectivity_eur_per_device_year
+    technology_or_stack_scope: cellular_ip_transport_service
+    source_type: official_operator_tariff
+    source_identifier: 1NCE IoT Lifetime Flat
+    source_url: https://www.1nce.com/en-eu/1nce-connect/features/sim-cards/iot-sim-europe
+    access_date: '2026-08-12'
+    source_currency: EUR
+    tax_status: source_page_not_used_for_tax_inference
+    billing_model: prepaid_fixed_term
+    term_years: 10
+    reference_value: 12.00
+    unit: EUR_per_device_prepaid_term
+    included_data_mb: 500
+    included_sms: 250
+    supported_radio_access: [LTE-M, NB-IoT]
+    ip_transport_evidence: [TCP, UDP]
+    applicability_notes: >-
+      Official tariff evidence supports LTE-M/NB-IoT IP connectivity. The published material reviewed
+      here does not establish NIDD/Non-IP service support, so this evidence must not leak to Non-IP candidates.
+
+  - evidence_id: one_nce_data_topup_2026_08_12
+    evidence_role: connectivity_data_topup
+    maps_to_contract_component: operator_connectivity_eur_per_device_year
+    technology_or_stack_scope: cellular_ip_transport_service
+    source_type: official_operator_tariff
+    source_identifier: 1NCE support / Lifetime Flat TopUp
+    source_url: https://www.1nce.com/en-eu/support
+    access_date: '2026-08-12'
+    source_currency: EUR
+    tax_status: source_page_not_used_for_tax_inference
+    reference_value: 10.00
+    unit: EUR_per_500MB_topup
+    topup_data_mb: 500
+    published_measurement_granularity_kbyte: 1
+    applicability_notes: >-
+      Retained as source tariff metadata. It is not interpreted as per-packet or per-report rounding,
+      because the reviewed source does not specify the aggregation interval. Exact transport/session usage remains unresolved.
+
+technical_applicability_evidence:
+  - evidence_id: quectel_bg95_rat_support_2026_08_12
+    source_type: manufacturer_product_page
+    source_identifier: Quectel BG95 series
+    source_url: https://www.quectel.com/product/lpwa-bg95-cat-m1-cat-nb2-egprs-series/
+    access_date: '2026-08-12'
+    supports: [LTE Cat M1, LTE Cat NB2]
+    interpretation: >-
+      Confirms that the selected reference module family can represent both LTE-M and NB-IoT radio-access
+      hardware. It does not by itself establish candidate-specific NIDD/Non-IP operator service support.
+
+expected:
+  feasible_candidate_rows: 21
+  operator_managed_rows: 17
+  ip_cellular_feasible_rows: 10
+  nonip_cellular_feasible_rows: 7
+  private_or_unresolved_lorawan_rows: 4
+  rows_with_dated_module_and_sim_price: 10
+  rows_with_ip_connectivity_tariff_evidence: 10
+  rows_with_canonical_lifecycle_cost_ready: 0
+  smart_meter_ip_rows_with_base_allowance_not_disproven: 4
+  tracking_ip_rows_with_base_allowance_not_disproven: 6
+  rows_where_base_allowance_definitely_insufficient: 0

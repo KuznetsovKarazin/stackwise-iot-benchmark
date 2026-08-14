@@ -1,0 +1,29 @@
+schema_version: "1.0"
+excluded:
+  - id: kaggle_iot_energy_lightpoles
+    landing_url: "https://www.kaggle.com/datasets/brunolcarli/iot-energy-consumption-dataset"
+    reason: "Measures electrical consumption of smart light poles, not communication-protocol energy."
+    category: wrong_measurement_target
+
+  - id: kaggle_iot_network_security_energy
+    landing_url: "https://www.kaggle.com/datasets/zara2099/iot-network-security-and-energy-dataset"
+    reason: "Integrated cyber-traffic and simulation parameters; provenance does not support use as empirical protocol-energy evidence."
+    category: synthetic_or_mixed_provenance
+
+  - id: coap_zenodo_4436043
+    landing_url: "https://zenodo.org/records/4436043"
+    reason: "Record is visible but files require access approval; excluded from the public-only core."
+    category: restricted_files
+
+  - id: zenodo_5g_nr_latency_simulation_2026
+    landing_url: "https://zenodo.org/records/20035549"
+    reason: "Packet-level simulation dataset, not a real-network measurement campaign. May be used only in a separate simulation-validation study."
+    category: simulation
+
+  - id: smart_meter_challenge_article
+    reason: "Useful published aggregate comparison, but no public raw traces were identified."
+    category: no_public_raw_data
+
+  - id: universal_iot_testbed_article
+    reason: "Useful published aggregate comparison, but no public per-message raw data were identified."
+    category: no_public_raw_data

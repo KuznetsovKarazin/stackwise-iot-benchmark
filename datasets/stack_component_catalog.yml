@@ -1,0 +1,1449 @@
+schema_version: 1
+stage: Stage-4B primary-source-verified core component catalog
+catalog_frozen_date: '2026-08-11'
+version_policy: Versions are explicit and frozen for reproducibility. A newer standard is not silently substituted for the
+  selected source-relevant version.
+scientific_policy:
+  primary_source_required_for_verified_component: true
+  absence_of_interface_not_interpreted_as_universal_impossibility: true
+  evidence_alignment_does_not_imply_component_level_causality: true
+  unknown_or_unverified_binding_is_not_compatible: true
+  mcda_authorised: false
+  ranking_authorised: false
+sources:
+  3gpp_ciot_overview:
+    authority: 3GPP
+    identifier: The Cellular Internet of Things
+    url: https://www.3gpp.org/news-events/3gpp-news/c-iot
+    source_type: official_primary_overview
+    verification_status: primary_source_verified
+  etsi_3gpp_ts_23_401_r17:
+    authority: ETSI/3GPP
+    identifier: ETSI TS 123 401 V17.7.0 / 3GPP TS 23.401 Release 17
+    url: https://www.etsi.org/deliver/etsi_ts/123400_123499/123401/17.07.00_60/ts_123401v170700p.pdf
+    source_type: normative_specification
+    verification_status: primary_source_verified
+  etsi_3gpp_ts_23_682_r17:
+    authority: ETSI/3GPP
+    identifier: ETSI TS 123 682 V17.2.0 / 3GPP TS 23.682 Release 17
+    url: https://www.etsi.org/deliver/etsi_ts/123600_123699/123682/17.02.00_60/ts_123682v170200p.pdf
+    source_type: normative_specification
+    verification_status: primary_source_verified
+  lorawan_ts001_1_0_4:
+    authority: LoRa Alliance
+    identifier: TS001-1.0.4 LoRaWAN L2 1.0.4
+    url: https://resources.lora-alliance.org/technical-specifications/ts001-1-0-4-lorawan-l2-1-0-4-specification
+    source_type: normative_specification
+    verification_status: primary_source_verified
+  lorawan_rp002_1_0_4:
+    authority: LoRa Alliance
+    identifier: RP002-1.0.4 LoRaWAN Regional Parameters
+    url: https://resources.lora-alliance.org/technical-specifications/rp002-1-0-4-regional-parameters
+    source_type: normative_specification
+    verification_status: primary_source_verified
+  thread_network_fundamentals:
+    authority: Thread Group
+    identifier: Thread Network Fundamentals
+    url: https://portal.threadgroup.org/DesktopModules/Inventures_Document/FileDownload.aspx?ContentID=633
+    source_type: official_primary_whitepaper
+    verification_status: primary_source_verified
+  thread_border_router_best_practices:
+    authority: Thread Group
+    identifier: Thread Border Router Best Practices
+    url: https://www.threadgroup.org/Portals/0/documents/support/ThreadBorderRouterBestPractices_2530_1.pdf
+    source_type: official_primary_whitepaper
+    verification_status: primary_source_verified
+  bluetooth_core_gatt_5_4:
+    authority: Bluetooth SIG
+    identifier: Bluetooth Core 5.4 HTML - GATT
+    url: https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-54/out/en/host/generic-attribute-profile--gatt-.html
+    source_type: normative_specification
+    verification_status: primary_source_verified
+  bluetooth_ipsp_1_0:
+    authority: Bluetooth SIG
+    identifier: Internet Protocol Support Profile 1.0
+    url: https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/IPSP_v1.0/out/en/index-en.html
+    source_type: normative_profile
+    verification_status: primary_source_verified
+  rfc_7668:
+    authority: IETF/RFC Editor
+    identifier: RFC 7668 IPv6 over Bluetooth Low Energy
+    url: https://www.rfc-editor.org/rfc/rfc7668.html
+    source_type: standards_track_rfc
+    verification_status: primary_source_verified
+  ieee_802_15_4z_2020:
+    authority: IEEE
+    identifier: IEEE 802.15.4z-2020
+    url: https://standards.ieee.org/ieee/802.15.4z/10230/
+    source_type: normative_standard_summary
+    verification_status: primary_source_verified
+  rfc_768:
+    authority: IETF/RFC Editor
+    identifier: RFC 768 User Datagram Protocol
+    url: https://www.rfc-editor.org/info/rfc768/
+    source_type: internet_standard
+    verification_status: primary_source_verified
+  rfc_9293:
+    authority: IETF/RFC Editor
+    identifier: RFC 9293 Transmission Control Protocol
+    url: https://www.rfc-editor.org/info/rfc9293/
+    source_type: internet_standard
+    verification_status: primary_source_verified
+  rfc_9846:
+    authority: IETF/RFC Editor
+    identifier: RFC 9846 TLS 1.3
+    url: https://www.rfc-editor.org/info/rfc9846/
+    source_type: standards_track_rfc
+    verification_status: primary_source_verified
+  rfc_9147:
+    authority: IETF/RFC Editor
+    identifier: RFC 9147 DTLS 1.3
+    url: https://www.rfc-editor.org/info/rfc9147/
+    source_type: standards_track_rfc
+    verification_status: primary_source_verified
+  rfc_7252:
+    authority: IETF/RFC Editor
+    identifier: RFC 7252 CoAP
+    url: https://www.rfc-editor.org/info/rfc7252/
+    source_type: standards_track_rfc
+    verification_status: primary_source_verified
+  rfc_8323:
+    authority: IETF/RFC Editor
+    identifier: RFC 8323 CoAP over TCP, TLS, and WebSockets
+    url: https://www.rfc-editor.org/info/rfc8323/
+    source_type: standards_track_rfc
+    verification_status: primary_source_verified
+  rfc_8613:
+    authority: IETF/RFC Editor
+    identifier: RFC 8613 OSCORE
+    url: https://www.rfc-editor.org/info/rfc8613/
+    source_type: standards_track_rfc
+    verification_status: primary_source_verified
+  mqtt_5_0:
+    authority: OASIS
+    identifier: MQTT Version 5.0 OASIS Standard
+    url: https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html
+    source_type: normative_specification
+    verification_status: primary_source_verified
+  rfc_9110:
+    authority: IETF/RFC Editor
+    identifier: RFC 9110 HTTP Semantics
+    url: https://www.rfc-editor.org/info/rfc9110/
+    source_type: internet_standard
+    verification_status: primary_source_verified
+  rfc_9112:
+    authority: IETF/RFC Editor
+    identifier: RFC 9112 HTTP/1.1
+    url: https://www.rfc-editor.org/info/rfc9112/
+    source_type: internet_standard
+    verification_status: primary_source_verified
+  lwm2m_core_1_2_2:
+    authority: Open Mobile Alliance
+    identifier: LwM2M Core 1.2.2
+    url: https://www.openmobilealliance.org/release/lightweightm2m/V1_2_2-20240613-A/HTML-Version/OMA-TS-LightweightM2M_Core-V1_2_2-20240613-A.html
+    source_type: normative_specification
+    verification_status: primary_source_verified
+  lwm2m_transport_1_2_2:
+    authority: Open Mobile Alliance
+    identifier: LwM2M Transport Bindings 1.2.2
+    url: https://www.openmobilealliance.org/release/LightweightM2M/V1_2_2-20240613-A/HTML-Version/OMA-TS-LightweightM2M_Transport-V1_2_2-20240613-A.html
+    source_type: normative_specification
+    verification_status: primary_source_verified
+claims:
+  cellular_eps_ip:
+    statement: EPS provides packet-switched IP connectivity; the Stage-4B cellular IP variants represent IP PDN operation
+      rather than all possible CIoT modes.
+    source_ids:
+    - etsi_3gpp_ts_23_401_r17
+    verification_status: primary_source_verified
+  cellular_ciot_nonip:
+    statement: CIoT EPS supports a Non-IP PDN type; NB-IoT/LTE-M Non-IP operation is modelled separately from IP PDN variants.
+    source_ids:
+    - etsi_3gpp_ts_23_401_r17
+    - etsi_3gpp_ts_23_682_r17
+    verification_status: primary_source_verified
+  nbiot_ltem_ciot_families:
+    statement: NB-IoT and LTE-M are cellular IoT access families in the 3GPP EPS/LTE ecosystem.
+    source_ids:
+    - 3gpp_ciot_overview
+    verification_status: primary_source_verified
+  lorawan_backend_architecture:
+    statement: LoRaWAN gateways relay end-device messages to a Network Server, which routes packets to an Application Server.
+    source_ids:
+    - lorawan_ts001_1_0_4
+    verification_status: primary_source_verified
+  lorawan_lrfhss_mode:
+    statement: LoRaWAN Regional Parameters define LR-FHSS data rates as LoRaWAN regional PHY/data-rate options.
+    source_ids:
+    - lorawan_rp002_1_0_4
+    verification_status: primary_source_verified
+  thread_ipv6_application_agnostic:
+    statement: Thread is an IPv6-based networking solution and is application-layer agnostic.
+    source_ids:
+    - thread_network_fundamentals
+    verification_status: primary_source_verified
+  thread_border_router:
+    statement: A Thread Border Router provides connectivity between a Thread IPv6 mesh and adjacent IP infrastructure.
+    source_ids:
+    - thread_border_router_best_practices
+    verification_status: primary_source_verified
+  ble_gatt:
+    statement: Bluetooth GATT uses ATT to exchange attribute commands, requests, responses, indications and notifications.
+    source_ids:
+    - bluetooth_core_gatt_5_4
+    verification_status: primary_source_verified
+  ble_ipsp_ipv6:
+    statement: Bluetooth IPSP supports exchange of IPv6 packets over Bluetooth Low Energy and defines Node/Router roles using
+      L2CAP.
+    source_ids:
+    - bluetooth_ipsp_1_0
+    - rfc_7668
+    verification_status: primary_source_verified
+  uwb_phy_mac_ranging:
+    statement: IEEE 802.15.4z enhances UWB PHY/MAC and associated ranging techniques; no generic IP service is inferred from
+      this claim.
+    source_ids:
+    - ieee_802_15_4z_2020
+    verification_status: primary_source_verified
+  udp_requires_ip:
+    statement: UDP is a datagram transport defined for operation over IP.
+    source_ids:
+    - rfc_768
+    verification_status: primary_source_verified
+  tcp_reliable_stream:
+    statement: TCP provides the reliable host-to-host stream transport used as a reliable byte-stream service in the catalog.
+    source_ids:
+    - rfc_9293
+    verification_status: primary_source_verified
+  tls13_reliable_stream:
+    statement: TLS 1.3 requires an underlying reliable, in-order data stream and provides an authenticated/confidential/integrity-protected
+      secure channel.
+    source_ids:
+    - rfc_9846
+    verification_status: primary_source_verified
+  dtls13_datagram_security:
+    statement: DTLS 1.3 provides TLS-like security over datagram/unreliable transports.
+    source_ids:
+    - rfc_9147
+    verification_status: primary_source_verified
+  coap_udp_dtls:
+    statement: Base CoAP exchanges messages over UDP and defines a DTLS-secured CoAP binding.
+    source_ids:
+    - rfc_7252
+    verification_status: primary_source_verified
+  coap_tcp_tls:
+    statement: CoAP is also specified over TCP and TLS.
+    source_ids:
+    - rfc_8323
+    verification_status: primary_source_verified
+  oscore_coap:
+    statement: OSCORE provides end-to-end object security for CoAP messages.
+    source_ids:
+    - rfc_8613
+    verification_status: primary_source_verified
+  mqtt_ordered_lossless:
+    statement: MQTT 5.0 requires an underlying ordered, lossless, bidirectional byte stream; TCP is a suitable transport.
+    source_ids:
+    - mqtt_5_0
+    verification_status: primary_source_verified
+  mqtt_tls:
+    statement: MQTT 5.0 identifies TLS as a suitable secured transport; the catalog keeps plain-stream and TLS-bound variants
+      separate.
+    source_ids:
+    - mqtt_5_0
+    - rfc_9846
+    verification_status: primary_source_verified
+  http11_stream:
+    statement: HTTP is an application-level protocol and HTTP/1.1 defines connection/message handling over a stream transport.
+    source_ids:
+    - rfc_9110
+    - rfc_9112
+    verification_status: primary_source_verified
+  http11_tls:
+    statement: HTTPS semantics use HTTP over a TLS-secured connection; the catalog keeps HTTP/TCP and HTTP/TLS variants separate.
+    source_ids:
+    - rfc_9110
+    - rfc_9846
+    verification_status: primary_source_verified
+  lwm2m_core:
+    statement: LwM2M defines RESTful device-management/service-enablement and information-reporting interfaces.
+    source_ids:
+    - lwm2m_core_1_2_2
+    verification_status: primary_source_verified
+  lwm2m_transport_bindings:
+    statement: LwM2M 1.2 supports CoAP over UDP/DTLS/TCP/TLS, MQTT over TLS/TCP, HTTP over TLS/TCP, and CoAP over Non-IP including
+      3GPP CIoT and LoRaWAN; OSCORE may protect CoAP bindings.
+    source_ids:
+    - lwm2m_transport_1_2_2
+    - lwm2m_core_1_2_2
+    verification_status: primary_source_verified
+components:
+- component_id: 3gpp_nbiot_eps_ip
+  name: 3GPP NB-IoT EPS IP-PDN access
+  roles:
+  - access_link
+  - network_protocol
+  supported_placements:
+  - device
+  - access_network
+  provides:
+  - ip_packet_service
+  - native_access_security
+  - operator_managed_access
+  requires: []
+  requires_any: []
+  forbids: []
+  properties:
+    variant: IP PDN
+    access_family: NB-IoT
+  standards_refs:
+  - authority: 3GPP
+    identifier: The Cellular Internet of Things
+    url: https://www.3gpp.org/news-events/3gpp-news/c-iot
+    verification_status: primary_source_verified
+  - authority: ETSI/3GPP
+    identifier: ETSI TS 123 401 V17.7.0 / 3GPP TS 23.401 Release 17
+    url: https://www.etsi.org/deliver/etsi_ts/123400_123499/123401/17.07.00_60/ts_123401v170700p.pdf
+    verification_status: primary_source_verified
+  claim_ids:
+  - nbiot_ltem_ciot_families
+  - cellular_eps_ip
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: 3gpp_nbiot_eps_nonip
+  name: 3GPP NB-IoT EPS Non-IP access
+  roles:
+  - access_link
+  - network_adaptation
+  supported_placements:
+  - device
+  - access_network
+  provides:
+  - ciot_nonip_service
+  - native_access_security
+  - operator_managed_access
+  requires: []
+  requires_any: []
+  forbids: []
+  properties:
+    variant: Non-IP PDN
+    access_family: NB-IoT
+  standards_refs:
+  - authority: 3GPP
+    identifier: The Cellular Internet of Things
+    url: https://www.3gpp.org/news-events/3gpp-news/c-iot
+    verification_status: primary_source_verified
+  - authority: ETSI/3GPP
+    identifier: ETSI TS 123 401 V17.7.0 / 3GPP TS 23.401 Release 17
+    url: https://www.etsi.org/deliver/etsi_ts/123400_123499/123401/17.07.00_60/ts_123401v170700p.pdf
+    verification_status: primary_source_verified
+  - authority: ETSI/3GPP
+    identifier: ETSI TS 123 682 V17.2.0 / 3GPP TS 23.682 Release 17
+    url: https://www.etsi.org/deliver/etsi_ts/123600_123699/123682/17.02.00_60/ts_123682v170200p.pdf
+    verification_status: primary_source_verified
+  claim_ids:
+  - nbiot_ltem_ciot_families
+  - cellular_ciot_nonip
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: 3gpp_ltem_eps_ip
+  name: 3GPP LTE-M EPS IP-PDN access
+  roles:
+  - access_link
+  - network_protocol
+  supported_placements:
+  - device
+  - access_network
+  provides:
+  - ip_packet_service
+  - native_access_security
+  - operator_managed_access
+  requires: []
+  requires_any: []
+  forbids: []
+  properties:
+    variant: IP PDN
+    access_family: LTE-M
+  standards_refs:
+  - authority: 3GPP
+    identifier: The Cellular Internet of Things
+    url: https://www.3gpp.org/news-events/3gpp-news/c-iot
+    verification_status: primary_source_verified
+  - authority: ETSI/3GPP
+    identifier: ETSI TS 123 401 V17.7.0 / 3GPP TS 23.401 Release 17
+    url: https://www.etsi.org/deliver/etsi_ts/123400_123499/123401/17.07.00_60/ts_123401v170700p.pdf
+    verification_status: primary_source_verified
+  claim_ids:
+  - nbiot_ltem_ciot_families
+  - cellular_eps_ip
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: 3gpp_ltem_eps_nonip
+  name: 3GPP LTE-M EPS Non-IP access
+  roles:
+  - access_link
+  - network_adaptation
+  supported_placements:
+  - device
+  - access_network
+  provides:
+  - ciot_nonip_service
+  - native_access_security
+  - operator_managed_access
+  requires: []
+  requires_any: []
+  forbids: []
+  properties:
+    variant: Non-IP PDN
+    access_family: LTE-M
+  standards_refs:
+  - authority: 3GPP
+    identifier: The Cellular Internet of Things
+    url: https://www.3gpp.org/news-events/3gpp-news/c-iot
+    verification_status: primary_source_verified
+  - authority: ETSI/3GPP
+    identifier: ETSI TS 123 401 V17.7.0 / 3GPP TS 23.401 Release 17
+    url: https://www.etsi.org/deliver/etsi_ts/123400_123499/123401/17.07.00_60/ts_123401v170700p.pdf
+    verification_status: primary_source_verified
+  - authority: ETSI/3GPP
+    identifier: ETSI TS 123 682 V17.2.0 / 3GPP TS 23.682 Release 17
+    url: https://www.etsi.org/deliver/etsi_ts/123600_123699/123682/17.02.00_60/ts_123682v170200p.pdf
+    verification_status: primary_source_verified
+  claim_ids:
+  - nbiot_ltem_ciot_families
+  - cellular_ciot_nonip
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: lorawan_lora_access
+  name: LoRaWAN LoRa access mode
+  roles:
+  - access_link
+  - network_adaptation
+  supported_placements:
+  - device
+  - gateway_edge
+  - access_network
+  provides:
+  - lorawan_frame_service
+  - lorawan_nonip_transport_service
+  - native_access_security
+  requires: []
+  requires_any: []
+  forbids: []
+  properties:
+    phy_mode: LoRa
+    access_family: LoRaWAN
+  standards_refs:
+  - authority: LoRa Alliance
+    identifier: TS001-1.0.4 LoRaWAN L2 1.0.4
+    url: https://resources.lora-alliance.org/technical-specifications/ts001-1-0-4-lorawan-l2-1-0-4-specification
+    verification_status: primary_source_verified
+  claim_ids:
+  - lorawan_backend_architecture
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: lorawan_lrfhss_access
+  name: LoRaWAN LR-FHSS access mode
+  roles:
+  - access_link
+  - network_adaptation
+  supported_placements:
+  - device
+  - gateway_edge
+  - access_network
+  provides:
+  - lorawan_frame_service
+  - lorawan_nonip_transport_service
+  - native_access_security
+  requires: []
+  requires_any: []
+  forbids: []
+  properties:
+    phy_mode: LR-FHSS
+    access_family: LoRaWAN
+  standards_refs:
+  - authority: LoRa Alliance
+    identifier: RP002-1.0.4 LoRaWAN Regional Parameters
+    url: https://resources.lora-alliance.org/technical-specifications/rp002-1-0-4-regional-parameters
+    verification_status: primary_source_verified
+  - authority: LoRa Alliance
+    identifier: TS001-1.0.4 LoRaWAN L2 1.0.4
+    url: https://resources.lora-alliance.org/technical-specifications/ts001-1-0-4-lorawan-l2-1-0-4-specification
+    verification_status: primary_source_verified
+  claim_ids:
+  - lorawan_backend_architecture
+  - lorawan_lrfhss_mode
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: lorawan_network_application_backend
+  name: LoRaWAN network/application-server backend
+  roles:
+  - gateway_function
+  - backend_integration
+  supported_placements:
+  - network_service
+  - application_backend
+  provides:
+  - lorawan_application_payload_service
+  requires:
+  - lorawan_frame_service
+  requires_any: []
+  forbids: []
+  properties: {}
+  standards_refs:
+  - authority: LoRa Alliance
+    identifier: TS001-1.0.4 LoRaWAN L2 1.0.4
+    url: https://resources.lora-alliance.org/technical-specifications/ts001-1-0-4-lorawan-l2-1-0-4-specification
+    verification_status: primary_source_verified
+  claim_ids:
+  - lorawan_backend_architecture
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: thread_ipv6_mesh
+  name: Thread IPv6 mesh networking
+  roles:
+  - access_link
+  - network_adaptation
+  - network_protocol
+  supported_placements:
+  - device
+  - gateway_edge
+  provides:
+  - ip_packet_service
+  - thread_mesh_service
+  - native_access_security
+  requires: []
+  requires_any: []
+  forbids: []
+  properties: {}
+  standards_refs:
+  - authority: Thread Group
+    identifier: Thread Network Fundamentals
+    url: https://portal.threadgroup.org/DesktopModules/Inventures_Document/FileDownload.aspx?ContentID=633
+    verification_status: primary_source_verified
+  claim_ids:
+  - thread_ipv6_application_agnostic
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: thread_border_router
+  name: Thread Border Router
+  roles:
+  - gateway_function
+  - network_adaptation
+  supported_placements:
+  - gateway_edge
+  provides:
+  - external_ipv6_route_service
+  requires:
+  - thread_mesh_service
+  requires_any: []
+  forbids: []
+  properties: {}
+  standards_refs:
+  - authority: Thread Group
+    identifier: Thread Border Router Best Practices
+    url: https://www.threadgroup.org/Portals/0/documents/support/ThreadBorderRouterBestPractices_2530_1.pdf
+    verification_status: primary_source_verified
+  claim_ids:
+  - thread_border_router
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: bluetooth_le_access
+  name: Bluetooth Low Energy link/L2CAP access
+  roles:
+  - access_link
+  supported_placements:
+  - device
+  - gateway_edge
+  provides:
+  - ble_le_l2cap_service
+  - native_access_security
+  requires: []
+  requires_any: []
+  forbids: []
+  properties:
+    access_family: Bluetooth LE
+  standards_refs:
+  - authority: Bluetooth SIG
+    identifier: Bluetooth Core 5.4 HTML - GATT
+    url: https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-54/out/en/host/generic-attribute-profile--gatt-.html
+    verification_status: primary_source_verified
+  - authority: Bluetooth SIG
+    identifier: Internet Protocol Support Profile 1.0
+    url: https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/IPSP_v1.0/out/en/index-en.html
+    verification_status: primary_source_verified
+  - authority: IETF/RFC Editor
+    identifier: RFC 7668 IPv6 over Bluetooth Low Energy
+    url: https://www.rfc-editor.org/rfc/rfc7668.html
+    verification_status: primary_source_verified
+  claim_ids:
+  - ble_gatt
+  - ble_ipsp_ipv6
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: bluetooth_gatt
+  name: Bluetooth GATT/ATT application data service
+  roles:
+  - application_messaging
+  supported_placements:
+  - device
+  - gateway_edge
+  provides:
+  - gatt_attribute_service
+  requires:
+  - ble_le_l2cap_service
+  requires_any: []
+  forbids: []
+  properties: {}
+  standards_refs:
+  - authority: Bluetooth SIG
+    identifier: Bluetooth Core 5.4 HTML - GATT
+    url: https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/Core-54/out/en/host/generic-attribute-profile--gatt-.html
+    verification_status: primary_source_verified
+  claim_ids:
+  - ble_gatt
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: bluetooth_ipsp_ipv6
+  name: Bluetooth IPSP IPv6 adaptation
+  roles:
+  - network_adaptation
+  - network_protocol
+  supported_placements:
+  - device
+  - gateway_edge
+  provides:
+  - ip_packet_service
+  requires:
+  - ble_le_l2cap_service
+  requires_any: []
+  forbids: []
+  properties: {}
+  standards_refs:
+  - authority: Bluetooth SIG
+    identifier: Internet Protocol Support Profile 1.0
+    url: https://www.bluetooth.com/wp-content/uploads/Files/Specification/HTML/IPSP_v1.0/out/en/index-en.html
+    verification_status: primary_source_verified
+  - authority: IETF/RFC Editor
+    identifier: RFC 7668 IPv6 over Bluetooth Low Energy
+    url: https://www.rfc-editor.org/rfc/rfc7668.html
+    verification_status: primary_source_verified
+  claim_ids:
+  - ble_ipsp_ipv6
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: uwb_ieee802154_family
+  name: IEEE 802.15.4-family UWB data/ranging access
+  roles:
+  - access_link
+  supported_placements:
+  - device
+  - gateway_edge
+  provides:
+  - uwb_mac_data_service
+  - uwb_ranging_service
+  requires: []
+  requires_any: []
+  forbids: []
+  properties:
+    standard_family: IEEE 802.15.4 UWB
+    exact_dataset_revision_verified: false
+  standards_refs:
+  - authority: IEEE
+    identifier: IEEE 802.15.4z-2020
+    url: https://standards.ieee.org/ieee/802.15.4z/10230/
+    verification_status: primary_source_verified
+  claim_ids:
+  - uwb_phy_mac_ranging
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: The selected primary standard source verifies the UWB PHY/MAC/ranging family. Exact revision/profile alignment to
+    the InSecTT DW1000 setup remains unresolved.
+- component_id: ephesos_experimental_access
+  name: EPhESOS experimental access implementation
+  roles:
+  - access_link
+  supported_placements:
+  - device
+  - gateway_edge
+  provides:
+  - experimental_nonip_service
+  requires: []
+  requires_any: []
+  forbids: []
+  properties:
+    access_family: EPhESOS
+  standards_refs: []
+  claim_ids: []
+  scientific_status: candidate_component
+  provenance_status: pending_primary_source_verification
+  catalog_status: evidence_only_pending_standardisation
+  notes: Retained because it is present in InSecTT empirical evidence; no interoperable standards/profile claim is made in
+    Stage-4B.
+- component_id: udp
+  name: UDP
+  roles:
+  - transport
+  supported_placements:
+  - device
+  - application_backend
+  - management_backend
+  provides:
+  - datagram_service
+  requires:
+  - ip_packet_service
+  requires_any: []
+  forbids: []
+  properties: {}
+  standards_refs:
+  - authority: IETF/RFC Editor
+    identifier: RFC 768 User Datagram Protocol
+    url: https://www.rfc-editor.org/info/rfc768/
+    verification_status: primary_source_verified
+  claim_ids:
+  - udp_requires_ip
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: tcp
+  name: TCP
+  roles:
+  - transport
+  supported_placements:
+  - device
+  - application_backend
+  - management_backend
+  provides:
+  - reliable_stream_service
+  requires:
+  - ip_packet_service
+  requires_any: []
+  forbids: []
+  properties: {}
+  standards_refs:
+  - authority: IETF/RFC Editor
+    identifier: RFC 9293 Transmission Control Protocol
+    url: https://www.rfc-editor.org/info/rfc9293/
+    verification_status: primary_source_verified
+  claim_ids:
+  - tcp_reliable_stream
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: tls13
+  name: TLS 1.3
+  roles:
+  - end_to_end_security
+  supported_placements:
+  - device
+  - application_backend
+  - management_backend
+  provides:
+  - secure_stream_service
+  requires:
+  - reliable_stream_service
+  requires_any: []
+  forbids: []
+  properties: {}
+  standards_refs:
+  - authority: IETF/RFC Editor
+    identifier: RFC 9846 TLS 1.3
+    url: https://www.rfc-editor.org/info/rfc9846/
+    verification_status: primary_source_verified
+  claim_ids:
+  - tls13_reliable_stream
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: dtls13
+  name: DTLS 1.3
+  roles:
+  - end_to_end_security
+  supported_placements:
+  - device
+  - application_backend
+  - management_backend
+  provides:
+  - secure_datagram_service
+  requires:
+  - datagram_service
+  requires_any: []
+  forbids: []
+  properties: {}
+  standards_refs:
+  - authority: IETF/RFC Editor
+    identifier: RFC 9147 DTLS 1.3
+    url: https://www.rfc-editor.org/info/rfc9147/
+    verification_status: primary_source_verified
+  claim_ids:
+  - dtls13_datagram_security
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: coap
+  name: CoAP
+  roles:
+  - application_messaging
+  supported_placements:
+  - device
+  - application_backend
+  - management_backend
+  provides:
+  - coap_message_service
+  requires: []
+  requires_any:
+  - - datagram_service
+    - secure_datagram_service
+    - reliable_stream_service
+    - secure_stream_service
+  forbids: []
+  properties: {}
+  standards_refs:
+  - authority: IETF/RFC Editor
+    identifier: RFC 7252 CoAP
+    url: https://www.rfc-editor.org/info/rfc7252/
+    verification_status: primary_source_verified
+  - authority: IETF/RFC Editor
+    identifier: RFC 8323 CoAP over TCP, TLS, and WebSockets
+    url: https://www.rfc-editor.org/info/rfc8323/
+    verification_status: primary_source_verified
+  claim_ids:
+  - coap_udp_dtls
+  - coap_tcp_tls
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: oscore
+  name: OSCORE
+  roles:
+  - end_to_end_security
+  supported_placements:
+  - device
+  - application_backend
+  - management_backend
+  provides:
+  - secure_coap_message_service
+  requires:
+  - coap_message_service
+  requires_any: []
+  forbids: []
+  properties: {}
+  standards_refs:
+  - authority: IETF/RFC Editor
+    identifier: RFC 8613 OSCORE
+    url: https://www.rfc-editor.org/info/rfc8613/
+    verification_status: primary_source_verified
+  claim_ids:
+  - oscore_coap
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: mqtt5_tcp
+  name: MQTT 5.0 over ordered lossless stream
+  roles:
+  - application_messaging
+  supported_placements:
+  - device
+  - application_backend
+  provides:
+  - mqtt_message_service
+  requires:
+  - reliable_stream_service
+  requires_any: []
+  forbids: []
+  properties:
+    security_binding: none_at_transport_component
+  standards_refs:
+  - authority: OASIS
+    identifier: MQTT Version 5.0 OASIS Standard
+    url: https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html
+    verification_status: primary_source_verified
+  claim_ids:
+  - mqtt_ordered_lossless
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: mqtt5_tls
+  name: MQTT 5.0 over TLS-secured stream
+  roles:
+  - application_messaging
+  supported_placements:
+  - device
+  - application_backend
+  provides:
+  - secure_mqtt_message_service
+  requires:
+  - secure_stream_service
+  requires_any: []
+  forbids: []
+  properties:
+    security_binding: TLS
+  standards_refs:
+  - authority: OASIS
+    identifier: MQTT Version 5.0 OASIS Standard
+    url: https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html
+    verification_status: primary_source_verified
+  - authority: IETF/RFC Editor
+    identifier: RFC 9846 TLS 1.3
+    url: https://www.rfc-editor.org/info/rfc9846/
+    verification_status: primary_source_verified
+  claim_ids:
+  - mqtt_ordered_lossless
+  - mqtt_tls
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: http11_tcp
+  name: HTTP/1.1 over stream transport
+  roles:
+  - application_messaging
+  supported_placements:
+  - device
+  - application_backend
+  provides:
+  - http_message_service
+  requires:
+  - reliable_stream_service
+  requires_any: []
+  forbids: []
+  properties:
+    security_binding: none_at_transport_component
+  standards_refs:
+  - authority: IETF/RFC Editor
+    identifier: RFC 9110 HTTP Semantics
+    url: https://www.rfc-editor.org/info/rfc9110/
+    verification_status: primary_source_verified
+  - authority: IETF/RFC Editor
+    identifier: RFC 9112 HTTP/1.1
+    url: https://www.rfc-editor.org/info/rfc9112/
+    verification_status: primary_source_verified
+  claim_ids:
+  - http11_stream
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: http11_tls
+  name: HTTP/1.1 over TLS-secured stream
+  roles:
+  - application_messaging
+  supported_placements:
+  - device
+  - application_backend
+  provides:
+  - secure_http_message_service
+  requires:
+  - secure_stream_service
+  requires_any: []
+  forbids: []
+  properties:
+    security_binding: TLS
+  standards_refs:
+  - authority: IETF/RFC Editor
+    identifier: RFC 9846 TLS 1.3
+    url: https://www.rfc-editor.org/info/rfc9846/
+    verification_status: primary_source_verified
+  - authority: IETF/RFC Editor
+    identifier: RFC 9110 HTTP Semantics
+    url: https://www.rfc-editor.org/info/rfc9110/
+    verification_status: primary_source_verified
+  - authority: IETF/RFC Editor
+    identifier: RFC 9112 HTTP/1.1
+    url: https://www.rfc-editor.org/info/rfc9112/
+    verification_status: primary_source_verified
+  claim_ids:
+  - http11_stream
+  - http11_tls
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+- component_id: lwm2m12
+  name: OMA LwM2M 1.2.x
+  roles:
+  - device_management
+  - application_messaging
+  supported_placements:
+  - device
+  - management_backend
+  provides:
+  - lwm2m_device_management_service
+  - lwm2m_application_service
+  requires: []
+  requires_any:
+  - - coap_message_service
+    - secure_coap_message_service
+    - secure_mqtt_message_service
+    - secure_http_message_service
+    - ciot_nonip_service
+    - lorawan_nonip_transport_service
+  forbids: []
+  properties: {}
+  standards_refs:
+  - authority: Open Mobile Alliance
+    identifier: LwM2M Core 1.2.2
+    url: https://www.openmobilealliance.org/release/lightweightm2m/V1_2_2-20240613-A/HTML-Version/OMA-TS-LightweightM2M_Core-V1_2_2-20240613-A.html
+    verification_status: primary_source_verified
+  - authority: Open Mobile Alliance
+    identifier: LwM2M Transport Bindings 1.2.2
+    url: https://www.openmobilealliance.org/release/LightweightM2M/V1_2_2-20240613-A/HTML-Version/OMA-TS-LightweightM2M_Transport-V1_2_2-20240613-A.html
+    verification_status: primary_source_verified
+  claim_ids:
+  - lwm2m_core
+  - lwm2m_transport_bindings
+  scientific_status: verified_component
+  provenance_status: primary_source_verified
+  catalog_status: primary_source_verified
+  notes: null
+compatibility_edges:
+- edge_id: 3gpp_nbiot_eps_ip_to_udp
+  from_component_id: 3gpp_nbiot_eps_ip
+  to_component_id: udp
+  interface: ip_packet_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - cellular_eps_ip
+  - udp_requires_ip
+  scope: null
+  limitations: null
+- edge_id: 3gpp_nbiot_eps_ip_to_tcp
+  from_component_id: 3gpp_nbiot_eps_ip
+  to_component_id: tcp
+  interface: ip_packet_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - cellular_eps_ip
+  - tcp_reliable_stream
+  scope: null
+  limitations: null
+- edge_id: 3gpp_ltem_eps_ip_to_udp
+  from_component_id: 3gpp_ltem_eps_ip
+  to_component_id: udp
+  interface: ip_packet_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - cellular_eps_ip
+  - udp_requires_ip
+  scope: null
+  limitations: null
+- edge_id: 3gpp_ltem_eps_ip_to_tcp
+  from_component_id: 3gpp_ltem_eps_ip
+  to_component_id: tcp
+  interface: ip_packet_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - cellular_eps_ip
+  - tcp_reliable_stream
+  scope: null
+  limitations: null
+- edge_id: 3gpp_nbiot_eps_nonip_to_lwm2m
+  from_component_id: 3gpp_nbiot_eps_nonip
+  to_component_id: lwm2m12
+  interface: ciot_nonip_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - cellular_ciot_nonip
+  - lwm2m_transport_bindings
+  scope: LwM2M Non-IP binding; not generic UDP/TCP.
+  limitations: null
+- edge_id: 3gpp_ltem_eps_nonip_to_lwm2m
+  from_component_id: 3gpp_ltem_eps_nonip
+  to_component_id: lwm2m12
+  interface: ciot_nonip_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - cellular_ciot_nonip
+  - lwm2m_transport_bindings
+  scope: LwM2M Non-IP binding; not generic UDP/TCP.
+  limitations: null
+- edge_id: lorawan_lora_access_to_backend
+  from_component_id: lorawan_lora_access
+  to_component_id: lorawan_network_application_backend
+  interface: lorawan_frame_service
+  relation: bridges
+  status: primary_source_verified_compatible
+  claim_ids:
+  - lorawan_backend_architecture
+  scope: null
+  limitations: null
+- edge_id: lorawan_lora_access_to_lwm2m
+  from_component_id: lorawan_lora_access
+  to_component_id: lwm2m12
+  interface: lorawan_nonip_transport_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - lwm2m_transport_bindings
+  scope: OMA LwM2M CoAP-over-Non-IP binding for LoRaWAN; not a claim that UDP/TCP run directly over LoRaWAN.
+  limitations: null
+- edge_id: lorawan_lrfhss_access_to_backend
+  from_component_id: lorawan_lrfhss_access
+  to_component_id: lorawan_network_application_backend
+  interface: lorawan_frame_service
+  relation: bridges
+  status: primary_source_verified_compatible
+  claim_ids:
+  - lorawan_backend_architecture
+  scope: null
+  limitations: null
+- edge_id: lorawan_lrfhss_access_to_lwm2m
+  from_component_id: lorawan_lrfhss_access
+  to_component_id: lwm2m12
+  interface: lorawan_nonip_transport_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - lwm2m_transport_bindings
+  scope: OMA LwM2M CoAP-over-Non-IP binding for LoRaWAN; not a claim that UDP/TCP run directly over LoRaWAN.
+  limitations: null
+- edge_id: thread_to_udp
+  from_component_id: thread_ipv6_mesh
+  to_component_id: udp
+  interface: ip_packet_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - thread_ipv6_application_agnostic
+  - udp_requires_ip
+  scope: null
+  limitations: null
+- edge_id: thread_to_tcp
+  from_component_id: thread_ipv6_mesh
+  to_component_id: tcp
+  interface: ip_packet_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - thread_ipv6_application_agnostic
+  - tcp_reliable_stream
+  scope: null
+  limitations: null
+- edge_id: thread_to_border_router
+  from_component_id: thread_ipv6_mesh
+  to_component_id: thread_border_router
+  interface: thread_mesh_service
+  relation: bridges
+  status: primary_source_verified_compatible
+  claim_ids:
+  - thread_border_router
+  scope: null
+  limitations: null
+- edge_id: ble_to_gatt
+  from_component_id: bluetooth_le_access
+  to_component_id: bluetooth_gatt
+  interface: ble_le_l2cap_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - ble_gatt
+  scope: null
+  limitations: null
+- edge_id: ble_to_ipsp
+  from_component_id: bluetooth_le_access
+  to_component_id: bluetooth_ipsp_ipv6
+  interface: ble_le_l2cap_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - ble_ipsp_ipv6
+  scope: null
+  limitations: null
+- edge_id: ble_ipsp_to_udp
+  from_component_id: bluetooth_ipsp_ipv6
+  to_component_id: udp
+  interface: ip_packet_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - ble_ipsp_ipv6
+  - udp_requires_ip
+  scope: null
+  limitations: null
+- edge_id: ble_ipsp_to_tcp
+  from_component_id: bluetooth_ipsp_ipv6
+  to_component_id: tcp
+  interface: ip_packet_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - ble_ipsp_ipv6
+  - tcp_reliable_stream
+  scope: null
+  limitations: null
+- edge_id: udp_to_dtls13
+  from_component_id: udp
+  to_component_id: dtls13
+  interface: datagram_service
+  relation: secures
+  status: primary_source_verified_compatible
+  claim_ids:
+  - dtls13_datagram_security
+  scope: null
+  limitations: null
+- edge_id: udp_to_coap
+  from_component_id: udp
+  to_component_id: coap
+  interface: datagram_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - coap_udp_dtls
+  scope: null
+  limitations: null
+- edge_id: tcp_to_tls13
+  from_component_id: tcp
+  to_component_id: tls13
+  interface: reliable_stream_service
+  relation: secures
+  status: primary_source_verified_compatible
+  claim_ids:
+  - tls13_reliable_stream
+  scope: null
+  limitations: null
+- edge_id: tcp_to_coap
+  from_component_id: tcp
+  to_component_id: coap
+  interface: reliable_stream_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - coap_tcp_tls
+  scope: null
+  limitations: null
+- edge_id: dtls13_to_coap
+  from_component_id: dtls13
+  to_component_id: coap
+  interface: secure_datagram_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - coap_udp_dtls
+  - dtls13_datagram_security
+  scope: null
+  limitations: null
+- edge_id: tls13_to_coap
+  from_component_id: tls13
+  to_component_id: coap
+  interface: secure_stream_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - coap_tcp_tls
+  - tls13_reliable_stream
+  scope: null
+  limitations: null
+- edge_id: coap_to_oscore
+  from_component_id: coap
+  to_component_id: oscore
+  interface: coap_message_service
+  relation: secures
+  status: primary_source_verified_compatible
+  claim_ids:
+  - oscore_coap
+  scope: null
+  limitations: null
+- edge_id: coap_to_lwm2m
+  from_component_id: coap
+  to_component_id: lwm2m12
+  interface: coap_message_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - lwm2m_transport_bindings
+  scope: null
+  limitations: null
+- edge_id: oscore_to_lwm2m
+  from_component_id: oscore
+  to_component_id: lwm2m12
+  interface: secure_coap_message_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - oscore_coap
+  - lwm2m_transport_bindings
+  scope: null
+  limitations: null
+- edge_id: tcp_to_mqtt5_tcp
+  from_component_id: tcp
+  to_component_id: mqtt5_tcp
+  interface: reliable_stream_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - mqtt_ordered_lossless
+  scope: null
+  limitations: null
+- edge_id: tls13_to_mqtt5_tls
+  from_component_id: tls13
+  to_component_id: mqtt5_tls
+  interface: secure_stream_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - mqtt_tls
+  scope: null
+  limitations: null
+- edge_id: mqtt5_tls_to_lwm2m
+  from_component_id: mqtt5_tls
+  to_component_id: lwm2m12
+  interface: secure_mqtt_message_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - lwm2m_transport_bindings
+  scope: null
+  limitations: null
+- edge_id: tcp_to_http11_tcp
+  from_component_id: tcp
+  to_component_id: http11_tcp
+  interface: reliable_stream_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - http11_stream
+  scope: null
+  limitations: null
+- edge_id: tls13_to_http11_tls
+  from_component_id: tls13
+  to_component_id: http11_tls
+  interface: secure_stream_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - http11_tls
+  scope: null
+  limitations: null
+- edge_id: http11_tls_to_lwm2m
+  from_component_id: http11_tls
+  to_component_id: lwm2m12
+  interface: secure_http_message_service
+  relation: carries
+  status: primary_source_verified_compatible
+  claim_ids:
+  - lwm2m_transport_bindings
+  scope: null
+  limitations: null
+evidence_alignment:
+- alignment_id: vomhoff_nbiot_ip
+  dataset_id: vomhoff_nbiot_ltem_energy_2023
+  component_id: 3gpp_nbiot_eps_ip
+  status: partial_stack_context
+  measurement_scope_note: Device/session phase energy was measured in NB-IoT IP application runs; it is not radio-only component
+    energy.
+  decision_use_note: Usable only through an accounting bridge preserving the whole-device phase boundary.
+- alignment_id: vomhoff_ltem_ip
+  dataset_id: vomhoff_nbiot_ltem_energy_2023
+  component_id: 3gpp_ltem_eps_ip
+  status: partial_stack_context
+  measurement_scope_note: Device/session phase energy was measured in LTE-M IP application runs; it is not radio-only component
+    energy.
+  decision_use_note: Usable only through an accounting bridge preserving the whole-device phase boundary.
+- alignment_id: insectt_thread
+  dataset_id: insectt_wsn_power_2023
+  component_id: thread_ipv6_mesh
+  status: partial_stack_context
+  measurement_scope_note: One approximately 60 s whole-device OpenThread configuration trace per reporting interval.
+  decision_use_note: Does not isolate protocol-only energy from hardware/firmware effects.
+- alignment_id: insectt_ble
+  dataset_id: insectt_wsn_power_2023
+  component_id: bluetooth_le_access
+  status: partial_stack_context
+  measurement_scope_note: One approximately 60 s whole-device BLE configuration trace per reporting interval. Exact higher-layer
+    profile/bearer is not promoted to a verified stack claim.
+  decision_use_note: Cannot be transferred directly to Bluetooth IPSP/IPv6 energy.
+- alignment_id: insectt_uwb
+  dataset_id: insectt_wsn_power_2023
+  component_id: uwb_ieee802154_family
+  status: implementation_or_revision_unresolved
+  measurement_scope_note: UWB whole-device traces use nRF52832 + DW1000; exact IEEE revision/profile correspondence is not
+    asserted by Stage-4B.
+  decision_use_note: Treat as implementation evidence, not a generic IEEE 802.15.4z protocol cost.
+- alignment_id: insectt_ephesos
+  dataset_id: insectt_wsn_power_2023
+  component_id: ephesos_experimental_access
+  status: experimental_source_only
+  measurement_scope_note: EPhESOS is retained as an empirical experimental configuration without a Stage-4B interoperable
+    standard/profile.
+  decision_use_note: Not eligible for a verified publication stack until its protocol contract is separately established.
+- alignment_id: lrfhss_direct
+  dataset_id: lorawan_lrfhss_energy_2024
+  component_id: lorawan_lrfhss_access
+  status: direct_measurement_boundary_match
+  measurement_scope_note: Radio-interface-only LR-FHSS energy traces directly match the LR-FHSS access-mode boundary, conditional
+    on the measured DR/ACK configuration.
+  decision_use_note: Still not whole-device/application-report energy.
+- alignment_id: loed_lora_direct
+  dataset_id: loed_lorawan_edge_2020
+  component_id: lorawan_lora_access
+  status: direct_measurement_boundary_match
+  measurement_scope_note: Reception-side LoRaWAN LoRa PHY/link observations align to classical LoRa SF7-SF12 access/link conditions,
+    not LR-FHSS.
+  decision_use_note: RSSI/SNR are bridge inputs; CRC fraction is not PDR.
+unresolved_catalog_gaps:
+- gap_id: ephesos_standardisation
+  status: unresolved
+  description: EPhESOS has empirical energy evidence but no interoperable primary-source standard/profile is materialised
+    in Stage-4B.
+  consequence: Do not create a verified EPhESOS end-to-end stack.
+- gap_id: insectt_ble_profile
+  status: unresolved
+  description: InSecTT BLE energy does not identify a Stage-4B IPSP/IPv6 profile boundary.
+  consequence: BLE access evidence cannot be silently reused as Bluetooth IPSP energy.
+- gap_id: insectt_uwb_revision
+  status: unresolved
+  description: Exact IEEE UWB revision/profile alignment of the DW1000 measurement setup is not established by the current
+    catalog.
+  consequence: UWB evidence remains implementation-specific.
+- gap_id: vomhoff_application_versions
+  status: unresolved
+  description: Vomhoff source labels HTTP/MQTT but do not establish the exact Stage-4B HTTP/MQTT version/security binding
+    in the evidence record.
+  consequence: Do not attach those measurements directly to HTTP/1.1 or MQTT 5/TLS component costs.
+- gap_id: loed_vs_lrfhss_link_mode
+  status: unresolved
+  description: LoED link-quality evidence is classical LoRa SF7-SF12 and does not validate LR-FHSS link-quality distributions.
+  consequence: LR-FHSS feasibility cannot inherit LoED RSSI/SNR distributions without a separate bridge/evidence source.
+- gap_id: lorawan_generic_backend_integration
+  status: unresolved
+  description: LoRaWAN L2 verifies Network Server/Application Server architecture, but a deployment-specific bridge from Application
+    Server payloads to MQTT/HTTP is not standardized by LoRaWAN L2 itself.
+  consequence: Future MQTT/HTTP LoRaWAN backend stacks require an explicit integration component and provenance.

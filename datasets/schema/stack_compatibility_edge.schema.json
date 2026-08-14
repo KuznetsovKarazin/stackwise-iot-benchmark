@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "STACKWISE verified component compatibility edge",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "edge_id",
+    "from_component_id",
+    "to_component_id",
+    "interface",
+    "relation",
+    "status",
+    "claim_ids"
+  ],
+  "properties": {
+    "edge_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+    },
+    "from_component_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+    },
+    "to_component_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+    },
+    "interface": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+    },
+    "relation": {
+      "enum": [
+        "carries",
+        "secures",
+        "manages",
+        "integrates",
+        "bridges",
+        "terminates"
+      ]
+    },
+    "status": {
+      "enum": [
+        "primary_source_verified_compatible",
+        "unresolved"
+      ]
+    },
+    "claim_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+      }
+    },
+    "scope": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "limitations": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

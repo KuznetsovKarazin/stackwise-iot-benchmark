@@ -1,0 +1,21 @@
+technology,reporting_interval_ms,payload_bytes,reference_mean_power_uw,source
+BLE,100,2,339.14,Table 1
+BLE,200,4,193.91,Table 1
+BLE,400,8,115.93,Table 1
+BLE,800,16,75.14,Table 1
+BLE,1600,32,40.13,Table 1
+Thread,100,2,767.25,Table 1
+Thread,200,4,427.98,Table 1
+Thread,400,8,261.99,Table 1
+Thread,800,16,173.35,Table 1
+Thread,1600,32,130.84,Table 1
+EPhESOS,100,2,637.10,Table 1
+EPhESOS,200,4,350.86,Table 1
+EPhESOS,400,8,202.22,Table 1
+EPhESOS,800,16,123.06,Table 1
+EPhESOS,1600,32,88.28,Table 1
+UWB,100,2,986.20,Table 1
+UWB,200,4,526.58,Table 1
+UWB,400,8,295.61,Table 1
+UWB,800,16,182.75,Table 1
+UWB,1600,32,126.65,Table 1

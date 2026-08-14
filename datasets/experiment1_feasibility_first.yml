@@ -1,0 +1,47 @@
+schema_version: 1
+stage: Experiment 1 — feasibility-first vs score-first preference-envelope stress test
+benchmark:
+  benchmark_id: stackwise_empirical_evidence_benchmark
+  benchmark_version: 1.0.0
+  release_root: release/stackwise_benchmark_v1.0.0
+  inputs:
+    candidate_stacks: tables/L3_benchmark_definitions/candidate_stack_catalog.csv
+    component_catalog: tables/L3_benchmark_definitions/component_catalog.csv
+    hard_feasibility: tables/L4_feasibility_and_support/refined_hard_feasibility_matrix.csv
+scientific_policy:
+  experiment_is_publication_oriented: true
+  experiment_is_real_candidate_mcda: false
+  empirical_soft_metric_imputation_allowed: false
+  missing_energy_cost_reliability_imputation_allowed: false
+  hard_constraints_may_be_compensated_by_soft_score: false
+  score_first_is_generic_preference_stress_test_not_recommended_method: true
+  preference_anchors_have_probability_interpretation: false
+  scenario_anchor_frequencies_have_probability_interpretation: false
+  unresolved_is_not_infeasible: true
+  feasibility_first_must_return_no_decision_if_no_feasible_candidate: true
+  publication_claim_scope: algorithmic_ordering_effect_under_frozen_structural_preference_envelope
+preference_features:
+  - feature_id: stack_parsimony
+    direction: maximize
+    construction: mean_inverse_minmax_component_count_and_binding_count
+    rationale: Fewer stack components and verified bindings are used only as a generic architecture-complexity preference.
+  - feature_id: explicit_transport_security
+    direction: maximize
+    construction: any_component_role_end_to_end_security
+    rationale: Explicit TLS/DTLS presence is a fully observed structural preference attribute, not a security-quality score.
+  - feature_id: operator_independence
+    direction: maximize
+    construction: primary_access_does_not_provide_operator_managed_access
+    rationale: Operator independence is treated as a generic deployment preference, never as a scenario feasibility substitute.
+  - feature_id: ip_interoperability
+    direction: maximize
+    construction: any_component_provides_ip_packet_service
+    rationale: IP service exposure is treated as a generic interoperability preference, not as a universal requirement.
+preference_design:
+  mode: deterministic_simplex_grid
+  simplex_step: 0.25
+  expected_anchor_count: 35
+  grid_resolution_sensitivity_steps: [0.5, 0.25, 0.2, 0.1]
+  tie_tolerance: 1.0e-12
+outputs:
+  directory: results/experiments/experiment1_feasibility_first

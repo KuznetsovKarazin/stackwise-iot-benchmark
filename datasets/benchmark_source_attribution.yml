@@ -1,0 +1,63 @@
+schema_version: '1.0'
+reviewed_on: '2026-08-12'
+review_status: passed
+review_scope: scientific_identity_attribution_and_derivation_role
+sources:
+  - dataset_id: vomhoff_nbiot_ltem_energy_2023
+    dataset_title: 'NB-IoT vs. LTE-M: Measurement Data of the Energy Consumption of LPWAN Technologies'
+    creators:
+      - Viktoria Vomhoff
+      - Simon Raffeck
+      - Steffen Gebert
+      - Stefan Geißler
+      - Tobias Hoßfeld
+    dataset_doi: 10.5281/zenodo.7603641
+    related_publication_title: 'NB-IoT vs. LTE-M: Measurement Study of the Energy Consumption of LPWAN Technologies'
+    related_publication_doi: 10.1109/ICCWorkshops57953.2023.10283595
+    upstream_license: CC-BY-4.0
+    stackwise_role: 'Whole-device NB-IoT/LTE-M phase-energy source reproduction and analysis-ready run/phase evidence.'
+    attribution_status: verified
+    verification_basis: 'Zenodo record metadata and associated IEEE publication metadata.'
+  - dataset_id: insectt_wsn_power_2023
+    dataset_title: 'InSecTT WSN Power Consumption Dataset'
+    creators:
+      - Julian Karoliny
+      - Leander B. Hörmann
+      - Philipp Peterseil
+    dataset_doi: 10.5281/zenodo.7762712
+    related_publication_title: 'Solar-Based Energy Harvesting and Low-Power Wireless Networks'
+    related_publication_doi: 10.1007/978-3-031-54049-3_14
+    upstream_license: CC-BY-4.0
+    stackwise_role: 'BLE/Thread/UWB/EPhESOS configuration-level current, charge and validated derived power/energy evidence.'
+    attribution_status: verified
+    verification_basis: 'Zenodo record metadata/README and associated Springer chapter metadata.'
+  - dataset_id: loed_lorawan_edge_2020
+    dataset_title: 'LoED: The LoRaWAN at the Edge Dataset'
+    creators:
+      - Laksh Bhatia
+      - Michael Breza
+      - Ramona Marfievici
+      - Julie A. McCann
+    dataset_doi: 10.5281/zenodo.4121430
+    related_publication_title: 'LoED: The LoRaWAN at the Edge Dataset'
+    related_publication_doi: 10.1145/3419016.3431491
+    upstream_license: CC-BY-4.0
+    stackwise_role: 'Reception-side LoRaWAN PHY, gateway/day and logical-frame observation-diversity evidence; no transmission-denominator/PDR inference.'
+    attribution_status: verified
+    verification_basis: 'Zenodo v3 record metadata and associated DATA 2020 publication metadata.'
+  - dataset_id: lorawan_lrfhss_energy_2024
+    dataset_title: 'Dataset: LoRaWAN LR-FHSS End-Device Current Consumption Measurements'
+    creators:
+      - Roger Sanchez-Vital
+      - Lluís Casals
+      - Bartomeu Heer-Salva
+      - Rafael Vidal
+      - Carles Gomez
+      - Eduard Garcia-Villegas
+    dataset_doi: 10.5281/zenodo.13838241
+    related_publication_title: 'Energy Performance of LR-FHSS: Analysis and Evaluation'
+    related_publication_doi: 10.3390/s24175770
+    upstream_license: CC-BY-4.0
+    stackwise_role: 'Radio-interface LR-FHSS ACK/noACK × DR8-DR11 current traces, capture energy and descriptive matched-DR ACK/RX contrasts.'
+    attribution_status: verified
+    verification_basis: 'Zenodo record metadata and associated Sensors publication metadata.'

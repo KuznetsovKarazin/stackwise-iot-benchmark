@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "STACKWISE dataset registry",
+  "type": "object",
+  "required": ["schema_version", "datasets"],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "datasets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id", "title", "provider", "empirical", "status", "evidence_grade",
+          "technologies", "metrics", "measurement_boundaries", "adapter", "licence"
+        ],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+          "title": {"type": "string"},
+          "provider": {"enum": ["zenodo", "kaggle", "http", "github"]},
+          "record_id": {"type": "string"},
+          "slug": {"type": "string"},
+          "empirical": {"type": "boolean"},
+          "status": {"enum": ["core", "supplementary", "candidate"]},
+          "evidence_grade": {"enum": ["A", "B", "C", "D"]},
+          "technologies": {"type": "array", "minItems": 1},
+          "metrics": {"type": "array", "minItems": 1},
+          "measurement_boundaries": {"type": "array", "minItems": 1},
+          "adapter": {"type": "string"},
+          "licence": {
+            "type": "object",
+            "required": ["id", "status", "redistribution"]
+          }
+        }
+      }
+    }
+  }
+}

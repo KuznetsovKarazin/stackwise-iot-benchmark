@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "STACKWISE Stage-3 uncertainty model specification",
+  "description": "A non-MCDA specification of how uncertainty and dependence for one Stage-2 evidence metric may be calibrated and propagated without inventing replication.",
+  "type": "object",
+  "required": [
+    "uncertainty_model_id",
+    "dataset_id",
+    "metric_id",
+    "support_domain",
+    "evidence_uncertainty_regime",
+    "population_variability_status",
+    "calibration_status",
+    "point_estimate_source",
+    "primary_sampling_unit",
+    "resampling_scheme",
+    "distribution_family_status",
+    "dependence_group_ids",
+    "shared_parameter_ids",
+    "study_effect_status",
+    "implementation_effect_status",
+    "bridge_uncertainty_status",
+    "forbidden_operations",
+    "calibration_artifacts",
+    "notes"
+  ],
+  "properties": {
+    "uncertainty_model_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dataset_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "metric_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "support_domain": {
+      "enum": [
+        "real",
+        "nonnegative_real",
+        "positive_real",
+        "unit_interval",
+        "nonnegative_integer"
+      ]
+    },
+    "evidence_uncertainty_regime": {
+      "enum": [
+        "replicated_run_level",
+        "single_configuration_trace",
+        "hierarchical_observational_campaign",
+        "shared_parameter_derived",
+        "single_matched_contrast",
+        "descriptive_only"
+      ]
+    },
+    "population_variability_status": {
+      "enum": [
+        "empirically_calibratable",
+        "not_identified_single_unit",
+        "hierarchical_calibration_required",
+        "not_applicable_descriptive",
+        "conditional_scenario_uncertainty_materialised"
+      ]
+    },
+    "calibration_status": {
+      "enum": [
+        "calibratable_now",
+        "calibrated_nonparametric",
+        "grouped_artifact_required",
+        "external_prior_required",
+        "descriptive_only",
+        "bridge_model_required",
+        "grouped_artifact_materialised",
+        "scenario_robustness_materialised"
+      ]
+    },
+    "point_estimate_source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "primary_sampling_unit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "resampling_scheme": {
+      "enum": [
+        "cluster_bootstrap_physical_run",
+        "hierarchical_block_bootstrap_pending",
+        "none_single_unit",
+        "none_descriptive",
+        "shared_parameter_propagation_pending",
+        "hierarchical_day_gateway_resampling_pending",
+        "campaign_block_robustness_family"
+      ]
+    },
+    "distribution_family_status": {
+      "enum": [
+        "empirical_resampling_preferred",
+        "parametric_family_not_yet_selected",
+        "external_prior_required",
+        "hierarchical_model_not_yet_selected",
+        "descriptive_no_population_distribution",
+        "empirical_robustness_family_no_single_distribution"
+      ]
+    },
+    "dependence_group_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "shared_parameter_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "study_effect_status": {
+      "enum": [
+        "not_separately_identified_single_study",
+        "not_applicable_within_single_study",
+        "future_cross_study_prior_or_evidence_required"
+      ]
+    },
+    "implementation_effect_status": {
+      "enum": [
+        "known_context_not_separately_identified",
+        "implementation_context_unknown",
+        "not_applicable_or_descriptive"
+      ]
+    },
+    "bridge_uncertainty_status": {
+      "enum": [
+        "not_applicable",
+        "pending_downstream_bridge",
+        "must_be_propagated_with_parent_evidence"
+      ]
+    },
+    "forbidden_operations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "calibration_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "notes": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

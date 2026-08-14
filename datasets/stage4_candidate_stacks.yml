@@ -1,0 +1,243 @@
+schema_version: 1
+stage: Stage-4C verified reference candidate stacks
+scientific_policy:
+  candidate_set_is_exhaustive: false
+  every_verified_binding_requires_catalog_edge: true
+  every_verified_candidate_component_primary_source_verified: true
+  full_end_to_end_empirical_support_required_for_structural_candidate: false
+  evidence_alignment_implies_full_stack_cost: false
+  unresolved_catalog_gap_silently_closed: false
+  mcda_authorised: false
+  ranking_authorised: false
+  stakeholder_weights_authorised: false
+
+candidate_stacks:
+  - stack_id: nbiot_ip_coap_dtls_lwm2m
+    name: NB-IoT IP + UDP + DTLS 1.3 + CoAP + LwM2M
+    description: Verified datagram-management reference path over NB-IoT IP-PDN access.
+    component_instances:
+      - {instance_id: access, component_id: 3gpp_nbiot_eps_ip, placement: device}
+      - {instance_id: udp, component_id: udp, placement: device}
+      - {instance_id: dtls, component_id: dtls13, placement: device}
+      - {instance_id: coap, component_id: coap, placement: device}
+      - {instance_id: lwm2m, component_id: lwm2m12, placement: device}
+    bindings:
+      - {from_instance_id: access, to_instance_id: udp, interface: ip_packet_service, relation: carries}
+      - {from_instance_id: udp, to_instance_id: dtls, interface: datagram_service, relation: secures}
+      - {from_instance_id: dtls, to_instance_id: coap, interface: secure_datagram_service, relation: carries}
+      - {from_instance_id: coap, to_instance_id: lwm2m, interface: coap_message_service, relation: carries}
+    environment_capabilities: []
+    primary_access_instance_id: access
+    scientific_status: verified_candidate
+    notes: Structural candidate only; Vomhoff did not measure this CoAP/LwM2M composition.
+
+  - stack_id: ltem_ip_coap_dtls_lwm2m
+    name: LTE-M IP + UDP + DTLS 1.3 + CoAP + LwM2M
+    description: Verified datagram-management reference path over LTE-M IP-PDN access.
+    component_instances:
+      - {instance_id: access, component_id: 3gpp_ltem_eps_ip, placement: device}
+      - {instance_id: udp, component_id: udp, placement: device}
+      - {instance_id: dtls, component_id: dtls13, placement: device}
+      - {instance_id: coap, component_id: coap, placement: device}
+      - {instance_id: lwm2m, component_id: lwm2m12, placement: device}
+    bindings:
+      - {from_instance_id: access, to_instance_id: udp, interface: ip_packet_service, relation: carries}
+      - {from_instance_id: udp, to_instance_id: dtls, interface: datagram_service, relation: secures}
+      - {from_instance_id: dtls, to_instance_id: coap, interface: secure_datagram_service, relation: carries}
+      - {from_instance_id: coap, to_instance_id: lwm2m, interface: coap_message_service, relation: carries}
+    environment_capabilities: []
+    primary_access_instance_id: access
+    scientific_status: verified_candidate
+    notes: Structural candidate only; Vomhoff did not measure this CoAP/LwM2M composition.
+
+  - stack_id: nbiot_ip_mqtt_tls_lwm2m
+    name: NB-IoT IP + TCP + TLS 1.3 + MQTT 5 + LwM2M
+    description: Verified secure-stream management reference path over NB-IoT IP-PDN access.
+    component_instances:
+      - {instance_id: access, component_id: 3gpp_nbiot_eps_ip, placement: device}
+      - {instance_id: tcp, component_id: tcp, placement: device}
+      - {instance_id: tls, component_id: tls13, placement: device}
+      - {instance_id: mqtt, component_id: mqtt5_tls, placement: device}
+      - {instance_id: lwm2m, component_id: lwm2m12, placement: device}
+    bindings:
+      - {from_instance_id: access, to_instance_id: tcp, interface: ip_packet_service, relation: carries}
+      - {from_instance_id: tcp, to_instance_id: tls, interface: reliable_stream_service, relation: secures}
+      - {from_instance_id: tls, to_instance_id: mqtt, interface: secure_stream_service, relation: carries}
+      - {from_instance_id: mqtt, to_instance_id: lwm2m, interface: secure_mqtt_message_service, relation: carries}
+    environment_capabilities: []
+    primary_access_instance_id: access
+    scientific_status: verified_candidate
+    notes: Vomhoff MQTT context is only partial empirical support because exact version/security binding is unresolved.
+
+  - stack_id: ltem_ip_mqtt_tls_lwm2m
+    name: LTE-M IP + TCP + TLS 1.3 + MQTT 5 + LwM2M
+    description: Verified secure-stream management reference path over LTE-M IP-PDN access.
+    component_instances:
+      - {instance_id: access, component_id: 3gpp_ltem_eps_ip, placement: device}
+      - {instance_id: tcp, component_id: tcp, placement: device}
+      - {instance_id: tls, component_id: tls13, placement: device}
+      - {instance_id: mqtt, component_id: mqtt5_tls, placement: device}
+      - {instance_id: lwm2m, component_id: lwm2m12, placement: device}
+    bindings:
+      - {from_instance_id: access, to_instance_id: tcp, interface: ip_packet_service, relation: carries}
+      - {from_instance_id: tcp, to_instance_id: tls, interface: reliable_stream_service, relation: secures}
+      - {from_instance_id: tls, to_instance_id: mqtt, interface: secure_stream_service, relation: carries}
+      - {from_instance_id: mqtt, to_instance_id: lwm2m, interface: secure_mqtt_message_service, relation: carries}
+    environment_capabilities: []
+    primary_access_instance_id: access
+    scientific_status: verified_candidate
+    notes: Vomhoff MQTT context is only partial empirical support because exact version/security binding is unresolved.
+
+  - stack_id: nbiot_nonip_lwm2m
+    name: NB-IoT CIoT Non-IP + LwM2M
+    description: Verified LwM2M Non-IP reference binding over NB-IoT CIoT Non-IP service.
+    component_instances:
+      - {instance_id: access, component_id: 3gpp_nbiot_eps_nonip, placement: device}
+      - {instance_id: lwm2m, component_id: lwm2m12, placement: device}
+    bindings:
+      - {from_instance_id: access, to_instance_id: lwm2m, interface: ciot_nonip_service, relation: carries}
+    environment_capabilities: []
+    primary_access_instance_id: access
+    scientific_status: verified_candidate
+    notes: No direct core-four empirical alignment exists for the Non-IP variant.
+
+  - stack_id: ltem_nonip_lwm2m
+    name: LTE-M CIoT Non-IP + LwM2M
+    description: Verified LwM2M Non-IP reference binding over LTE-M CIoT Non-IP service.
+    component_instances:
+      - {instance_id: access, component_id: 3gpp_ltem_eps_nonip, placement: device}
+      - {instance_id: lwm2m, component_id: lwm2m12, placement: device}
+    bindings:
+      - {from_instance_id: access, to_instance_id: lwm2m, interface: ciot_nonip_service, relation: carries}
+    environment_capabilities: []
+    primary_access_instance_id: access
+    scientific_status: verified_candidate
+    notes: No direct core-four empirical alignment exists for the Non-IP variant.
+
+  - stack_id: lorawan_lora_lwm2m_nonip
+    name: LoRaWAN LoRa + backend + LwM2M Non-IP
+    description: Classical LoRaWAN access with explicit LoRaWAN backend path and LwM2M Non-IP binding.
+    component_instances:
+      - {instance_id: access, component_id: lorawan_lora_access, placement: device}
+      - {instance_id: backend, component_id: lorawan_network_application_backend, placement: network_service}
+      - {instance_id: lwm2m, component_id: lwm2m12, placement: device}
+    bindings:
+      - {from_instance_id: access, to_instance_id: backend, interface: lorawan_frame_service, relation: bridges}
+      - {from_instance_id: access, to_instance_id: lwm2m, interface: lorawan_nonip_transport_service, relation: carries}
+    environment_capabilities: []
+    primary_access_instance_id: access
+    scientific_status: verified_candidate
+    notes: LoED supplies only reception-side classical-LoRa link evidence; it does not provide delivery probability or energy.
+
+  - stack_id: lorawan_lrfhss_lwm2m_nonip
+    name: LoRaWAN LR-FHSS + backend + LwM2M Non-IP
+    description: LR-FHSS access with explicit LoRaWAN backend path and LwM2M Non-IP binding.
+    component_instances:
+      - {instance_id: access, component_id: lorawan_lrfhss_access, placement: device}
+      - {instance_id: backend, component_id: lorawan_network_application_backend, placement: network_service}
+      - {instance_id: lwm2m, component_id: lwm2m12, placement: device}
+    bindings:
+      - {from_instance_id: access, to_instance_id: backend, interface: lorawan_frame_service, relation: bridges}
+      - {from_instance_id: access, to_instance_id: lwm2m, interface: lorawan_nonip_transport_service, relation: carries}
+    environment_capabilities: []
+    primary_access_instance_id: access
+    scientific_status: verified_candidate
+    notes: LR-FHSS has direct radio-energy evidence but no core-four LR-FHSS link-quality distribution.
+
+  - stack_id: thread_coap_dtls_lwm2m
+    name: Thread + Border Router + UDP + DTLS 1.3 + CoAP + LwM2M
+    description: Thread IPv6 reference path with explicit Border Router and secure CoAP/LwM2M composition.
+    component_instances:
+      - {instance_id: access, component_id: thread_ipv6_mesh, placement: device}
+      - {instance_id: border, component_id: thread_border_router, placement: gateway_edge}
+      - {instance_id: udp, component_id: udp, placement: device}
+      - {instance_id: dtls, component_id: dtls13, placement: device}
+      - {instance_id: coap, component_id: coap, placement: device}
+      - {instance_id: lwm2m, component_id: lwm2m12, placement: device}
+    bindings:
+      - {from_instance_id: access, to_instance_id: border, interface: thread_mesh_service, relation: bridges}
+      - {from_instance_id: access, to_instance_id: udp, interface: ip_packet_service, relation: carries}
+      - {from_instance_id: udp, to_instance_id: dtls, interface: datagram_service, relation: secures}
+      - {from_instance_id: dtls, to_instance_id: coap, interface: secure_datagram_service, relation: carries}
+      - {from_instance_id: coap, to_instance_id: lwm2m, interface: coap_message_service, relation: carries}
+    environment_capabilities: []
+    primary_access_instance_id: access
+    scientific_status: verified_candidate
+    notes: InSecTT OpenThread evidence is whole-device partial context and does not isolate DTLS/CoAP/LwM2M cost.
+
+candidate_evidence_support:
+  - stack_id: nbiot_ip_coap_dtls_lwm2m
+    support_class: partial_stack_context_only
+    alignment_ids: [vomhoff_nbiot_ip]
+    full_end_to_end_empirical_support: false
+    limitations:
+      - Vomhoff NB-IoT observations are whole-device phase measurements, not component energy.
+      - The source application contexts are HTTP/MQTT rather than this CoAP/LwM2M composition.
+  - stack_id: ltem_ip_coap_dtls_lwm2m
+    support_class: partial_stack_context_only
+    alignment_ids: [vomhoff_ltem_ip]
+    full_end_to_end_empirical_support: false
+    limitations:
+      - Vomhoff LTE-M observations are whole-device phase measurements, not component energy.
+      - The source application contexts are HTTP/MQTT rather than this CoAP/LwM2M composition.
+  - stack_id: nbiot_ip_mqtt_tls_lwm2m
+    support_class: partial_stack_context_only
+    alignment_ids: [vomhoff_nbiot_ip]
+    full_end_to_end_empirical_support: false
+    limitations:
+      - Exact MQTT version and security binding in Vomhoff are unresolved.
+      - Whole-device phase energy cannot be decomposed into access/TCP/TLS/MQTT component costs.
+  - stack_id: ltem_ip_mqtt_tls_lwm2m
+    support_class: partial_stack_context_only
+    alignment_ids: [vomhoff_ltem_ip]
+    full_end_to_end_empirical_support: false
+    limitations:
+      - Exact MQTT version and security binding in Vomhoff are unresolved.
+      - Whole-device phase energy cannot be decomposed into access/TCP/TLS/MQTT component costs.
+  - stack_id: nbiot_nonip_lwm2m
+    support_class: no_direct_core_four_alignment
+    alignment_ids: []
+    full_end_to_end_empirical_support: false
+    limitations:
+      - Vomhoff empirical runs represent the IP application context and cannot be transferred to the CIoT Non-IP variant.
+  - stack_id: ltem_nonip_lwm2m
+    support_class: no_direct_core_four_alignment
+    alignment_ids: []
+    full_end_to_end_empirical_support: false
+    limitations:
+      - Vomhoff empirical runs represent the IP application context and cannot be transferred to the CIoT Non-IP variant.
+  - stack_id: lorawan_lora_lwm2m_nonip
+    support_class: component_direct_boundary_only
+    alignment_ids: [loed_lora_direct]
+    full_end_to_end_empirical_support: false
+    limitations:
+      - LoED RSSI/SNR are reception-side link-model bridge inputs only; CRC fraction is not PDR.
+      - No whole-device LoRaWAN energy evidence is available in the core-four matrix.
+  - stack_id: lorawan_lrfhss_lwm2m_nonip
+    support_class: component_direct_boundary_only
+    alignment_ids: [lrfhss_direct]
+    full_end_to_end_empirical_support: false
+    limitations:
+      - LR-FHSS energy is radio-interface-only, not whole-device/application-report energy.
+      - LoED classical-LoRa link evidence cannot be transferred to LR-FHSS.
+  - stack_id: thread_coap_dtls_lwm2m
+    support_class: partial_stack_context_only
+    alignment_ids: [insectt_thread]
+    full_end_to_end_empirical_support: false
+    limitations:
+      - InSecTT is one whole-device OpenThread trace per configuration.
+      - DTLS/CoAP/LwM2M overhead is not isolated by the empirical source.
+
+deferred_candidate_families:
+  - family_id: bluetooth_ipsp_remote_service
+    status: deferred
+    reason: Structural BLE+IPSP composition is verified, but the catalog has no explicit external-router/backend mediation component for a remote service path and InSecTT BLE energy cannot be transferred to IPSP.
+  - family_id: bluetooth_gatt_gateway_service
+    status: deferred
+    reason: Native GATT is verified, but a gateway-to-backend integration path is not yet materialised.
+  - family_id: uwb_remote_service
+    status: deferred
+    reason: UWB access/ranging is verified only at the PHY/MAC family level; no verified higher-layer adaptation/backend path is materialised.
+  - family_id: ephesos_remote_service
+    status: deferred
+    reason: EPhESOS remains evidence-only/pending standardisation.

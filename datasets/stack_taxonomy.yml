@@ -1,0 +1,60 @@
+schema_version: 1
+stage: Stage-4A stack contract
+model_principles:
+  - A stack is a graph of placed component instances, not a one-row technology label.
+  - Functional roles are not mutually exclusive OSI layers; a component may occupy multiple roles.
+  - Security is compositional: native access security and end-to-end security may coexist.
+  - Gateway and backend functions are explicit so non-IP access can bridge into IP/application services without pretending that the end device runs those protocols directly.
+  - Hard feasibility is evaluated before preference; an unknown hard fact does not count as feasible.
+  - Scores, ranks, stakeholder weights and default stochastic priors are outside Stage 4A.
+roles:
+  access_link: primary device-to-access connectivity function
+  network_adaptation: adaptation/routing function between link and network service
+  network_protocol: network-layer packet service
+  transport: end-to-end or segment transport service
+  end_to_end_security: security overlay that consumes one service and exposes a secured service
+  application_messaging: application messaging/request-response protocol
+  device_management: provisioning/configuration/device-management function
+  gateway_function: protocol termination, border-router or gateway role
+  backend_integration: server-side bridge/integration function
+placements:
+  - device
+  - gateway_edge
+  - access_network
+  - network_service
+  - application_backend
+  - management_backend
+binding_relations:
+  - carries
+  - secures
+  - manages
+  - integrates
+  - bridges
+  - terminates
+primary_access_policy:
+  exactly_one_primary_access_anchor: true
+  additional_nonprimary_access_components_allowed: true
+requirement_policy:
+  unsatisfied_component_requirement: incompatible
+  unknown_external_hard_fact: unresolved_and_blocks_feasible_claim
+cycle_policy:
+  acyclic_relations:
+    - carries
+    - secures
+    - integrates
+    - bridges
+    - terminates
+status_semantics:
+  structural:
+    compatible: all structural requirements and bindings are satisfied
+    incompatible: at least one structural hard rule is violated
+    unresolved: structural result depends on an explicitly unresolved rule or fact
+  feasibility:
+    feasible: every hard scenario predicate passes
+    infeasible: at least one hard scenario predicate fails
+    unresolved: no predicate fails but at least one required fact is unknown
+publication_guards:
+  mcda_authorised: false
+  rankings_authorised: false
+  stakeholder_weights_authorised: false
+  publication_wide_stochastic_sampling_authorised: false

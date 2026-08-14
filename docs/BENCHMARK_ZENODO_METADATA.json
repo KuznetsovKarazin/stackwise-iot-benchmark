@@ -1,0 +1,32 @@
+{
+  "upload_type": "dataset",
+  "title": "STACKWISE Empirical Evidence Benchmark v1.0.0",
+  "description": "A harmonised, provenance-preserving multi-source benchmark derived from four independently published real IoT measurement datasets. The benchmark separates source-specific analysis-ready derivatives, canonical evidence records, uncertainty/dependence contracts, benchmark scenarios and stacks, feasibility/evidence-support results, and explicitly synthetic/model-derived sensitivity artifacts. Raw upstream archives are not mirrored.",
+  "creators": [
+    {
+      "name": "Kuznetsov, Oleksandr",
+      "orcid": "0000-0003-2331-6326"
+    }
+  ],
+  "license": "cc-by-4.0",
+  "keywords": [
+    "Internet of Things",
+    "IoT communication stacks",
+    "empirical benchmark",
+    "NB-IoT",
+    "LTE-M",
+    "LoRaWAN",
+    "Thread",
+    "BLE",
+    "UWB",
+    "energy consumption",
+    "uncertainty",
+    "reproducibility"
+  ],
+  "related_identifiers": [
+    {"identifier": "10.5281/zenodo.7603641", "relation": "isDerivedFrom", "resource_type": "dataset"},
+    {"identifier": "10.5281/zenodo.7762712", "relation": "isDerivedFrom", "resource_type": "dataset"},
+    {"identifier": "10.5281/zenodo.4121430", "relation": "isDerivedFrom", "resource_type": "dataset"},
+    {"identifier": "10.5281/zenodo.13838241", "relation": "isDerivedFrom", "resource_type": "dataset"}
+  ]
+}

@@ -1,0 +1,126 @@
+schema_version: 1
+stage: Stage-6D synthetic nested decision/robustness engine dry run
+stage6_status: engine_validated_on_synthetic_energy_only_real_candidate_ranking_still_blocked
+
+scientific_policy:
+  preserve_stage4_feasibility_matrix: true
+  preserve_stage6a_preferred_subset: true
+  preserve_stage6c_cost_family: true
+  preferred_subset_id: periodic_tracking_ip_cellular_2x2
+  scenario_id: asset_tracking_periodic_cross_cell
+  publication_mcda_authorised: false
+  real_candidate_ranking_authorised: false
+  synthetic_energy_may_enter_publication_results: false
+  pooled_probability_across_cost_states: false
+  pooled_probability_across_weight_anchors: false
+  cost_family_probability_interpretation: false
+  stakeholder_weight_probability_interpretation: false
+  purpose: >-
+    Validate the nested decision engine, tie handling, fixed value transformations, deterministic preference sensitivity,
+    and epistemic-envelope reporting before matched Stage-6B whole-device energy measurements exist. No synthetic utility,
+    rank or fixture result is a scientific result about NB-IoT, LTE-M, CoAP or MQTT.
+
+engine_policy:
+  normalisation_mode: fixed_external_linear_value_anchors
+  alternative_set_minmax_normalisation_allowed: false
+  tie_handling: fractional_mass_across_occupied_ranks
+  tie_tolerance: 1.0e-12
+  enumerate_cost_states_without_probability_weights: true
+  enumerate_preference_weights_without_probability_weights: true
+  synthetic_energy_draws_are_paired_by_common_block_factor: true
+  do_not_average_rank_acceptability_across_epistemic_cost_states: true
+  do_not_average_rank_acceptability_across_weight_anchors: true
+
+preferred_subset_stack_ids:
+  - nbiot_ip_coap_dtls_lwm2m
+  - ltem_ip_coap_dtls_lwm2m
+  - nbiot_ip_mqtt_tls_lwm2m
+  - ltem_ip_mqtt_tls_lwm2m
+
+synthetic_value_functions:
+  energy_j:
+    direction: minimize
+    best: 0.0
+    worst: 6.0
+    scientific_interpretation: synthetic_dry_run_anchor_only
+  lifecycle_cost_eur:
+    direction: minimize
+    best: 0.0
+    worst: 160.0
+    scientific_interpretation: synthetic_dry_run_anchor_only
+
+preference_design:
+  mode: deterministic_grid
+  energy_weight_grid:
+    - 0.00
+    - 0.05
+    - 0.10
+    - 0.15
+    - 0.20
+    - 0.25
+    - 0.30
+    - 0.35
+    - 0.40
+    - 0.45
+    - 0.50
+    - 0.55
+    - 0.60
+    - 0.65
+    - 0.70
+    - 0.75
+    - 0.80
+    - 0.85
+    - 0.90
+    - 0.95
+    - 1.00
+  cost_weight_rule: 1_minus_energy_weight
+  probability_interpretation: false
+
+synthetic_energy_fixtures:
+  - fixture_id: F0_ltem_energy_advantage
+    purpose: regression_fixture_for_ltem_within_binding_energy_dominance
+    draws: 64
+    seed: 61001
+    shared_log_sd: 0.08
+    mean_energy_j:
+      nbiot_ip_coap_dtls_lwm2m: 4.0
+      ltem_ip_coap_dtls_lwm2m: 1.0
+      nbiot_ip_mqtt_tls_lwm2m: 3.2
+      ltem_ip_mqtt_tls_lwm2m: 0.8
+  - fixture_id: F1_binding_tradeoff_rat_symmetry
+    purpose: regression_fixture_for_cost_energy_tradeoff_and_exact_rat_ties
+    draws: 64
+    seed: 61002
+    shared_log_sd: 0.08
+    mean_energy_j:
+      nbiot_ip_coap_dtls_lwm2m: 2.0
+      ltem_ip_coap_dtls_lwm2m: 2.0
+      nbiot_ip_mqtt_tls_lwm2m: 0.8
+      ltem_ip_mqtt_tls_lwm2m: 0.8
+  - fixture_id: F2_nbiot_energy_advantage
+    purpose: regression_fixture_for_nbiot_within_binding_energy_dominance
+    draws: 64
+    seed: 61003
+    shared_log_sd: 0.08
+    mean_energy_j:
+      nbiot_ip_coap_dtls_lwm2m: 1.0
+      ltem_ip_coap_dtls_lwm2m: 4.0
+      nbiot_ip_mqtt_tls_lwm2m: 0.8
+      ltem_ip_mqtt_tls_lwm2m: 3.2
+
+inputs:
+  cost_family: results/validation/stage6c_lifecycle_cost_robustness/preferred_subset_lifecycle_cost_family.csv
+  preferred_subset: results/validation/stage6a_decision_slice_consolidation/preferred_development_subset.csv
+
+expected:
+  preferred_subset_candidates: 4
+  aligned_cost_states: 144
+  synthetic_energy_fixtures: 3
+  synthetic_energy_draws_per_fixture: 64
+  deterministic_weight_anchors: 21
+  conditional_state_weight_evaluations: 9072
+  weight_sensitivity_rows: 252
+  rank_envelope_rows: 12
+  invariants_passed: 13
+  invariants_failed: 0
+  publication_mcda_authorised: false

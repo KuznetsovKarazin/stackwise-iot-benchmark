@@ -1,0 +1,29 @@
+seed: 26
+samples: 20000
+weight_concentration: 30
+score_noise_scale: 0.08
+criteria:
+  energy_efficiency:
+    direction: maximize
+    baseline_weight: 0.24
+  coverage_predictability:
+    direction: maximize
+    baseline_weight: 0.20
+  latency_suitability:
+    direction: maximize
+    baseline_weight: 0.12
+  delivery_reliability:
+    direction: maximize
+    baseline_weight: 0.18
+  cost_efficiency:
+    direction: maximize
+    baseline_weight: 0.14
+  private_control:
+    direction: maximize
+    baseline_weight: 0.07
+  lifecycle_viability:
+    direction: maximize
+    baseline_weight: 0.05
+correlation:
+  enabled: true
+  common_factor_loading: 0.25

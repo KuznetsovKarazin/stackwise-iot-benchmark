@@ -1,0 +1,94 @@
+version: 1
+critical_boundary_fields:
+- system_scope
+- temporal_scope
+- accounting_basis
+- conditioning
+- payload_basis
+- baseline_accounting
+- ack_rx_accounting
+- retry_accounting
+- path_start
+- path_end
+workload_fields:
+- payload_bytes
+- reporting_interval_s
+- direction
+- confirmation_mode
+- tx_power_dbm
+- environment
+- phase_name
+- data_rate_mode
+- frequency_hz
+- bandwidth_hz
+- spreading_factor
+- coding_rate
+- bit_rate_bps
+- operator
+unknown_tokens:
+- unknown
+comparison_classes:
+  C0_DIRECT:
+    meaning: Same metric semantics, canonical unit, fully specified compatible boundary
+      and matched workload except explicitly declared comparison factors.
+  C1_BRIDGEABLE:
+    meaning: A comparison is possible only through an explicit, provenance-preserving
+      transformation or component model.
+  C2_CONDITIONAL:
+    meaning: Evidence can support characterization or a conditional model but is not
+      a directly comparable decision criterion as recorded.
+  C3_INCOMPATIBLE:
+    meaning: The required estimand cannot be recovered honestly from the available
+      evidence because a denominator, endpoint, component or semantic link is absent.
+bridgeable_system_scope_pairs:
+- - whole_device
+  - radio_rail
+bridgeable_energy_temporal_pairs:
+- - phase
+  - transaction
+- - phase
+  - reporting_cycle
+- - transaction
+  - trace_window
+- - transaction
+  - reporting_cycle
+- - trace_window
+  - reporting_cycle
+hard_incompatible_metric_pairs:
+- - gateway_crc_valid_indicator
+  - delivery_probability
+- - gateway_crc_valid_fraction_of_receptions
+  - delivery_probability
+- - logical_frame_distinct_gateway_count
+  - delivery_probability
+- - logical_frame_multi_gateway_fraction
+  - delivery_probability
+principles:
+- Canonical unit equality is necessary but never sufficient for direct comparability.
+- Unknown critical boundary fields prohibit C0_DIRECT classification.
+- Reception-conditional quantities cannot be promoted to attempt-denominator reliability
+  without an external transmission denominator.
+- Raw RSSI, RSRP, SNR and SINR values are technology-specific inputs to link models,
+  not universal cross-RAT utility scores.
+- Bridge models must retain parent evidence identifiers and all shared uncertain parameters.
+- Implementation context is part of evidence applicability. A device/radio/firmware
+  mismatch is not a technology-only comparison unless explicitly declared as a comparison
+  factor.
+- C0_DIRECT means matched scientific estimand and boundary; it does not by itself
+  authorise naive statistical pooling across studies or dependent evidence records.
+bridgeable_metric_pairs:
+- - gateway_rssi_dbm
+  - feasible_link_probability
+- - gateway_snr_db
+  - feasible_link_probability
+- - device_phase_duration_s
+  - end_to_end_application_latency_ms
+conditional_metric_pairs:
+- - gateway_rssi_dbm
+  - delivery_probability
+- - gateway_snr_db
+  - delivery_probability
+implementation_fields:
+- device_model
+- radio_module
+- firmware_version

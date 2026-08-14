@@ -1,0 +1,146 @@
+schema_version: 1
+stage: Stage-5H lifecycle-cost accounting and evidence contract
+stage5_status: accounting_boundary_frozen_price_evidence_not_yet_materialised
+
+scientific_policy:
+  canonical_target_metric_id: lifecycle_cost_eur
+  canonical_target_definition: >-
+    Five-year cumulative differential lifecycle cost attributable to the candidate communication
+    stack/deployment path, expressed in constant 2026 EUR. Common application/sensor/compute costs
+    that do not differ between candidates are excluded. Shared infrastructure remains a site-level
+    term until a deployment scale is explicitly frozen.
+  analysis_horizon_years: 5
+  price_basis_date: '2026-08-12'
+  base_currency: EUR
+  price_basis: constant_2026_eur
+  primary_analysis_discounting: none
+  sensitivity_horizons_years: [3, 10]
+  infer_missing_prices: false
+  infer_private_infrastructure_allocation_without_device_count: false
+  treat_operator_service_as_zero_infrastructure_cost: false
+  treat_public_access_service_as_free: false
+  use_configs_fleet_as_publication_evidence: false
+  use_smoke_test_prices_as_publication_evidence: false
+  double_count_energy_and_battery_replacement: false
+  mcda_authorised: false
+  fleet_optimisation_authorised: false
+
+accounting_boundary:
+  included_if_differential:
+    - component_id: device_incremental_capex_eur_per_device
+      scope: per_device_one_time
+      mandatory_for_modes: [operator_managed_access, private_owned_access, managed_service_access]
+      description: Incremental device/module hardware attributable to the communication stack; common sensor/MCU enclosure cost is excluded.
+    - component_id: operator_connectivity_eur_per_device_year
+      scope: per_device_recurring
+      mandatory_for_modes: [operator_managed_access]
+      description: Recurring connectivity/service charge paid to the cellular operator or equivalent access provider.
+    - component_id: managed_service_eur_per_device_year
+      scope: per_device_recurring
+      mandatory_for_modes: [managed_service_access]
+      description: Recurring managed LPWAN/access-service fee when infrastructure is not owned by the deployment.
+    - component_id: private_access_infrastructure_capex_eur_per_site
+      scope: per_site_one_time_shared
+      mandatory_for_modes: [private_owned_access]
+      description: Differential gateways/border routers/access infrastructure required by the candidate path.
+    - component_id: private_access_infrastructure_opex_eur_per_site_year
+      scope: per_site_recurring_shared
+      mandatory_for_modes: [private_owned_access]
+      description: Differential recurring operation/hosting/support cost of private access infrastructure.
+    - component_id: stack_specific_backend_eur_per_site_year
+      scope: per_site_recurring_shared
+      mandatory_for_modes: []
+      description: Include only when the candidate requires a differential backend/network service not common to all candidates.
+    - component_id: stack_specific_maintenance_eur_per_device_year
+      scope: per_device_recurring
+      mandatory_for_modes: []
+      description: Include only if evidence demonstrates a candidate-specific maintenance difference.
+    - component_id: differential_installation_eur_per_site
+      scope: per_site_one_time_shared
+      mandatory_for_modes: []
+      description: Include only candidate-specific installation/commissioning labour; common deployment labour is excluded.
+  explicitly_deferred:
+    - battery_replacement_cost_until_energy_lifetime_model_exists
+    - commodity_energy_cost_until_common_whole_device_energy_target_exists
+    - common_application_cloud_cost
+    - common_sensor_compute_enclosure_cost
+    - taxes_or_recoverable_vat_without_common_tax_basis
+
+source_evidence_requirements:
+  required_fields:
+    - evidence_id
+    - component_id
+    - technology_or_stack_scope
+    - geographic_market
+    - source_type
+    - source_identifier
+    - source_url_or_doi
+    - access_date
+    - source_currency
+    - tax_status
+    - low_value
+    - reference_value
+    - high_value
+    - unit
+    - applicability_notes
+  admissible_source_types:
+    - official_operator_tariff
+    - official_vendor_price
+    - manufacturer_or_authorised_distributor_quote
+    - public_cloud_or_network_service_price
+    - peer_reviewed_cost_study
+    - public_procurement_or_tender_price
+  assumption_only_source_types:
+    - expert_assumption
+    - scenario_assumption
+  rules:
+    - Numerical source ranges must not be invented when only a point price is published.
+    - A point price may be retained as a point observation, with uncertainty added only by a separately documented sensitivity policy.
+    - Non-EUR prices require a dated exchange-rate source; no implicit currency conversion is allowed.
+    - Evidence must be date-stamped because market prices and tariffs are temporally unstable.
+    - Retail and institutional prices must not be mixed silently.
+    - Hardware prices must use a defined SKU/configuration and must not silently include unrelated application hardware.
+    - Shared infrastructure must not be divided by device count until the scenario deployment scale is materialised.
+
+scenario_cost_modes:
+  environmental_private_lorawan:
+    lorawan: private_owned_access
+  smart_meter_public_cellular:
+    cellular: operator_managed_access
+  urban_nonip_dual_access:
+    cellular: operator_managed_access
+    lorawan: unresolved_ownership_mode
+  asset_tracking_periodic_cross_cell:
+    cellular: operator_managed_access
+  asset_tracking_connected_handover:
+    cellular: operator_managed_access
+
+# Intentionally empty in Stage 5H. Price collection is the next evidence task.
+price_evidence: []
+
+deployment_scale:
+  environmental_private_lorawan:
+    reference_device_count: null
+    status: not_materialised
+  smart_meter_public_cellular:
+    reference_device_count: null
+    status: not_required_for_per_device_operator_cost_boundary
+  urban_nonip_dual_access:
+    reference_device_count: null
+    status: ownership_and_scale_not_materialised_for_lorawan
+  asset_tracking_periodic_cross_cell:
+    reference_device_count: null
+    status: not_required_for_per_device_operator_cost_boundary
+  asset_tracking_connected_handover:
+    reference_device_count: null
+    status: not_required_for_per_device_operator_cost_boundary
+
+expected:
+  feasible_candidate_rows: 21
+  operator_managed_rows: 17
+  private_owned_rows: 2
+  unresolved_ownership_rows: 2
+  rows_with_complete_required_price_evidence: 0
+  rows_requiring_shared_cost_scale: 2
+  canonical_target_ready_rows: 0
+  smoke_price_rows_authorised: 0

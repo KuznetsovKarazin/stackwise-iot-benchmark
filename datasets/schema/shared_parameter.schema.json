@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "STACKWISE shared derivation parameter",
+  "description": "A provenance-preserving parameter shared by multiple Stage-2 evidence records and therefore capable of inducing correlated uncertainty.",
+  "type": "object",
+  "required": [
+    "parameter_id", "parameter_kind", "name", "unit", "estimate", "derivation_class",
+    "validation_status", "source_dois", "supporting_artifacts", "shared_across_dataset_ids",
+    "n_supporting_configurations", "uncertainty_basis", "uncertainty_model_status",
+    "statistical_interpretation", "diagnostics", "applicability_domain", "limitations"
+  ],
+  "properties": {
+    "parameter_id": {"type": "string", "minLength": 1},
+    "parameter_kind": {"enum": ["calibration", "conversion", "model", "assumption", "external_prior"]},
+    "name": {"type": "string", "minLength": 1},
+    "unit": {"type": "string", "minLength": 1},
+    "estimate": {"type": "number"},
+    "derivation_class": {"enum": ["validated_derived", "analytical", "literature_derived", "assumption", "expert_prior"]},
+    "validation_status": {"enum": ["validated", "validated_with_limitations", "pending"]},
+    "source_dois": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "supporting_artifacts": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "shared_across_dataset_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "n_supporting_configurations": {"type": "integer", "minimum": 1},
+    "uncertainty_basis": {"type": "string", "minLength": 1},
+    "uncertainty_model_status": {"enum": ["pending_stage3", "specified", "deterministic"]},
+    "statistical_interpretation": {"type": "string", "minLength": 1},
+    "diagnostics": {
+      "type": "object",
+      "additionalProperties": {"type": ["number", "string", "boolean", "null"]}
+    },
+    "applicability_domain": {"type": "string", "minLength": 1},
+    "limitations": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}

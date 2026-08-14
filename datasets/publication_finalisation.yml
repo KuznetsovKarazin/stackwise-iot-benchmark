@@ -1,0 +1,9 @@
+benchmark_version: 1.0.0
+inputs:
+  experiment1_summary: results/experiments/experiment1_feasibility_first/summary.json
+  experiment2_summary: results/experiments/experiment2_evidence_admissibility/summary.json
+  experiment3_summary: results/experiments/experiment3_uncertainty_treatment/summary.json
+  experiment4_summary: results/experiments/experiment4_accounting_simplification/summary.json
+  experiment5_summary: results/experiments/experiment5_fleet_portfolio/summary.json
+outputs:
+  directory: results/publication/final_consolidation

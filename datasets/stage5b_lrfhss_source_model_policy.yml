@@ -1,0 +1,75 @@
+stage: Stage-5B LR-FHSS source-model bridge audit
+stage5_status: lrfhss_component_model_partially_validated_generic_whole_device_bridge_blocked
+sources:
+  source_model_publication:
+    title: "Energy Performance of LR-FHSS: Analysis and Evaluation"
+    doi: 10.3390/s24175770
+    arxiv: 2408.04908
+    role: primary_source_model
+  measurement_dataset:
+    doi: 10.5281/zenodo.13838241
+    role: source_trace_evidence
+  independent_model_corroboration:
+    title: "Experiment-based Models for Air Time and Current Consumption of LoRaWAN LR-FHSS"
+    arxiv: 2408.09954
+    role: qualitative_independent_corroboration_only
+    used_for_numeric_bridge: false
+source_model:
+  voltage_v: 3.3
+  model_tx_current_a: 0.0257
+  sleep_current_a: 0.0000005
+  frm_to_phy_fixed_overhead_bytes: 13
+  ack_probability_rx1: 0.5
+  ack_probability_rx2: 0.5
+  payload_duration_operationalisation: table6_numeric_reproduction_convention_effective_plus_3_bytes
+  rendered_equation_6_extra_bytes: 2.75
+  table6_effective_extra_bytes: 3.0
+  source_internal_equation_table_discrepancy_causally_resolved: false
+  frequency_hop_equation_uses_rendered_2p75_bytes_with_floor: true
+  state_energy_hop_time_double_counted: false
+validation_policy:
+  source_trace_payload_bytes: 4
+  source_trace_tx_power_dbm: 14
+  close_reproduction_abs_relative_error_pct: 2.0
+  threshold_is_statistical_confidence_bound: false
+  threshold_role: versioned_deterministic_model_audit_tolerance
+  confirmed_model_requires_close_reproduction: true
+benchmark_refinement:
+  scenario_id: remote_agriculture_energy_budget
+  stack_id: lorawan_lrfhss_lwm2m_nonip
+  frm_payload_bytes: 16
+  energy_budget_j: 0.2
+  source_aligned_tx_power_dbm: 14
+  transaction_count_for_component_lower_bound: 1
+  reporting_interval_sleep_energy_included_in_component_lower_bound: false
+  one_sided_component_lower_bound_rule: radio_component_energy_above_budget_implies_matched_variant_whole_device_infeasible
+scientific_policy:
+  preserve_stage4_matrix: true
+  generic_candidate_feasibility_resolved: false
+  confirmed_payload_extrapolation_authorised: false
+  unconfirmed_payload_extrapolation_authorised_for_radio_component_only: true
+  radio_below_budget_implies_whole_device_feasible: false
+  radio_above_budget_can_exclude_exact_matched_variant: true
+  choose_best_dr_post_hoc: false
+  treat_radio_energy_as_whole_device_energy: false
+  coerce_single_trace_to_population_distribution: false
+  whole_device_energy_estimate_materialised: false
+  numeric_target_bridge_output_authorised: false
+  preference_scoring_authorised: false
+  publication_mcda_authorised: false
+expected:
+  publication_table6_reproduction_rows: 4
+  source_trace_reproduction_rows: 8
+  unconfirmed_trace_rows: 4
+  unconfirmed_close_reproduction_rows: 4
+  confirmed_trace_rows: 4
+  confirmed_close_reproduction_rows: 0
+  tx_plateau_diagnostic_rows: 8
+  benchmark_variant_rows: 8
+  one_sided_budget_screen_rows: 8
+  unconfirmed_variants_above_budget: 2
+  unconfirmed_variants_below_or_equal_budget: 2
+  confirmed_variants_extrapolation_blocked: 4
+  stage4_feasible_rows: 21
+  stage4_infeasible_rows: 39
+  stage4_unresolved_rows: 3

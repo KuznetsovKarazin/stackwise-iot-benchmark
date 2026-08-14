@@ -1,0 +1,38 @@
+version: 1
+dataset_id: loed_lorawan_edge_2020
+stage: Stage-3F within-campaign block-bootstrap sensitivity
+campaign_policy:
+  campaigns_are_fixed_observed_deployment_scenarios: true
+  cross_campaign_pooling_authorised: false
+  campaign_random_effect_authorised: false
+  cross_campaign_joint_distribution_asserted: false
+  reason: >-
+    Stage-3E shows materially different gateway support between 2019 and 2020 (6 vs 5 gateways,
+    only 2 shared across a 9-gateway union). Full campaign shifts are therefore confounded by
+    time, gateway composition, traffic/device mix and deployment context.
+resampling_design:
+  resampler: noncircular_overlapping_moving_block_source_day
+  candidate_block_lengths_days: [3, 7, 14]
+  bootstrap_replicates_per_campaign_length: 5000
+  random_seed: 20260811
+  estimand: campaign_conditional_reception_weighted_phy_mean
+  cluster_unit: source_day
+  cluster_payload: all observed PHY strata and both RSSI/SNR metrics for that source day
+  gateway_handling: preserve observed gateway composition inside sampled source-day clusters
+  structural_missingness: preserve
+  independent_gateway_bootstrap_authorised: false
+  iid_day_bootstrap_authorised: false
+  block_length_selected: false
+  seven_day_reference_selected_as_final: false
+interpretation_guardrails:
+  diagnostic_sensitivity_only: true
+  block_bootstrap_authorised_for_publication_sampling: false
+  parametric_distribution_fitted: false
+  hierarchical_sampling_authorised: false
+  publication_uncertainty_sampling_authorised: false
+  publication_mcda_authorised: false
+review_requirements:
+  - Compare 3-, 7- and 14-day bootstrap SD and percentile-width sensitivity separately by campaign and metric.
+  - Use the Stage-3D detrended ACF as context; do not select a block length from calendar intuition alone.
+  - Do not align bootstrap replicate IDs across campaigns or block lengths as if they defined a joint draw.
+  - If uncertainty width is materially block-length-sensitive, retain multiple block lengths as robustness scenarios rather than force a single sampler.

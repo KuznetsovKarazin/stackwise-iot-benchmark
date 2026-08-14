@@ -1,0 +1,24 @@
+schema_version: 1
+experiment: Experiment 3 — deterministic point treatment vs uncertainty-/robustness-aware treatment
+benchmark:
+  benchmark_version: 1.0.0
+scientific_policy:
+  global_candidate_ranking_authorised: false
+  publication_mcda_authorised: false
+  probability_pooling_across_epistemic_states: false
+  point_treatment_is_diagnostic_counterfactual: true
+  preserve_vomhoff_cross_block_nonjoint_semantics: true
+  preserve_loed_campaign_and_block_model_as_unweighted_robustness_family: true
+  preserve_cost_state_alignment: true
+inputs:
+  vomhoff_source_active_summary: results/validation/stage5_cellular_ip_energy_bridge/source_active_component_summary.csv
+  loed_robustness_summary: results/validation/loed_uncertainty_robustness/robustness_family_summary.csv
+  stage6c_cost_family: results/validation/stage6c_lifecycle_cost_robustness/preferred_subset_lifecycle_cost_family.csv
+reference_cost_state:
+  anchor_id: A0_compact_persistent
+  shape_id: S0_single_opaque_test_resource
+  session_control_envelope_id: E0_compact_psk_control
+  billing_anchor_id: B0_persistent_pdp
+  procurement_anchor_id: P1_retail_qty1
+outputs:
+  directory: results/experiments/experiment3_uncertainty_treatment

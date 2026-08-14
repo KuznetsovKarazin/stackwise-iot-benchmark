@@ -1,0 +1,214 @@
+version: 1
+canonical_units_required: true
+notes:
+- Metric identity includes scientific semantics, not only physical dimension and unit.
+- Metrics with the same unit are not directly comparable unless metric_id and boundary
+  semantics are compatible.
+- target_only metrics define future decision estimands and must not be populated from
+  reception-side proxies without an explicit bridge model.
+metrics:
+  device_phase_energy_j:
+    family: energy
+    unit: J
+    bridge_group: energy_accounting
+    source_status: observed_or_reproduced
+    description: Whole-device energy attributed to a documented source phase.
+    direct_condition_fields:
+    - phase_name
+  device_phase_duration_s:
+    family: duration
+    unit: s
+    bridge_group: time_accounting
+    source_status: observed_or_reproduced
+    description: Duration of a documented whole-device source phase.
+    direct_condition_fields:
+    - phase_name
+  trace_mean_current_a:
+    family: current
+    unit: A
+    bridge_group: electrical_load
+    source_status: direct_empirical
+    description: Time-average current over a complete capture window.
+    direct_condition_fields:
+    - payload_bytes
+    - reporting_interval_s
+    - direction
+  trace_charge_c:
+    family: charge
+    unit: C
+    bridge_group: electrical_load
+    source_status: direct_empirical
+    description: Integrated charge over a complete capture window.
+    direct_condition_fields:
+    - payload_bytes
+    - reporting_interval_s
+    - direction
+  derived_mean_power_w:
+    family: power
+    unit: W
+    bridge_group: electrical_load
+    source_status: validated_derived
+    description: Mean power derived using an explicitly validated or source-backed
+      voltage.
+    direct_condition_fields:
+    - payload_bytes
+    - reporting_interval_s
+    - direction
+  derived_capture_energy_j:
+    family: energy
+    unit: J
+    bridge_group: energy_accounting
+    source_status: validated_derived
+    description: Energy over a complete capture window derived from charge and an
+      explicit voltage parameter.
+    direct_condition_fields:
+    - payload_bytes
+    - reporting_interval_s
+    - direction
+  radio_full_capture_energy_j:
+    family: energy
+    unit: J
+    bridge_group: energy_accounting
+    source_status: direct_empirical
+    description: Energy on the measured radio rail over the full capture window.
+    direct_condition_fields:
+    - payload_bytes
+    - direction
+    - confirmation_mode
+    - tx_power_dbm
+    - data_rate_mode
+  radio_incremental_transaction_energy_j:
+    family: energy
+    unit: J
+    bridge_group: energy_accounting
+    source_status: validated_derived
+    description: Incremental radio-rail transaction energy after explicit baseline
+      removal.
+    direct_condition_fields:
+    - payload_bytes
+    - direction
+    - confirmation_mode
+    - tx_power_dbm
+    - data_rate_mode
+  radio_ack_rx_overhead_energy_j:
+    family: energy
+    unit: J
+    bridge_group: energy_accounting
+    source_status: validated_derived
+    description: Capture-specific confirmed-minus-unconfirmed incremental radio energy
+      under matched DR conditions.
+    direct_condition_fields:
+    - payload_bytes
+    - direction
+    - tx_power_dbm
+    - data_rate_mode
+  gateway_rssi_dbm:
+    family: link_quality
+    unit: dBm
+    bridge_group: null
+    source_status: direct_empirical
+    description: RSSI recorded by a receiving gateway; technology-specific and reception-conditional.
+    direct_condition_fields:
+    - frequency_hz
+    - bandwidth_hz
+    - spreading_factor
+  gateway_snr_db:
+    family: link_quality
+    unit: dB
+    bridge_group: null
+    source_status: direct_empirical
+    description: Canonical physical SNR recorded by a receiving gateway after documented
+      source-value QC.
+    direct_condition_fields:
+    - frequency_hz
+    - bandwidth_hz
+    - spreading_factor
+  gateway_crc_valid_indicator:
+    family: reception_status
+    unit: boolean
+    bridge_group: null
+    source_status: direct_empirical
+    description: CRC status conditional on a recorded gateway reception; not packet
+      delivery probability.
+    direct_condition_fields:
+    - frequency_hz
+    - bandwidth_hz
+    - spreading_factor
+  gateway_crc_valid_fraction_of_receptions:
+    family: reception_status
+    unit: proportion
+    bridge_group: null
+    source_status: source_reproduced
+    description: Fraction of recorded gateway reception rows with valid CRC. The denominator
+      is recorded receptions, not attempted transmissions, so this is not PDR.
+    direct_condition_fields:
+    - frequency_hz
+    - bandwidth_hz
+    - spreading_factor
+  logical_frame_distinct_gateway_count:
+    family: observation_diversity
+    unit: count
+    bridge_group: null
+    source_status: validated_derived
+    description: Number of distinct gateways that observed a CRC-valid exact-PHY logical
+      frame within a source day.
+    direct_condition_fields: []
+  logical_frame_multi_gateway_fraction:
+    family: observation_diversity
+    unit: proportion
+    bridge_group: null
+    source_status: validated_derived
+    description: Fraction of CRC-valid exact-PHY logical frames observed by more than one
+      distinct gateway within a source day; observation diversity only, not simultaneous RF diversity.
+    direct_condition_fields:
+    - frequency_hz
+    - bandwidth_hz
+    - spreading_factor
+  delivery_probability:
+    family: delivery_reliability
+    unit: probability
+    bridge_group: null
+    source_status: target_only
+    description: Probability of successful delivery per attempted transmission under
+      a declared endpoint and retry policy.
+    direct_condition_fields:
+    - payload_bytes
+    - direction
+  feasible_link_probability:
+    family: coverage
+    unit: probability
+    bridge_group: null
+    source_status: target_only
+    description: Scenario-conditioned probability that a technology-specific link
+      feasibility condition is satisfied.
+    direct_condition_fields:
+    - direction
+  end_to_end_application_latency_ms:
+    family: latency
+    unit: ms
+    bridge_group: null
+    source_status: target_only
+    description: Application-to-application latency under a declared session, retry
+      and security policy.
+    direct_condition_fields:
+    - payload_bytes
+    - direction
+  expected_device_energy_per_application_report_j:
+    family: energy
+    unit: J
+    bridge_group: energy_accounting
+    source_status: target_only
+    description: Expected whole-device energy per application report under a fully
+      specified stack and reporting policy.
+    direct_condition_fields:
+    - payload_bytes
+    - direction
+    - reporting_interval_s
+  lifecycle_cost_eur:
+    family: cost
+    unit: EUR
+    bridge_group: null
+    source_status: target_only
+    description: Lifecycle cost under an explicit ownership, infrastructure, subscription,
+      maintenance and horizon boundary.
+    direct_condition_fields: []

@@ -1,0 +1,17 @@
+experiment_id: experiment2_evidence_admissibility
+benchmark:
+  benchmark_version: "1.0.0"
+inputs:
+  registry: datasets/registry.yml
+  evidence_summary: results/validation/core_four_evidence_matrix/summary.json
+  target_relations: results/validation/core_four_evidence_matrix/decision_target_gap_matrix.csv
+  candidate_criterion_readiness: results/validation/stage6a_decision_slice_consolidation/candidate_criterion_readiness.csv
+  stage6c_cost_summary: results/validation/stage6c_lifecycle_cost_robustness/preferred_subset_cost_summary.csv
+outputs:
+  directory: results/experiments/experiment2_evidence_admissibility
+interpretation:
+  source_grade_is_provenance_not_inferential_strength: true
+  bridgeable_does_not_equal_decision_ready: true
+  conditional_context_is_not_a_soft_score: true
+  counterfactual_relaxation_is_not_authorised_mcda: true
+  probability_interpretation: false

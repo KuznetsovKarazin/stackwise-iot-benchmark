@@ -1,0 +1,58 @@
+# Python / virtual environments
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+*.egg-info/
+build/
+dist/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Secrets / local credentials
+.env
+.env.*
+!.env.example
+.kaggle/
+kaggle.json
+*.pem
+*.key
+
+# External, derived and generated data. The frozen benchmark is published on Zenodo.
+data/**
+!data/
+!data/examples/
+!data/examples/**
+
+# Generated outputs and release packages
+results/
+release/
+artifacts/
+
+# Local research checkpoints / patch machinery (never publish)
+backups/
+payload/
+PATCH_APPLY.txt
+PROJECT_INVENTORY.txt
+/*.zip
+
+# Local manuscript workspace; manuscripts are submitted separately
+paper/
+
+# DVC local state / cache
+a.dvc/
+.dvc/cache/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+~*

@@ -1,0 +1,16 @@
+stages:
+  audit:
+    cmd: stackwise audit --output results/audit
+    deps:
+      - datasets/registry.yml
+      - datasets/excluded.yml
+    outs:
+      - results/audit
+  smoke:
+    cmd: stackwise reproduce --smoke
+    deps:
+      - data/examples/smoke_observations.csv
+      - configs/mcda.yml
+      - configs/fleet.yml
+    outs:
+      - results/smoke

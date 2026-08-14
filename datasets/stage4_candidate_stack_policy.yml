@@ -1,0 +1,26 @@
+stage: Stage-4C verified reference candidate stack assembly
+stage4_status: verified_reference_candidates_materialised_with_incomplete_empirical_support
+expected:
+  candidate_stacks: 9
+  verified_candidate_stacks: 9
+  candidate_component_instances: 36
+  candidate_bindings: 27
+  verified_binding_matches: 27
+  candidate_evidence_support_records: 9
+  candidates_with_any_core_four_alignment: 7
+  candidates_with_full_end_to_end_empirical_support: 0
+  partial_stack_context_only: 5
+  component_direct_boundary_only: 2
+  no_direct_core_four_alignment: 2
+  deferred_candidate_families: 4
+scientific_guards:
+  interface_match_without_verified_edge_authorised: false
+  verified_candidate_with_unverified_component_authorised: false
+  evidence_alignment_promoted_to_full_stack_cost: false
+  unresolved_catalog_gap_silently_closed: false
+  candidate_set_claimed_exhaustive: false
+  hard_scenario_screening_authorised: false
+  mcda_authorised: false
+  ranking_authorised: false
+  stakeholder_weights_authorised: false
+next_scientific_step: Stage-4D define quantitative scenario facts and hard constraints, then evaluate tri-state feasibility of the frozen Stage-4C reference candidates; still no scoring or ranking.

@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "STACKWISE stack component",
+  "description": "A typed communication-stack component. Components expose and require explicit interfaces/capabilities and may occupy one or more functional roles; security and management are not forced into one mutually-exclusive OSI slot.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "component_id",
+    "name",
+    "roles",
+    "supported_placements",
+    "provides",
+    "requires",
+    "forbids",
+    "scientific_status",
+    "provenance_status"
+  ],
+  "properties": {
+    "component_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "roles": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "access_link",
+          "network_adaptation",
+          "network_protocol",
+          "transport",
+          "end_to_end_security",
+          "application_messaging",
+          "device_management",
+          "gateway_function",
+          "backend_integration"
+        ]
+      }
+    },
+    "supported_placements": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "device",
+          "gateway_edge",
+          "access_network",
+          "network_service",
+          "application_backend",
+          "management_backend"
+        ]
+      }
+    },
+    "provides": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+      }
+    },
+    "requires": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+      }
+    },
+    "forbids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+      }
+    },
+    "properties": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "standards_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "authority",
+          "identifier",
+          "verification_status"
+        ],
+        "properties": {
+          "authority": {
+            "type": "string",
+            "minLength": 1
+          },
+          "identifier": {
+            "type": "string",
+            "minLength": 1
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "verification_status": {
+            "enum": [
+              "unverified",
+              "primary_source_verified",
+              "contract_fixture"
+            ]
+          }
+        }
+      }
+    },
+    "scientific_status": {
+      "enum": [
+        "contract_fixture",
+        "candidate_component",
+        "verified_component"
+      ]
+    },
+    "provenance_status": {
+      "enum": [
+        "fixture_only",
+        "pending_primary_source_verification",
+        "primary_source_verified"
+      ]
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "requires_any": {
+      "type": "array",
+      "description": "Each inner list is an OR-group: at least one listed interface must be satisfied. Multiple groups are cumulative AND requirements.",
+      "items": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+        }
+      }
+    },
+    "claim_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+      }
+    },
+    "catalog_status": {
+      "enum": [
+        "primary_source_verified",
+        "evidence_only_pending_standardisation",
+        "pending_primary_source_verification"
+      ]
+    }
+  }
+}

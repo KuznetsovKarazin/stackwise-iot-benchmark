@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "STACKWISE benchmark deployment scenario",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["scenario_id", "name", "archetype", "assumption_status", "quantitative_context", "deployment_facts", "hard_constraints"],
+  "properties": {
+    "scenario_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_.-]*$"},
+    "name": {"type": "string", "minLength": 1},
+    "archetype": {"type": "string", "minLength": 1},
+    "assumption_status": {"const": "synthetic_reproducible_benchmark"},
+    "quantitative_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["payload_bytes", "reporting_interval_s", "target_end_to_end_latency_ms"],
+      "properties": {
+        "payload_bytes": {"type": "integer", "minimum": 0},
+        "reporting_interval_s": {"type": "number", "exclusiveMinimum": 0},
+        "target_end_to_end_latency_ms": {"type": "number", "exclusiveMinimum": 0},
+        "whole_device_energy_budget_per_report_j": {"type": ["number", "null"], "exclusiveMinimum": 0},
+        "notes": {"type": ["string", "null"]}
+      }
+    },
+    "deployment_facts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cellular_access_service_available_at_site", "lorawan_access_service_available_at_site", "thread_border_router_available_at_site"],
+      "properties": {
+        "cellular_access_service_available_at_site": {"type": ["boolean", "null"]},
+        "lorawan_access_service_available_at_site": {"type": ["boolean", "null"]},
+        "thread_border_router_available_at_site": {"type": ["boolean", "null"]}
+      }
+    },
+    "hard_constraints": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "object"}
+    },
+    "notes": {"type": ["string", "null"]}
+  }
+}

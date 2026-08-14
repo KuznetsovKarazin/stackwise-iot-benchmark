@@ -1,0 +1,23 @@
+{
+  "title": "STACKWISE: Reproducible code for layer-aware IoT communication stack analysis",
+  "description": "Open Python software for constructing and validating the STACKWISE Empirical Evidence Benchmark and reproducing layer-aware feasibility, evidence-admissibility, uncertainty, accounting and fleet-portfolio analyses. The frozen benchmark dataset is available at https://doi.org/10.5281/zenodo.21937093.",
+  "creators": [
+    {
+      "name": "Kuznetsov, Oleksandr",
+      "orcid": "0000-0003-2331-6326",
+      "affiliation": "eCampus University"
+    }
+  ],
+  "license": "Apache-2.0",
+  "upload_type": "software",
+  "access_right": "open",
+  "version": "0.1.60",
+  "keywords": [
+    "Internet of Things",
+    "communication stacks",
+    "benchmarking",
+    "hard feasibility",
+    "uncertainty",
+    "reproducibility"
+  ]
+}

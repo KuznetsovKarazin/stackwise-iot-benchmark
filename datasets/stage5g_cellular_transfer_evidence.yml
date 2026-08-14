@@ -1,0 +1,73 @@
+schema_version: 1
+stage: Stage-5G targeted cellular transfer-evidence admissibility audit
+stage5_status: external_state_model_structurally_informative_absolute_candidate_transfer_not_authorised
+scientific_policy:
+  preserve_stage4_matrix: true
+  preserve_stage5f_source_components: true
+  canonical_target_metric_id: expected_device_energy_per_application_report_j
+  publication_mcda_authorised: false
+  allow_external_model_absolute_recalibration: false
+  allow_external_model_structural_support: true
+  require_exact_upper_layer_or_explicit_overhead_model: true
+  require_boundary_compatible_absolute_energy: true
+  require_device_transfer_validation: true
+
+external_evidence_sources:
+  - evidence_id: sorensen_2022_cellular_energy_state_model
+    citation: "A. Sørensen et al., Modeling and Experimental Validation for Battery Lifetime Estimation in NB-IoT and LTE-M, IEEE Internet of Things Journal, 9(12), 9804-9819, 2022."
+    doi: "10.1109/JIOT.2022.3152173"
+    technologies: [NB-IoT, LTE-M]
+    evidence_type: empirical_validated_state_procedure_model
+    measurement_boundary: modem_only
+    validation_scope: specific_commercial_modems_and_controlled_network_scenarios
+    reported_model_error: within_5_percent_in_studied_configurations
+    payload_dependence: supported_structurally
+    reporting_cycle_state_accounting: supported_structurally
+    coverage_network_parameter_dependence: supported_structurally
+    upper_layer_protocol_context: not_candidate_stack_specific
+    direct_absolute_transfer_to_vomhoff: false
+    reason_direct_transfer_prohibited: "The model requires device-specific state characterization; its modem-only boundary and hardware/network context do not equal the retained Vomhoff whole-device source-active boundary."
+
+transfer_dimensions:
+  payload_dependence:
+    external_support: structural_support
+    numeric_candidate_transfer: robustness_only
+    rationale: "The external model explicitly varies payload size, but its device-specific state/procedure parameters cannot calibrate Vomhoff whole-device 1 KB observations into 64/200 B candidate values."
+  reporting_cycle_state_accounting:
+    external_support: structural_support
+    numeric_candidate_transfer: robustness_only
+    rationale: "The external model composes connected/idle/eDRX/PSM/TAU behaviour across transmit cycles, but absolute state powers and network timers are device/network specific."
+  upper_layer_protocol_context:
+    external_support: unresolved
+    numeric_candidate_transfer: prohibited
+    rationale: "The reviewed model is not an exact CoAP/DTLS/LwM2M or MQTT5/TLS1.3/LwM2M application-energy bridge."
+  absolute_measurement_boundary:
+    external_support: incompatible_for_absolute_calibration
+    numeric_candidate_transfer: prohibited
+    rationale: "Sørensen is modem-only; retained Vomhoff Stage-5F source component is whole-device active phases."
+  device_hardware_transfer:
+    external_support: incompatible_for_absolute_calibration
+    numeric_candidate_transfer: prohibited
+    rationale: "The external paper states that a new device must be characterized in each state before applying the model quantitatively."
+
+expected:
+  feasible_cellular_ip_candidate_incidences: 10
+  canonical_target_ready_rows: 0
+  payload_structural_support_rows: 10
+  reporting_cycle_structural_support_rows: 10
+  exact_upper_layer_support_rows: 0
+  absolute_external_calibration_authorised_rows: 0
+  external_sources_reviewed: 1
+
+next_step_policy:
+  preferred: targeted_matched_bridge_evidence
+  options:
+    - option_id: matched_measurement_or_same_device_dataset
+      priority: 1
+      rule: "Obtain matched NB-IoT/LTE-M measurements (or a same-device open dataset) spanning 64/200/1024 B and the candidate application/report-cycle contexts."
+    - option_id: external_model_robustness_only
+      priority: 2
+      rule: "If matched evidence is unavailable, use the external state model only as a robustness/sensitivity family; do not label model-derived values as empirical candidate report-energy estimates."
+    - option_id: lifecycle_cost_parallel
+      priority: 1
+      rule: "Build the dated lifecycle-cost evidence contract in parallel because it is missing for every feasible candidate and does not depend on closing the cellular energy bridge."

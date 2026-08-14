@@ -1,0 +1,116 @@
+schema_version: 1
+stage: Stage-6C lifecycle-cost robustness family for the periodic-tracking IP-cellular development subset
+stage6_status: preferred_subset_cost_ready_as_unweighted_robustness_family_energy_still_blocked
+
+scientific_policy:
+  preserve_stage4_feasibility_matrix: true
+  preserve_stage6a_preferred_subset: true
+  preferred_subset_id: periodic_tracking_ip_cellular_2x2
+  scenario_id: asset_tracking_periodic_cross_cell
+  lifecycle_horizon_years: 5
+  base_currency: EUR
+  price_basis_date: '2026-08-12'
+  cost_target_metric_id: lifecycle_cost_eur
+  family_semantics: unweighted_epistemic_and_deployment_sensitivity_family
+  probability_interpretation: false
+  allow_family_members_to_be_treated_as_samples_from_a_market_distribution: false
+  allow_probability_weights: false
+  allow_cost_family_to_imply_energy_readiness: false
+  allow_raw_transport_bytes_to_be_called_canonical_billed_volume: false
+  publication_mcda_authorised: false
+  decision_engine_development_authorised_for_cost_only: true
+
+source_updates:
+  - evidence_id: one_nce_platform2_pdp_session_rounding_2026_08_12
+    source_type: official_operator_developer_documentation
+    source_identifier: 1NCE Platform 2.0 Data Service / Session rounding
+    source_url: https://help.1nce.com/platform-migration/feature-changes/data-service/
+    access_date: '2026-08-12'
+    supports: >-
+      Platform 2.0 data usage is rounded per PDP session at session end to the nearest KB. The official
+      example distinguishes many short PDP sessions from many sends within one long-running PDP session.
+    does_not_support: >-
+      It does not determine how often a specific STACKWISE device opens/closes PDP sessions. That deployment
+      behaviour is therefore represented by explicit unweighted sensitivity anchors rather than a probability.
+  - evidence_id: one_nce_data_volume_scope_2026_08_12
+    source_type: official_operator_developer_documentation
+    source_identifier: 1NCE Data Volume
+    source_url: https://help.1nce.com/dev-hub/docs/data-services-data-volume
+    access_date: '2026-08-12'
+    supports: >-
+      Billed data includes uplink and downlink IP traffic, transport/application protocol overhead,
+      acknowledgements/retransmissions and connection-establishment traffic inside the billed data service boundary.
+
+billing_session_anchors:
+  - billing_anchor_id: B0_persistent_pdp
+    semantics: >-
+      One long-running PDP session carries the entire five-year periodic workload. Stage-5N raw bytes are rounded
+      only once when the PDP session is closed at the end of the benchmark horizon. This is a deployment sensitivity
+      anchor, not a claim that a real operator/device will preserve one session for five years.
+    sessions_per_report: 0
+    session_count_rule: one_session_for_horizon
+    rounding_unit_bytes: 1000
+  - billing_anchor_id: B1_pdp_per_report
+    semantics: >-
+      Every scheduled application report occurs in a separate PDP session. Each report-level session total is rounded
+      independently to the published 1-kB Platform-2.0 billing unit. This is a high-churn deployment sensitivity anchor,
+      not a statement that security-session re-establishment necessarily implies PDP-session re-establishment.
+    sessions_per_report: 1
+    session_count_rule: one_session_per_report
+    rounding_unit_bytes: 1000
+
+procurement_anchors:
+  - procurement_anchor_id: P0_volume_250
+    module_unit_price_eur: 26.06644
+    source_quantity: 250
+    source_role: published_digikey_reel_quantity_observation
+    probability: null
+  - procurement_anchor_id: P1_retail_qty1
+    module_unit_price_eur: 33.41
+    source_quantity: 1
+    source_role: published_digikey_single_unit_reference_observation
+    probability: null
+
+fixed_cash_components:
+  standard_sim_eur: 1.0
+  base_connectivity_prepaid_eur: 12.0
+  included_data_bytes: 500000000
+  topup_increment_bytes: 500000000
+  topup_price_eur: 10.0
+
+family_construction:
+  stage5n_input: results/validation/stage5n_security_session_control_envelope/session_control_envelope.csv
+  stage6a_subset_input: results/validation/stage6a_decision_slice_consolidation/preferred_development_subset.csv
+  retain_all_stage5n_protocol_serialization_session_control_rows: true
+  cross_with_billing_session_anchors: true
+  cross_with_procurement_anchors: true
+  topup_rule: ceil_positive_excess_over_base_allowance_in_500mb_increments
+  cost_formula: module_price + standard_SIM + prepaid_base_plan + topup_count * topup_price
+  exclusions:
+    - shipping
+    - taxes_or_recoverable_vat_without_common_tax_basis
+    - battery_replacement_until_energy_model_exists
+    - commodity_energy_cost_until_common_energy_target_exists
+    - common_sensor_mcu_enclosure_cloud_costs
+
+readiness_interpretation:
+  lifecycle_cost_eur: READY_ROBUSTNESS_FAMILY
+  energy_report: BLOCKED
+  first_slice_candidate_ready: false
+  rationale: >-
+    For the declared reference hardware/operator and periodic-tracking development benchmark, lifecycle cost is now
+    numerically materialised as an explicit finite unweighted family spanning protocol/serialization/session-control,
+    PDP-session billing behaviour and two dated procurement observations. It is not a population distribution and does
+    not represent all market/operator choices. Energy remains blocked, so candidate scoring is still prohibited.
+
+expected:
+  preferred_subset_candidates: 4
+  source_stage5n_rows: 144
+  billing_anchors: 2
+  procurement_anchors: 2
+  cost_family_rows: 576
+  cost_ready_candidates: 4
+  energy_ready_candidates: 0
+  first_slice_ready_candidates: 0
+  candidates_with_identical_nb_iot_lte_m_cost_family_within_binding: 4
+  publication_mcda_authorised: false

@@ -1,0 +1,16 @@
+benchmark:
+  benchmark_version: "1.0.0"
+inputs:
+  refined_hard_feasibility_matrix: "results/validation/stage4_hard_capability_review/refined_hard_feasibility_matrix.csv"
+  candidate_stack_catalog: "results/validation/stage4_candidate_stacks/candidate_stack_catalog.csv"
+outputs:
+  directory: "results/experiments/experiment5_fleet_portfolio"
+interpretation:
+  primary_universe: "strictly feasible scenarios only"
+  unresolved_sensitivity: "feasible + unresolved is reported only as an optimistic evidence-closure sensitivity"
+  portfolio_objective: "maximise scenario-class serviceability, then identify minimum-cardinality complete portfolios"
+  device_counts_used: false
+  lifecycle_cost_used: false
+  soft_scores_used: false
+  probability_interpretation: false
+  global_mcda_authorised: false

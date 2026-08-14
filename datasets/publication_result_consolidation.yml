@@ -1,0 +1,15 @@
+stage: publication_result_consolidation
+benchmark_version: 1.0.0
+inputs:
+  experiment1_summary: results/experiments/experiment1_feasibility_first/summary.json
+  experiment2_summary: results/experiments/experiment2_evidence_admissibility/summary.json
+  experiment3_summary: results/experiments/experiment3_uncertainty_treatment/summary.json
+  experiment4_summary: results/experiments/experiment4_accounting_simplification/summary.json
+outputs:
+  directory: results/publication/result_consolidation
+publication_policy:
+  pooled_epistemic_probability: false
+  global_candidate_ranking_authorised: false
+  benchmark_content_frozen: true
+  experiment1_to_4_closed: true
+  fleet_claim_requires_additional_result: true

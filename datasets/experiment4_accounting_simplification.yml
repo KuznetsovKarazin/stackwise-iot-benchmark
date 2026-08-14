@@ -1,0 +1,21 @@
+benchmark:
+  benchmark_version: "1.0.0"
+  scenario_id: "asset_tracking_periodic_cross_cell"
+  nominal_allowance_bytes: 500000000
+  topup_increment_bytes: 500000000
+  topup_price_eur: 10.0
+inputs:
+  stage5l_wire_accounting: "results/validation/stage5l_wire_volume_accounting/wire_volume_accounting.csv"
+  stage5m_serialization: "results/validation/stage5m_lwm2m_serialization_envelope/serialization_surrogate_envelope.csv"
+  stage5n_session_control: "results/validation/stage5n_security_session_control_envelope/session_control_envelope.csv"
+  stage6c_cost_family: "results/validation/stage6c_lifecycle_cost_robustness/preferred_subset_lifecycle_cost_family.csv"
+outputs:
+  directory: "results/experiments/experiment4_accounting_simplification"
+interpretation:
+  probability_interpretation: false
+  publication_mcda_authorised: false
+  final_reference_level: "L4_BILLING_AWARE"
+  note: >-
+    L0-L3 are deterministic accounting simplifications evaluated on the same Stage-6C
+    state space. L4 uses the billing-aware Stage-6C bytes/top-up result. Fractions are
+    state-space coverage, not probabilities of deployment configurations.

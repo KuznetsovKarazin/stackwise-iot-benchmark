@@ -1,0 +1,529 @@
+version: 1
+scope: validated_core_four_stage2_evidence
+publication_mcda_authorised: false
+notes:
+- Stage 3 begins with uncertainty specification and identifiability audit, not distribution
+  fitting.
+- Every core-four dataset/metric pair must map to exactly one uncertainty model specification.
+- Distribution family selection is deferred unless supported by replicated or hierarchical
+  calibration data.
+- Vomhoff implementation hardware is not structured in retained Stage-2 source materials;
+  no device random effect is invented.
+dependence_groups:
+- dependence_group_id: vomhoff_physical_run_multiphase
+  dataset_id: vomhoff_nbiot_ltem_energy_2023
+  level: physical_run
+  meaning: Energy and duration phases from the same physical/source run share conditions
+    and must be resampled together.
+  calibration_status: available_from_analysis_ready_run_phase_artifact
+- dependence_group_id: vomhoff_cross_figure_dependent_views
+  dataset_id: vomhoff_nbiot_ltem_energy_2023
+  level: derived_view
+  meaning: Figure-4/Figure-5 shared HTTP runs and alternate Idle views are dependent
+    derivations, not extra replication.
+  calibration_status: encoded_in_stage2_lineage
+- dependence_group_id: insectt_single_trace_configuration
+  dataset_id: insectt_wsn_power_2023
+  level: configuration_trace
+  meaning: Millions of electrical samples describe one approximately 60 s trace per
+    technology x reporting-period configuration.
+  calibration_status: between_run_variability_not_identified
+- dependence_group_id: insectt_shared_source_voltage
+  dataset_id: insectt_wsn_power_2023
+  level: shared_parameter
+  meaning: All derived power and capture-energy records share the same inferred PPK
+    II source-voltage parameter.
+  calibration_status: uncertainty_distribution_pending
+- dependence_group_id: lrfhss_single_trace_configuration
+  dataset_id: lorawan_lrfhss_energy_2024
+  level: configuration_trace
+  meaning: Full-capture and incremental transaction energy from the same configuration
+    inherit one physical trace.
+  calibration_status: between_run_variability_not_identified
+- dependence_group_id: lrfhss_ack_contrast_parent_pair
+  dataset_id: lorawan_lrfhss_energy_2024
+  level: matched_dr_contrast
+  meaning: Each ACK/RX overhead contrast is a deterministic difference of one confirmed
+    and one unconfirmed transaction record at the same DR.
+  calibration_status: population_contrast_variability_not_identified
+- dependence_group_id: loed_campaign_hierarchy
+  dataset_id: loed_lorawan_edge_2020
+  level: campaign
+  meaning: LoED receptions are nested within source days, recurring gateway infrastructure
+    and exact PHY strata. The two acquisition campaigns remain fixed deployment scenarios;
+    within-campaign source-day block resampling is retained as a 3/7/14-day robustness
+    family rather than one selected probability model.
+  calibration_status: campaign_block_robustness_family_materialised
+- dependence_group_id: loed_joint_rssi_snr
+  dataset_id: loed_lorawan_edge_2020
+  level: reception
+  meaning: RSSI and SNR are measured on the same reception events and must not be
+    independently sampled in a future link model.
+  calibration_status: joint_scenario_block_draws_materialised
+metric_models:
+- uncertainty_model_id: unc_vomhoff_phase_energy
+  dataset_id: vomhoff_nbiot_ltem_energy_2023
+  metric_id: device_phase_energy_j
+  support_domain: nonnegative_real
+  evidence_uncertainty_regime: replicated_run_level
+  population_variability_status: empirically_calibratable
+  calibration_status: calibrated_nonparametric
+  point_estimate_source: Stage-2 evidence summary; calibration source is logical_phase_observations.parquet
+    at physical_run_id level.
+  primary_sampling_unit: physical_run_id
+  resampling_scheme: cluster_bootstrap_physical_run
+  distribution_family_status: empirical_resampling_preferred
+  dependence_group_ids:
+  - vomhoff_physical_run_multiphase
+  - vomhoff_cross_figure_dependent_views
+  shared_parameter_ids: []
+  study_effect_status: future_cross_study_prior_or_evidence_required
+  implementation_effect_status: implementation_context_unknown
+  bridge_uncertainty_status: pending_downstream_bridge
+  forbidden_operations:
+  - iid_bootstrap_of_source_segments
+  - generic_study_random_effect_from_confounded_core_four
+  calibration_artifacts:
+  - data/analysis_ready/vomhoff_nbiot_ltem_energy_2023/logical_phase_observations.parquet
+  - data/analysis_ready/vomhoff_nbiot_ltem_energy_2023/uncertainty/run_level_samples.parquet
+  - data/analysis_ready/vomhoff_nbiot_ltem_energy_2023/uncertainty/marginal_calibration.csv
+  - data/analysis_ready/vomhoff_nbiot_ltem_energy_2023/uncertainty/block_bootstrap_means.parquet
+  - data/analysis_ready/vomhoff_nbiot_ltem_energy_2023/uncertainty/bootstrap_mean_summary.csv
+  notes: Replicated run variability is identifiable within matched source configurations.
+    Within-run phase dependence and cross-Figure dependent views must be preserved.
+    Stage-3B uses block-wise nonparametric physical-run bootstrap; partial overlap
+    preserves structural missingness without imputation or listwise deletion.
+- uncertainty_model_id: unc_vomhoff_phase_duration
+  dataset_id: vomhoff_nbiot_ltem_energy_2023
+  metric_id: device_phase_duration_s
+  support_domain: nonnegative_real
+  evidence_uncertainty_regime: replicated_run_level
+  population_variability_status: empirically_calibratable
+  calibration_status: calibrated_nonparametric
+  point_estimate_source: Stage-2 evidence summary; calibration source is logical_phase_observations.parquet
+    at physical_run_id level.
+  primary_sampling_unit: physical_run_id
+  resampling_scheme: cluster_bootstrap_physical_run
+  distribution_family_status: empirical_resampling_preferred
+  dependence_group_ids:
+  - vomhoff_physical_run_multiphase
+  - vomhoff_cross_figure_dependent_views
+  shared_parameter_ids: []
+  study_effect_status: future_cross_study_prior_or_evidence_required
+  implementation_effect_status: implementation_context_unknown
+  bridge_uncertainty_status: pending_downstream_bridge
+  forbidden_operations:
+  - iid_bootstrap_of_source_segments
+  - generic_study_random_effect_from_confounded_core_four
+  calibration_artifacts:
+  - data/analysis_ready/vomhoff_nbiot_ltem_energy_2023/logical_phase_observations.parquet
+  - data/analysis_ready/vomhoff_nbiot_ltem_energy_2023/uncertainty/run_level_samples.parquet
+  - data/analysis_ready/vomhoff_nbiot_ltem_energy_2023/uncertainty/marginal_calibration.csv
+  - data/analysis_ready/vomhoff_nbiot_ltem_energy_2023/uncertainty/block_bootstrap_means.parquet
+  - data/analysis_ready/vomhoff_nbiot_ltem_energy_2023/uncertainty/bootstrap_mean_summary.csv
+  notes: Replicated run variability is identifiable within matched source configurations.
+    Within-run phase dependence and cross-Figure dependent views must be preserved.
+    Stage-3B uses block-wise nonparametric physical-run bootstrap; partial overlap
+    preserves structural missingness without imputation or listwise deletion.
+- uncertainty_model_id: unc_insectt_trace_current
+  dataset_id: insectt_wsn_power_2023
+  metric_id: trace_mean_current_a
+  support_domain: nonnegative_real
+  evidence_uncertainty_regime: single_configuration_trace
+  population_variability_status: not_identified_single_unit
+  calibration_status: external_prior_required
+  point_estimate_source: One approximately 60 s trace per configuration.
+  primary_sampling_unit: configuration_trace
+  resampling_scheme: none_single_unit
+  distribution_family_status: external_prior_required
+  dependence_group_ids:
+  - insectt_single_trace_configuration
+  shared_parameter_ids: []
+  study_effect_status: future_cross_study_prior_or_evidence_required
+  implementation_effect_status: known_context_not_separately_identified
+  bridge_uncertainty_status: pending_downstream_bridge
+  forbidden_operations:
+  - sqrt_n_from_high_frequency_samples
+  - population_ci_from_single_trace
+  - default_cv_or_default_sd
+  calibration_artifacts:
+  - data/analysis_ready/insectt_wsn_power_2023/configuration_observations.parquet
+  notes: Within-trace samples estimate one physical trace; they do not identify between-run
+    or between-device repeatability.
+- uncertainty_model_id: unc_insectt_trace_charge
+  dataset_id: insectt_wsn_power_2023
+  metric_id: trace_charge_c
+  support_domain: nonnegative_real
+  evidence_uncertainty_regime: single_configuration_trace
+  population_variability_status: not_identified_single_unit
+  calibration_status: external_prior_required
+  point_estimate_source: Integrated charge from one approximately 60 s trace per configuration.
+  primary_sampling_unit: configuration_trace
+  resampling_scheme: none_single_unit
+  distribution_family_status: external_prior_required
+  dependence_group_ids:
+  - insectt_single_trace_configuration
+  shared_parameter_ids: []
+  study_effect_status: future_cross_study_prior_or_evidence_required
+  implementation_effect_status: known_context_not_separately_identified
+  bridge_uncertainty_status: pending_downstream_bridge
+  forbidden_operations:
+  - sqrt_n_from_high_frequency_samples
+  - population_ci_from_single_trace
+  - default_cv_or_default_sd
+  calibration_artifacts:
+  - data/analysis_ready/insectt_wsn_power_2023/configuration_observations.parquet
+  notes: Within-trace samples estimate one physical trace; they do not identify between-run
+    or between-device repeatability.
+- uncertainty_model_id: unc_insectt_mean_power
+  dataset_id: insectt_wsn_power_2023
+  metric_id: derived_mean_power_w
+  support_domain: nonnegative_real
+  evidence_uncertainty_regime: shared_parameter_derived
+  population_variability_status: not_identified_single_unit
+  calibration_status: external_prior_required
+  point_estimate_source: Trace mean current multiplied by the shared validated voltage
+    estimate.
+  primary_sampling_unit: configuration_trace
+  resampling_scheme: shared_parameter_propagation_pending
+  distribution_family_status: external_prior_required
+  dependence_group_ids:
+  - insectt_single_trace_configuration
+  - insectt_shared_source_voltage
+  shared_parameter_ids:
+  - insectt_ppk2_source_voltage_v
+  study_effect_status: future_cross_study_prior_or_evidence_required
+  implementation_effect_status: known_context_not_separately_identified
+  bridge_uncertainty_status: pending_downstream_bridge
+  forbidden_operations:
+  - independent_sampling_of_shared_parameter_derivatives
+  - population_ci_from_single_trace
+  - default_cv_or_default_sd
+  calibration_artifacts:
+  - data/analysis_ready/insectt_wsn_power_2023/configuration_observations.parquet
+  - data/analysis_ready/insectt_wsn_power_2023/shared_parameters.json
+  notes: Derived quantity inherits n=1 configuration repeatability uncertainty plus
+    one common voltage calibration uncertainty.
+- uncertainty_model_id: unc_insectt_capture_energy
+  dataset_id: insectt_wsn_power_2023
+  metric_id: derived_capture_energy_j
+  support_domain: nonnegative_real
+  evidence_uncertainty_regime: shared_parameter_derived
+  population_variability_status: not_identified_single_unit
+  calibration_status: external_prior_required
+  point_estimate_source: Trace charge multiplied by the shared validated voltage estimate.
+  primary_sampling_unit: configuration_trace
+  resampling_scheme: shared_parameter_propagation_pending
+  distribution_family_status: external_prior_required
+  dependence_group_ids:
+  - insectt_single_trace_configuration
+  - insectt_shared_source_voltage
+  shared_parameter_ids:
+  - insectt_ppk2_source_voltage_v
+  study_effect_status: future_cross_study_prior_or_evidence_required
+  implementation_effect_status: known_context_not_separately_identified
+  bridge_uncertainty_status: pending_downstream_bridge
+  forbidden_operations:
+  - independent_sampling_of_shared_parameter_derivatives
+  - population_ci_from_single_trace
+  - default_cv_or_default_sd
+  calibration_artifacts:
+  - data/analysis_ready/insectt_wsn_power_2023/configuration_observations.parquet
+  - data/analysis_ready/insectt_wsn_power_2023/shared_parameters.json
+  notes: Derived quantity inherits n=1 configuration repeatability uncertainty plus
+    one common voltage calibration uncertainty.
+- uncertainty_model_id: unc_lrfhss_full_capture_energy
+  dataset_id: lorawan_lrfhss_energy_2024
+  metric_id: radio_full_capture_energy_j
+  support_domain: nonnegative_real
+  evidence_uncertainty_regime: single_configuration_trace
+  population_variability_status: not_identified_single_unit
+  calibration_status: external_prior_required
+  point_estimate_source: One radio-interface capture per confirmation-mode x DR configuration.
+  primary_sampling_unit: configuration_trace
+  resampling_scheme: none_single_unit
+  distribution_family_status: external_prior_required
+  dependence_group_ids:
+  - lrfhss_single_trace_configuration
+  shared_parameter_ids: []
+  study_effect_status: future_cross_study_prior_or_evidence_required
+  implementation_effect_status: known_context_not_separately_identified
+  bridge_uncertainty_status: pending_downstream_bridge
+  forbidden_operations:
+  - population_ci_from_single_trace
+  - default_cv_or_default_sd
+  calibration_artifacts:
+  - data/analysis_ready/lorawan_lrfhss_energy_2024/configuration_observations.parquet
+  notes: Full capture is radio-interface-only and has one independent trace per configuration.
+- uncertainty_model_id: unc_lrfhss_incremental_transaction
+  dataset_id: lorawan_lrfhss_energy_2024
+  metric_id: radio_incremental_transaction_energy_j
+  support_domain: nonnegative_real
+  evidence_uncertainty_regime: single_configuration_trace
+  population_variability_status: not_identified_single_unit
+  calibration_status: external_prior_required
+  point_estimate_source: Baseline-subtracted transaction energy from the same single
+    configuration trace.
+  primary_sampling_unit: configuration_trace
+  resampling_scheme: none_single_unit
+  distribution_family_status: external_prior_required
+  dependence_group_ids:
+  - lrfhss_single_trace_configuration
+  shared_parameter_ids: []
+  study_effect_status: future_cross_study_prior_or_evidence_required
+  implementation_effect_status: known_context_not_separately_identified
+  bridge_uncertainty_status: must_be_propagated_with_parent_evidence
+  forbidden_operations:
+  - independent_sampling_of_parent_and_child_evidence
+  - population_ci_from_single_trace
+  - default_cv_or_default_sd
+  calibration_artifacts:
+  - data/analysis_ready/lorawan_lrfhss_energy_2024/transaction_derivation.csv
+  notes: Incremental transaction energy shares its parent trace with full-capture
+    energy and is not an independent draw.
+- uncertainty_model_id: unc_lrfhss_ack_overhead
+  dataset_id: lorawan_lrfhss_energy_2024
+  metric_id: radio_ack_rx_overhead_energy_j
+  support_domain: real
+  evidence_uncertainty_regime: single_matched_contrast
+  population_variability_status: not_applicable_descriptive
+  calibration_status: descriptive_only
+  point_estimate_source: One confirmed-minus-unconfirmed matched-DR contrast.
+  primary_sampling_unit: matched_dr_contrast
+  resampling_scheme: none_descriptive
+  distribution_family_status: descriptive_no_population_distribution
+  dependence_group_ids:
+  - lrfhss_ack_contrast_parent_pair
+  - lrfhss_single_trace_configuration
+  shared_parameter_ids: []
+  study_effect_status: future_cross_study_prior_or_evidence_required
+  implementation_effect_status: known_context_not_separately_identified
+  bridge_uncertainty_status: must_be_propagated_with_parent_evidence
+  forbidden_operations:
+  - population_ci_from_single_ack_contrast
+  - independent_sampling_of_parent_and_child_evidence
+  calibration_artifacts:
+  - data/analysis_ready/lorawan_lrfhss_energy_2024/ack_rx_contrasts.csv
+  notes: Four DR contrasts are descriptive single-capture effects, not a population
+    ACK-overhead distribution.
+- uncertainty_model_id: unc_loed_rssi
+  dataset_id: loed_lorawan_edge_2020
+  metric_id: gateway_rssi_dbm
+  support_domain: real
+  evidence_uncertainty_regime: hierarchical_observational_campaign
+  population_variability_status: conditional_scenario_uncertainty_materialised
+  calibration_status: scenario_robustness_materialised
+  point_estimate_source: PHY-stratum summary; grouped calibration returns to source-day
+    x gateway x PHY cells.
+  primary_sampling_unit: source_day_campaign_block_with_gateway_phy_cells
+  resampling_scheme: campaign_block_robustness_family
+  distribution_family_status: empirical_robustness_family_no_single_distribution
+  dependence_group_ids:
+  - loed_campaign_hierarchy
+  - loed_joint_rssi_snr
+  shared_parameter_ids: []
+  study_effect_status: future_cross_study_prior_or_evidence_required
+  implementation_effect_status: known_context_not_separately_identified
+  bridge_uncertainty_status: pending_downstream_bridge
+  forbidden_operations:
+  - iid_bootstrap_of_receptions
+  - generic_study_random_effect_from_confounded_core_four
+  - default_cv_or_default_sd
+  - probability_weighting_of_fixed_campaigns
+  - probability_weighting_of_block_length_models
+  - cross_campaign_replicate_alignment
+  calibration_artifacts:
+  - data/processed/loed_lorawan_edge_2020/observations.parquet
+  - data/analysis_ready/loed_lorawan_edge_2020/gateway_day_summary.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/gateway_day_phy_cells.parquet
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/rssi_snr_hierarchical_calibration.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/daily_phy_summary.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/day_coverage.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_dependence_diagnostics.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_audit/campaign_summary.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_audit/acf_lag_summary.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_audit/campaign_shift_diagnostics.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_audit/gateway_confounding/composition_sensitivity.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_audit/block_sensitivity/block_length_sensitivity.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_audit/robustness_family/joint_centered_block_draws.parquet
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_audit/robustness_family/centered_block_summary.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_audit/robustness_family/block_length_robustness_envelope.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_audit/robustness_family/phy_source_day_support.csv
+  notes: Deployment-specific RSSI/SNR are jointly observed. Stage-3C materialises
+    source-day x gateway x PHY grouped moments; Stage-3D/3E retain two fixed, composition-confounded
+    deployment campaigns; Stage-3F shows material 3/7/14-day block-length sensitivity.
+    Stage-3G therefore materialises centered joint campaign x block-length draws and
+    a non-probabilistic robustness envelope. No probability weights are assigned to
+    campaigns or block lengths, and no single publication distribution is asserted.
+- uncertainty_model_id: unc_loed_snr
+  dataset_id: loed_lorawan_edge_2020
+  metric_id: gateway_snr_db
+  support_domain: real
+  evidence_uncertainty_regime: hierarchical_observational_campaign
+  population_variability_status: conditional_scenario_uncertainty_materialised
+  calibration_status: scenario_robustness_materialised
+  point_estimate_source: PHY-stratum summary; grouped calibration returns to source-day
+    x gateway x PHY cells.
+  primary_sampling_unit: source_day_campaign_block_with_gateway_phy_cells
+  resampling_scheme: campaign_block_robustness_family
+  distribution_family_status: empirical_robustness_family_no_single_distribution
+  dependence_group_ids:
+  - loed_campaign_hierarchy
+  - loed_joint_rssi_snr
+  shared_parameter_ids: []
+  study_effect_status: future_cross_study_prior_or_evidence_required
+  implementation_effect_status: known_context_not_separately_identified
+  bridge_uncertainty_status: pending_downstream_bridge
+  forbidden_operations:
+  - iid_bootstrap_of_receptions
+  - generic_study_random_effect_from_confounded_core_four
+  - default_cv_or_default_sd
+  - probability_weighting_of_fixed_campaigns
+  - probability_weighting_of_block_length_models
+  - cross_campaign_replicate_alignment
+  calibration_artifacts:
+  - data/processed/loed_lorawan_edge_2020/observations.parquet
+  - data/analysis_ready/loed_lorawan_edge_2020/gateway_day_summary.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/gateway_day_phy_cells.parquet
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/rssi_snr_hierarchical_calibration.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/daily_phy_summary.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/day_coverage.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_dependence_diagnostics.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_audit/campaign_summary.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_audit/acf_lag_summary.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_audit/campaign_shift_diagnostics.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_audit/gateway_confounding/composition_sensitivity.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_audit/block_sensitivity/block_length_sensitivity.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_audit/robustness_family/joint_centered_block_draws.parquet
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_audit/robustness_family/centered_block_summary.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_audit/robustness_family/block_length_robustness_envelope.csv
+  - data/analysis_ready/loed_lorawan_edge_2020/uncertainty/temporal_audit/robustness_family/phy_source_day_support.csv
+  notes: Deployment-specific RSSI/SNR are jointly observed. Stage-3C materialises
+    source-day x gateway x PHY grouped moments; Stage-3D/3E retain two fixed, composition-confounded
+    deployment campaigns; Stage-3F shows material 3/7/14-day block-length sensitivity.
+    Stage-3G therefore materialises centered joint campaign x block-length draws and
+    a non-probabilistic robustness envelope. No probability weights are assigned to
+    campaigns or block lengths, and no single publication distribution is asserted.
+- uncertainty_model_id: unc_loed_crc_fraction
+  dataset_id: loed_lorawan_edge_2020
+  metric_id: gateway_crc_valid_fraction_of_receptions
+  support_domain: unit_interval
+  evidence_uncertainty_regime: hierarchical_observational_campaign
+  population_variability_status: not_applicable_descriptive
+  calibration_status: descriptive_only
+  point_estimate_source: Stage-2 descriptive campaign summary.
+  primary_sampling_unit: hierarchical_campaign_block
+  resampling_scheme: none_descriptive
+  distribution_family_status: descriptive_no_population_distribution
+  dependence_group_ids:
+  - loed_campaign_hierarchy
+  shared_parameter_ids: []
+  study_effect_status: future_cross_study_prior_or_evidence_required
+  implementation_effect_status: known_context_not_separately_identified
+  bridge_uncertainty_status: not_applicable
+  forbidden_operations:
+  - iid_bootstrap_of_receptions
+  - default_cv_or_default_sd
+  calibration_artifacts:
+  - data/analysis_ready/loed_lorawan_edge_2020/reception_phy_summary.csv
+  notes: CRC fraction is conditional on recorded receptions and remains descriptive,
+    not PDR.
+- uncertainty_model_id: unc_loed_gateway_count
+  dataset_id: loed_lorawan_edge_2020
+  metric_id: logical_frame_distinct_gateway_count
+  support_domain: nonnegative_real
+  evidence_uncertainty_regime: hierarchical_observational_campaign
+  population_variability_status: not_applicable_descriptive
+  calibration_status: descriptive_only
+  point_estimate_source: Stage-2 descriptive campaign summary.
+  primary_sampling_unit: hierarchical_campaign_block
+  resampling_scheme: none_descriptive
+  distribution_family_status: descriptive_no_population_distribution
+  dependence_group_ids:
+  - loed_campaign_hierarchy
+  shared_parameter_ids: []
+  study_effect_status: future_cross_study_prior_or_evidence_required
+  implementation_effect_status: known_context_not_separately_identified
+  bridge_uncertainty_status: not_applicable
+  forbidden_operations:
+  - iid_bootstrap_of_receptions
+  - default_cv_or_default_sd
+  calibration_artifacts:
+  - data/analysis_ready/loed_lorawan_edge_2020/logical_frame_phy_summary.csv
+  notes: Observation diversity of CRC-valid logical frames, not simultaneous RF multiplicity.
+- uncertainty_model_id: unc_loed_multi_gateway_fraction
+  dataset_id: loed_lorawan_edge_2020
+  metric_id: logical_frame_multi_gateway_fraction
+  support_domain: unit_interval
+  evidence_uncertainty_regime: hierarchical_observational_campaign
+  population_variability_status: not_applicable_descriptive
+  calibration_status: descriptive_only
+  point_estimate_source: Stage-2 descriptive campaign summary.
+  primary_sampling_unit: hierarchical_campaign_block
+  resampling_scheme: none_descriptive
+  distribution_family_status: descriptive_no_population_distribution
+  dependence_group_ids:
+  - loed_campaign_hierarchy
+  shared_parameter_ids: []
+  study_effect_status: future_cross_study_prior_or_evidence_required
+  implementation_effect_status: known_context_not_separately_identified
+  bridge_uncertainty_status: not_applicable
+  forbidden_operations:
+  - iid_bootstrap_of_receptions
+  - default_cv_or_default_sd
+  calibration_artifacts:
+  - data/analysis_ready/loed_lorawan_edge_2020/logical_frame_phy_summary.csv
+  notes: Descriptive distinct-gateway observation diversity only; no delivery probability
+    is inferred.
+calibration_gaps:
+- gap_id: vomhoff_implementation_context_not_structured
+  dataset_id: vomhoff_nbiot_ltem_energy_2023
+  severity: important
+  status: preserve_unknown
+  needed_for: device/implementation random effect
+  resolution: Do not invent a device model from secondary descriptions. Use study/run
+    variability only unless primary-source implementation metadata is recovered.
+- gap_id: insectt_between_run_repeatability
+  dataset_id: insectt_wsn_power_2023
+  severity: critical_for_population_uncertainty
+  status: external_prior_or_new_replication_required
+  needed_for: population uncertainty for current/charge/power/energy
+  resolution: Do not derive repeatability from millions of within-trace samples. Obtain
+    justified external repeatability evidence or repeated traces.
+- gap_id: insectt_voltage_distribution
+  dataset_id: insectt_wsn_power_2023
+  severity: important
+  status: prior_specification_required
+  needed_for: correlated calibration uncertainty
+  resolution: The 20 implied values are validation scale checks against rounded published
+    means; their spread is not a standard error.
+- gap_id: lrfhss_between_run_repeatability
+  dataset_id: lorawan_lrfhss_energy_2024
+  severity: critical_for_population_uncertainty
+  status: external_prior_or_new_replication_required
+  needed_for: population uncertainty of transaction/capture energy and ACK overhead
+  resolution: One trace per configuration cannot identify between-run variance.
+- gap_id: cross_study_variance_not_identified
+  dataset_id: core_four
+  severity: critical_for_generic_random_effects
+  status: external_evidence_required
+  needed_for: generic study random-effect variance
+  resolution: Core-four study identity is confounded with technology/implementation/boundary.
+    A generic study variance cannot be estimated honestly from these four sources.
+- gap_id: bridge_structural_uncertainty_pending
+  dataset_id: core_four
+  severity: critical_before_decision_model
+  status: downstream_bridge_models_required
+  needed_for: common energy, coverage, reliability, latency and cost decision estimands
+  resolution: Specify bridge equations and scenario conditions first; only then calibrate
+    structural uncertainty on bridge outputs.
+resolved_uncertainty_choices:
+- choice_id: loed_scenario_block_robustness_family
+  dataset_id: loed_lorawan_edge_2020
+  status: materialised_without_single_probability_distribution
+  decision: Retain 2019/2020 as fixed deployment scenarios and 3/7/14-day source-day
+    block lengths as an unweighted model-robustness set. Center each non-circular
+    MBB draw family on the observed campaign point estimate, preserve within-scenario
+    RSSI/SNR and cross-PHY dependence, and report source-day support explicitly.
+  guardrail: Do not interpret the outer robustness envelope as a probability interval
+    or align replicate IDs across campaigns/block lengths.

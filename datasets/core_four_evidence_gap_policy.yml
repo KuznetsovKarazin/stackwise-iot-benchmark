@@ -1,0 +1,156 @@
+version: 1
+scope: validated_core_four_empirical_sources_only
+notes:
+- E0_MISSING means the core-four sources contain no evidence record that identifies or bridges to the target.
+- C1/C2/C3 describe the scientific relation of available evidence to the future decision estimand; they do not authorise MCDA use by themselves.
+- Missing cells are explicit evidence gaps, not values to be imputed with default scores.
+- Publication MCDA remains unauthorised until Stage 3 uncertainty and later stack/scenario models are validated.
+
+target_metrics:
+- expected_device_energy_per_application_report_j
+- delivery_probability
+- feasible_link_probability
+- end_to_end_application_latency_ms
+- lifecycle_cost_eur
+
+target_relations:
+- target_metric_id: expected_device_energy_per_application_report_j
+  dataset_id: vomhoff_nbiot_ltem_energy_2023
+  relation_class: C1_BRIDGEABLE
+  supporting_metric_ids: [device_phase_energy_j]
+  required_bridge_or_missing_evidence: Scenario-specific phase composition, reporting/session/retry policy and any missing device states must be composed into one whole-device application-report accounting boundary.
+  interpretation: Strong whole-device cellular component evidence, but not yet the common per-report decision estimand.
+- target_metric_id: expected_device_energy_per_application_report_j
+  dataset_id: insectt_wsn_power_2023
+  relation_class: C1_BRIDGEABLE
+  supporting_metric_ids: [derived_capture_energy_j, trace_charge_c]
+  required_bridge_or_missing_evidence: Convert the approximately 60 s repeated-workload capture into a declared reporting-cycle model while propagating the shared voltage parameter and preserving n=1 per configuration.
+  interpretation: Strong configuration-level load evidence, not a replicated per-report population estimate.
+- target_metric_id: expected_device_energy_per_application_report_j
+  dataset_id: lorawan_lrfhss_energy_2024
+  relation_class: C1_BRIDGEABLE
+  supporting_metric_ids: [radio_incremental_transaction_energy_j, radio_full_capture_energy_j]
+  required_bridge_or_missing_evidence: Bridge radio-rail energy to whole-device energy and add the declared upper-layer/session/reporting-cycle components.
+  interpretation: Radio-only transaction/capture evidence with one trace per configuration.
+- target_metric_id: expected_device_energy_per_application_report_j
+  dataset_id: loed_lorawan_edge_2020
+  relation_class: E0_MISSING
+  supporting_metric_ids: []
+  required_bridge_or_missing_evidence: LoED has no device-energy measurements.
+  interpretation: Reception-side field evidence only.
+
+- target_metric_id: delivery_probability
+  dataset_id: vomhoff_nbiot_ltem_energy_2023
+  relation_class: E0_MISSING
+  supporting_metric_ids: []
+  required_bridge_or_missing_evidence: Attempted-transmission outcomes under a declared endpoint and retry policy are required.
+  interpretation: Energy/phase dataset does not identify delivery probability.
+- target_metric_id: delivery_probability
+  dataset_id: insectt_wsn_power_2023
+  relation_class: E0_MISSING
+  supporting_metric_ids: []
+  required_bridge_or_missing_evidence: Attempted-transmission outcomes under a declared endpoint and retry policy are required.
+  interpretation: Power traces do not identify delivery probability.
+- target_metric_id: delivery_probability
+  dataset_id: lorawan_lrfhss_energy_2024
+  relation_class: E0_MISSING
+  supporting_metric_ids: []
+  required_bridge_or_missing_evidence: Replicated attempted-transmission outcomes are required; ACK/noACK energy traces are not delivery trials.
+  interpretation: Energy captures do not identify delivery probability.
+- target_metric_id: delivery_probability
+  dataset_id: loed_lorawan_edge_2020
+  relation_class: C2_CONDITIONAL
+  supporting_metric_ids: [gateway_rssi_dbm, gateway_snr_db]
+  prohibited_proxy_metric_ids: [gateway_crc_valid_fraction_of_receptions, logical_frame_multi_gateway_fraction]
+  required_bridge_or_missing_evidence: An external attempted-transmission denominator and outcome-linked technology-specific model are required. CRC-valid reception fraction and gateway diversity remain prohibited PDR proxies.
+  interpretation: LoED can condition a link model but cannot identify absolute delivery probability from the corpus alone.
+
+- target_metric_id: feasible_link_probability
+  dataset_id: vomhoff_nbiot_ltem_energy_2023
+  relation_class: E0_MISSING
+  supporting_metric_ids: []
+  required_bridge_or_missing_evidence: Technology-specific coverage/link evidence under scenario geometry and deployment assumptions is required.
+  interpretation: Energy phases do not identify coverage probability.
+- target_metric_id: feasible_link_probability
+  dataset_id: insectt_wsn_power_2023
+  relation_class: E0_MISSING
+  supporting_metric_ids: []
+  required_bridge_or_missing_evidence: Technology-specific coverage/link evidence under scenario geometry and deployment assumptions is required.
+  interpretation: Bench power traces do not identify deployment coverage.
+- target_metric_id: feasible_link_probability
+  dataset_id: lorawan_lrfhss_energy_2024
+  relation_class: E0_MISSING
+  supporting_metric_ids: []
+  required_bridge_or_missing_evidence: Link-budget/field evidence for LR-FHSS under declared geometry and environment is required.
+  interpretation: Radio energy traces do not identify link feasibility probability.
+- target_metric_id: feasible_link_probability
+  dataset_id: loed_lorawan_edge_2020
+  relation_class: C1_BRIDGEABLE
+  supporting_metric_ids: [gateway_rssi_dbm, gateway_snr_db]
+  prohibited_proxy_metric_ids: [gateway_crc_valid_fraction_of_receptions, logical_frame_multi_gateway_fraction]
+  required_bridge_or_missing_evidence: Calibrated LoRaWAN-specific link model plus scenario geometry/deployment assumptions; raw RSSI/SNR are not cross-RAT utility scores.
+  interpretation: Strong real-world LoRaWAN reception-side link evidence, deployment-specific and hierarchical.
+
+- target_metric_id: end_to_end_application_latency_ms
+  dataset_id: vomhoff_nbiot_ltem_energy_2023
+  relation_class: C1_BRIDGEABLE
+  supporting_metric_ids: [device_phase_duration_s]
+  required_bridge_or_missing_evidence: Compose source phase durations into a declared application-to-application endpoint including protocol/security/session/retry components and unit conversion.
+  interpretation: Useful cellular component timing evidence, not end-to-end application latency as recorded.
+- target_metric_id: end_to_end_application_latency_ms
+  dataset_id: insectt_wsn_power_2023
+  relation_class: E0_MISSING
+  supporting_metric_ids: []
+  required_bridge_or_missing_evidence: End-to-end timing measurements or a validated protocol-stack timing model are required.
+  interpretation: No end-to-end latency evidence in the validated traces.
+- target_metric_id: end_to_end_application_latency_ms
+  dataset_id: lorawan_lrfhss_energy_2024
+  relation_class: E0_MISSING
+  supporting_metric_ids: []
+  required_bridge_or_missing_evidence: End-to-end timing measurements or a validated protocol-stack timing model are required.
+  interpretation: Capture duration is not application latency.
+- target_metric_id: end_to_end_application_latency_ms
+  dataset_id: loed_lorawan_edge_2020
+  relation_class: E0_MISSING
+  supporting_metric_ids: []
+  required_bridge_or_missing_evidence: Attempt-to-delivery timestamps with declared endpoints are required; reception timestamps alone are insufficient.
+  interpretation: Gateway reception timing does not define application latency.
+
+- target_metric_id: lifecycle_cost_eur
+  dataset_id: vomhoff_nbiot_ltem_energy_2023
+  relation_class: E0_MISSING
+  supporting_metric_ids: []
+  required_bridge_or_missing_evidence: Hardware, subscription, infrastructure, maintenance, replacement and horizon evidence is required.
+  interpretation: No lifecycle-cost evidence.
+- target_metric_id: lifecycle_cost_eur
+  dataset_id: insectt_wsn_power_2023
+  relation_class: E0_MISSING
+  supporting_metric_ids: []
+  required_bridge_or_missing_evidence: Hardware, infrastructure, maintenance, replacement and horizon evidence is required.
+  interpretation: No lifecycle-cost evidence.
+- target_metric_id: lifecycle_cost_eur
+  dataset_id: lorawan_lrfhss_energy_2024
+  relation_class: E0_MISSING
+  supporting_metric_ids: []
+  required_bridge_or_missing_evidence: Hardware, gateway/network ownership, maintenance and horizon evidence is required.
+  interpretation: No lifecycle-cost evidence.
+- target_metric_id: lifecycle_cost_eur
+  dataset_id: loed_lorawan_edge_2020
+  relation_class: E0_MISSING
+  supporting_metric_ids: []
+  required_bridge_or_missing_evidence: Gateway/network deployment ownership, hardware, maintenance and horizon evidence is required.
+  interpretation: Field receptions do not define lifecycle cost.
+
+non_metric_gaps:
+- gap_id: standards_feasibility_constraints
+  status: external_evidence_required
+  evidence_needed: Standards/regulatory/vendor evidence for payload limits, spectrum/duty-cycle constraints, operator dependency, topology, mobility and infrastructure availability.
+  why_core_four_is_insufficient: The empirical sources measure selected operating configurations; they do not define the full legal/standards feasibility domain of candidate stacks.
+- gap_id: upper_layer_stack_compatibility_and_overhead
+  status: external_or_analytical_evidence_required
+  evidence_needed: Transport/security/application/management compatibility and overhead for candidate end-to-end stacks, including TCP/UDP, TLS/DTLS/OSCORE, MQTT/CoAP/LwM2M or industrial integration where applicable.
+  why_core_four_is_insufficient: Vomhoff supplies limited HTTP/MQTT cellular phases, but the core-four set does not cover the full upper-layer candidate space.
+- gap_id: scenario_workload_definition
+  status: benchmark_specification_required
+  evidence_needed: Quantitative payload, reporting interval, direction, ACK/retry/session policy, latency bound, lifetime horizon and deployment geometry for each benchmark scenario.
+  why_core_four_is_insufficient: Empirical applicability domains cannot be transferred to a decision scenario until the scenario workload and constraints are explicitly defined.

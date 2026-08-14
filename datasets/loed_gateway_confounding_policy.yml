@@ -1,0 +1,42 @@
+version: 1
+dataset_id: loed_lorawan_edge_2020
+stage: Stage-3E gateway-composition/campaign confounding audit
+observed_campaign_infrastructure:
+  campaign_1_gateways: 6
+  campaign_2_gateways: 5
+  shared_gateways: 2
+  gateway_union: 9
+  cross_campaign_gateway_jaccard: 0.2222222222222222
+interpretation_guardrails:
+  full_campaign_shift_is_pure_temporal_effect: false
+  shared_gateway_shift_is_causal_temporal_effect: false
+  gateway_composition_causal_decomposition_authorised: false
+  campaign_random_effect_authorised: false
+  independent_gateway_bootstrap_authorised: false
+resampling_guardrails:
+  campaign_stratified_block_bootstrap_authorised: false
+  block_length_selected: false
+  hierarchical_sampling_authorised: false
+  publication_uncertainty_sampling_authorised: false
+  publication_mcda_authorised: false
+review_requirements:
+  - Compare full-campaign RSSI/SNR shifts with same-gateway shifts on the two gateways observed in both campaigns.
+  - Compare full-campaign shifts with equal-shared-gateway and reception-weighted-shared-gateway sensitivity estimates.
+  - Quantify within-campaign heterogeneity across gateway-level means for every PHY stratum.
+  - Do not attribute differences between full and shared-gateway summaries causally to gateway composition; traffic, device population, placement and time remain confounded.
+  - Select any within-campaign temporal block length only after this infrastructure-support audit is reviewed.
+
+production_stage3e_conclusion:
+  gateway_composition_materially_confounds_full_campaign_shift: true
+  causal_gateway_composition_decomposition_authorised: false
+  campaigns_retained_as_fixed_deployment_scenarios: true
+  full_campaign_rssi_abs_shift_median_db: 10.880043752153924
+  equal_shared_gateway_rssi_abs_shift_median_db: 5.061454560213477
+  full_campaign_snr_abs_shift_median_db: 5.097516836078421
+  equal_shared_gateway_snr_abs_shift_median_db: 1.3999999999999986
+  same_sign_full_vs_equal_shared_gateway_fraction: 0.32653061224489793
+  complete_two_shared_gateway_support_phy_fraction: 0.5306122448979592
+  interpretation: >-
+    Common-gateway sensitivity materially changes both magnitude and often sign of the campaign shift.
+    The two shared gateways themselves show heterogeneous cross-campaign changes, so no scalar temporal or
+    gateway-composition effect is identified. Campaigns are treated as fixed deployment scenarios.

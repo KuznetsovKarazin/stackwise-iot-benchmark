@@ -1,0 +1,137 @@
+schema_version: 1
+stage: Stage-6B matched cellular-IP report-energy evidence audit and experimental contract
+stage6_status: no_public_source_matches_candidate_boundary_targeted_measurement_required
+
+scientific_policy:
+  preserve_stage4_feasibility_matrix: true
+  preserve_stage6a_preferred_subset: true
+  preferred_subset_id: periodic_tracking_ip_cellular_2x2
+  canonical_target_metric_id: expected_device_energy_per_application_report_j
+  target_scenario_id: asset_tracking_periodic_cross_cell
+  target_pre_lwm2m_payload_bytes: 64
+  target_reporting_interval_s: 60
+  require_both_rats: [NB-IoT, LTE-M]
+  require_both_bindings: [coap_dtls_udp, mqtt_tls_tcp]
+  require_whole_device_boundary: true
+  allow_payload_scaling_from_vomhoff: false
+  allow_modem_only_evidence_as_whole_device: false
+  allow_nb_iot_only_source_to_rank_lte_m: false
+  allow_model_validation_error_to_be_used_as_candidate_uncertainty: false
+  publication_mcda_authorised: false
+
+external_source_review:
+  - source_id: vomhoff_2023
+    citation: 'V. Vomhoff et al., NB-IoT vs. LTE-M: Measurement Study of the Energy Consumption of LPWAN Technologies, ICC Workshops 2023.'
+    doi_or_pid: '10.1109/ICCWorkshops57953.2023.10283595'
+    raw_data_pid: '10.5281/zenodo.7603641'
+    technologies: 'NB-IoT|LTE-M'
+    empirical_payload_bytes: '1024'
+    reporting_cycle: '30/150-s source scripts; normalized source phases'
+    upper_layer_context: 'HTTP for NB-IoT/LTE-M; MQTT only for NB-IoT'
+    measurement_boundary: 'whole-device source phases in retained STACKWISE interpretation'
+    raw_data_open: true
+    exact_64b_payload: false
+    exact_60s_cycle: false
+    both_rats: true
+    both_candidate_bindings: false
+    whole_device_compatible: true
+    candidate_boundary_ready: false
+    admissible_role: 'Grade-A source-aligned empirical reference; no payload/application/report-cycle transfer.'
+
+  - source_id: sorensen_2022
+    citation: 'A. Sørensen et al., Modelling and Experimental Validation for Battery Lifetime Estimation in NB-IoT and LTE-M, IEEE Internet of Things Journal, 2022.'
+    doi_or_pid: '10.1109/JIOT.2022.3152173'
+    raw_data_pid: ''
+    technologies: 'NB-IoT|LTE-M'
+    empirical_payload_bytes: '100 for model-validation campaigns'
+    reporting_cycle: '1 h and 24 h validation cycles; arbitrary cycles only through the model'
+    upper_layer_context: 'UE/procedure-level uplink traffic; not candidate CoAP/MQTT application-stack matched'
+    measurement_boundary: 'modem power/energy; sensor/device remainder explicitly separated'
+    raw_data_open: false
+    exact_64b_payload: false
+    exact_60s_cycle: false
+    both_rats: true
+    both_candidate_bindings: false
+    whole_device_compatible: false
+    candidate_boundary_ready: false
+    admissible_role: 'Validated structural/model evidence for payload, cycle, coverage and state effects; not absolute whole-device calibration.'
+
+  - source_id: michelinakis_2020
+    citation: 'F. Michelinakis et al., Dissecting Energy Consumption of NB-IoT Devices Empirically, IEEE Internet of Things Journal, 2021.'
+    doi_or_pid: '10.1109/JIOT.2020.3013949'
+    raw_data_pid: ''
+    technologies: 'NB-IoT'
+    empirical_payload_bytes: '20|128|256|512'
+    reporting_cycle: 'transaction/state experiments; not 60-s periodic whole-cycle benchmark'
+    upper_layer_context: 'UDP echo; RAI/default network configurations'
+    measurement_boundary: 'NB-IoT module/device current-state measurements'
+    raw_data_open: false
+    exact_64b_payload: false
+    exact_60s_cycle: false
+    both_rats: false
+    both_candidate_bindings: false
+    whole_device_compatible: false
+    candidate_boundary_ready: false
+    admissible_role: 'NB-IoT sensitivity evidence showing module/operator/RAI effects and payload dependence; cannot supply LTE-M comparison.'
+
+  - source_id: lukic_2020
+    citation: 'M. Lukic et al., In-depth Real-World Evaluation of NB-IoT Module Energy Consumption, IEEE SmartIoT 2020.'
+    doi_or_pid: '10.1109/SmartIoT49966.2020.00046'
+    raw_data_pid: ''
+    technologies: 'NB-IoT'
+    empirical_payload_bytes: '64 UDP example'
+    reporting_cycle: 'single uplink transaction analysis; not 60-s periodic whole-cycle benchmark'
+    upper_layer_context: 'UDP uplink'
+    measurement_boundary: 'NB-IoT module on custom measurement platform'
+    raw_data_open: false
+    exact_64b_payload: true
+    exact_60s_cycle: false
+    both_rats: false
+    both_candidate_bindings: false
+    whole_device_compatible: false
+    candidate_boundary_ready: false
+    admissible_role: 'Exact-payload NB-IoT transaction evidence only; useful cross-check, not a matched decision source.'
+
+minimum_experiment_contract:
+  status: measurement_required
+  hardware_rule: 'Use one dual-mode LTE-M/NB-IoT application platform for all four candidates; hardware family is not frozen by this contract.'
+  reference_platform_note: 'An nRF91-family dual-mode SiP is an admissible implementation because the same application MCU/SiP can operate LTE-M and NB-IoT and supports rail current measurement on DK hardware; equivalent platforms are allowed.'
+  operator_rule: 'Use one SIM/operator supporting both LTE-M and NB-IoT in the same study location. If that is impossible, the result is not treated as a fully matched Grade-A comparison.'
+  energy_boundary: 'Measured DUT rail only: application MCU + memory + cellular modem + protocol/security processing, from scheduled report trigger until return to the frozen post-report sleep state. External debugger, USB interface and measurement instrument are excluded. Sensor acquisition is excluded because the benchmark payload is synthetically generated and identical across candidates.'
+  primary_payload_shape: 'single Opaque LwM2M Resource surrogate from Stage 5M, 64 pre-LwM2M application bytes'
+  reporting_interval_s: 60
+  primary_session_policy: 'fresh transport/security application session per scheduled report; deterministic conservative benchmark, not claimed typical'
+  robustness_session_policy: 'resumption/context-reuse path where supported and observable; retained as an unweighted sensitivity member, never substituted silently when unsupported'
+  replication_unit: 'one complete scheduled 60-s report cycle'
+  blocking_unit: 'time block containing all four RAT×binding candidates in randomized order under the same site/operator setup'
+  pilot_blocks: 5
+  final_replication_count: 'not frozen before pilot; determine from observed between-block variance and a predeclared precision/power criterion before the main run'
+  failed_reports_policy: 'Do not discard failed cycles. Record success, retries and energy for every scheduled report. If failure is non-negligible, delivery probability must re-enter the decision slice rather than conditioning energy only on successful reports.'
+  mandatory_logged_covariates: 'RSRP|RSRQ|SINR_or_available_quality|cell_id|band|RAT|operator|firmware|modem_firmware|PSM_grant|eDRX_grant|T3324|T3412|RAI_or_release_behavior|retries|bytes_ul|bytes_dl|report_success|session_outcome'
+  mandatory_energy_outputs: 'cycle_energy_j|active_transaction_energy_j|cycle_duration_s|report_success'
+  main_analysis: 'paired/block-aware comparison with block bootstrap or mixed-effects model; no sample-level pseudo-replication'
+  publication_role: 'If completed as specified, the four primary cells can identify a candidate-boundary energy robustness input for the preferred Stage-6A development subset. The robustness session profile is reported separately unless supported for all four candidates.'
+
+preferred_subset_stacks:
+  - stack_id: nbiot_ip_coap_dtls_lwm2m
+    rat: NB-IoT
+    binding_family: coap_dtls_udp
+  - stack_id: ltem_ip_coap_dtls_lwm2m
+    rat: LTE-M
+    binding_family: coap_dtls_udp
+  - stack_id: nbiot_ip_mqtt_tls_lwm2m
+    rat: NB-IoT
+    binding_family: mqtt_tls_tcp
+  - stack_id: ltem_ip_mqtt_tls_lwm2m
+    rat: LTE-M
+    binding_family: mqtt_tls_tcp
+
+expected:
+  external_sources_reviewed: 4
+  sources_covering_both_rats: 2
+  sources_with_exact_64b_payload: 1
+  sources_with_exact_60s_cycle: 0
+  sources_candidate_boundary_ready: 0
+  primary_experiment_cells: 4
+  robustness_experiment_cells: 4
+  publication_mcda_authorised: false

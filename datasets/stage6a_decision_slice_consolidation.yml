@@ -1,0 +1,106 @@
+schema_version: 1
+stage: Stage-6A first decision-ready slice consolidation
+stage6_status: no_full_decision_ready_slice_cost_context_available_energy_still_blocked
+
+scientific_policy:
+  preserve_stage4_feasibility_matrix: true
+  frozen_stage4_feasible_rows: 21
+  frozen_stage4_infeasible_rows: 39
+  frozen_stage4_unresolved_rows: 3
+  first_slice_required_soft_targets:
+    - expected_device_energy_per_application_report_j
+    - lifecycle_cost_eur
+  first_slice_non_scored_targets:
+    - end_to_end_application_latency_ms
+    - delivery_probability
+    - feasible_link_probability
+  allow_context_only_as_mcda_score: false
+  allow_hard_screen_result_to_be_rescored: false
+  allow_missing_target_imputation: false
+  allow_transport_bytes_to_be_converted_to_energy: false
+  allow_raw_tariff_volume_to_be_called_exact_billed_volume: false
+  transport_accounting_detail_frozen_after_stage5n: true
+  publication_mcda_authorised: false
+  fleet_optimisation_authorised: false
+  stochastic_engine_candidate_scoring_authorised: false
+
+readiness_semantics:
+  READY_PROBABILISTIC: A decision target is numerically identified at the declared boundary with a probability-bearing uncertainty representation that is admissible for sampling.
+  READY_ROBUSTNESS_FAMILY: A decision target is numerically identified as an explicit unweighted epistemic/scenario family; members may be enumerated but not assigned invented probabilities.
+  CONTEXT_ONLY: Evidence is decision-informative but does not identify the required target metric in a scoreable form.
+  HARD_SCREEN_ONLY: The dimension remains upstream in non-compensatory feasibility and is not rescored in the first soft slice.
+  DEFERRED: The optional target is not retained in the first soft slice and therefore does not block it.
+  BLOCKED: The required target is not identified at a decision-usable boundary.
+
+preferred_development_subset:
+  subset_id: periodic_tracking_ip_cellular_2x2
+  scenario_id: asset_tracking_periodic_cross_cell
+  stack_ids:
+    - nbiot_ip_coap_dtls_lwm2m
+    - ltem_ip_coap_dtls_lwm2m
+    - nbiot_ip_mqtt_tls_lwm2m
+    - ltem_ip_mqtt_tls_lwm2m
+  publication_scope: development_subset_not_full_scenario_optimum
+  selection_rationale: >-
+    This is the richest currently feasible IP-cellular subset with a common 60-s/64-B scenario profile,
+    both NB-IoT and LTE-M access, both CoAP/DTLS and MQTT/TLS bindings, and non-degenerate Stage-5N
+    tariff-volume robustness classes. The two feasible Non-IP candidates remain outside this development
+    subset because matched energy and operator-service cost evidence are not available. Selection is for
+    decision-engine development and gap closure only; it must not be reported as the optimum over the full
+    scenario candidate set.
+
+stage6b_gap_priorities:
+  - gap_id: matched_cellular_ip_report_energy
+    priority_order: 1
+    affected_feasible_candidate_rows: 10
+    affected_scenarios: 3
+    preferred_subset_rows: 4
+    closure_requirement: >-
+      Obtain matched whole-device energy/report evidence or a validated candidate-boundary model for the
+      64-B/60-s and 200-B/900-s IP-cellular profiles. Preserve device/network/state uncertainty and do not
+      transfer the 1-KB Vomhoff source component by payload scaling.
+  - gap_id: cellular_ip_lifecycle_cost_robustness_family
+    priority_order: 2
+    affected_feasible_candidate_rows: 10
+    affected_scenarios: 3
+    preferred_subset_rows: 4
+    closure_requirement: >-
+      Convert the dated module/SIM/tariff evidence plus Stage-5N traffic envelope into an explicit EUR
+      lifecycle-cost robustness family. Resolve or bracket tariff billing aggregation and retain market-price
+      observations/ranges without assigning unsupported probabilities.
+  - gap_id: cellular_nonip_energy_and_operator_cost
+    priority_order: 3
+    affected_feasible_candidate_rows: 7
+    affected_scenarios: 4
+    preferred_subset_rows: 0
+    closure_requirement: >-
+      Add matched Non-IP/NIDD whole-device energy and operator-service/hardware evidence before Non-IP
+      candidates enter a publication decision comparison.
+  - gap_id: lorawan_whole_device_energy_and_private_cost
+    priority_order: 4
+    affected_feasible_candidate_rows: 4
+    affected_scenarios: 2
+    preferred_subset_rows: 0
+    closure_requirement: >-
+      Add classical-LoRa whole-device report energy, resolve LR-FHSS whole-device residual energy, freeze
+      urban ownership mode, and define private deployment scale plus source-backed infrastructure cost.
+
+expected:
+  stage4_feasible_rows: 21
+  stage4_infeasible_rows: 39
+  stage4_unresolved_rows: 3
+  feasible_candidate_rows: 21
+  hard_unresolved_exclusion_rows: 3
+  criterion_rows: 105
+  required_soft_criterion_rows: 42
+  ready_required_soft_criterion_rows: 0
+  context_only_required_soft_criterion_rows: 10
+  blocked_required_soft_criterion_rows: 32
+  feasible_candidates_ready_for_first_slice: 0
+  feasible_candidates_with_cost_context: 10
+  cost_context_robust_within_candidates: 4
+  cost_context_robust_exceed_candidates: 3
+  cost_context_protocol_envelope_sensitive_candidates: 3
+  preferred_development_subset_rows: 4
+  preferred_development_subset_ready_rows: 0
+  scenarios_with_feasible_candidates: 5

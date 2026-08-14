@@ -1,0 +1,14 @@
+dataset_id: lorawan_lrfhss_energy_2024
+dataset_doi: 10.5281/zenodo.13838241
+publication_doi: 10.3390/s24175770
+expected_configurations: 8
+sampling_period_s: 0.00002048
+radio_supply_voltage_v: 3.3
+frm_payload_bytes: 4
+tx_power_dbm: 14
+reference_state_currents:
+  unconfirmed_dr8_tx_a: 0.0257
+  sleep_a: 0.0000005
+notes:
+  - The 3.3 V radio supply is documented in the associated publication experimental setup.
+  - The 25.7 mA TX and 0.5 uA sleep values are publication reference values for scale validation, not replacements for raw measurements.

@@ -1,0 +1,117 @@
+schema_version: 1
+stage: Stage-5M LwM2M Send serialization surrogate envelope
+stage5_status: exact_synthetic_serialization_surrogates_materialised_canonical_application_serialization_and_session_traffic_still_unresolved
+
+scientific_policy:
+  inherited_protocol_envelope: datasets/stage5k_protocol_envelope_variants.yml
+  inherited_wire_accounting: datasets/stage5l_wire_volume_accounting.yml
+  standards_review_date: '2026-08-12'
+  tariff_megabyte_definition_bytes: 1000000
+  synthetic_test_object_id: 42769
+  synthetic_test_object_production_use_authorised: false
+  map_pre_lwm2m_payload_to_opaque_resource_only_for_serialization_surrogate: true
+  infer_real_application_resource_model: false
+  infer_real_resource_count: false
+  assign_surrogate_probabilities: false
+  treat_surrogate_as_empirical_observation: false
+  exact_surrogate_serialization_authorised: true
+  canonical_application_serialization_authorised: false
+  exact_billed_volume_authorised: false
+  exact_tariff_topup_count_authorised: false
+  canonical_report_energy_authorised: false
+  publication_mcda_authorised: false
+  security_session_increment_included: false
+  mqtt_pure_tcp_ack_segmentation_included: false
+  billing_rounding_interval_is_unresolved: true
+  interpretation: >-
+    Stage 5M does not invent the missing application data model. Instead it maps the frozen 64/200-byte
+    pre-LwM2M payload to explicitly synthetic Opaque Resource values under OMA test Object ID 42769.
+    Exact serialization length is therefore identified only for the two benchmark surrogates below, not
+    for the unknown real application resource/value structure. Raw-volume comparisons remain sensitivity
+    results and are not exact billed-volume or TopUp claims.
+
+benchmark_payload_octets: [64, 200]
+encodings: [LwM2M_CBOR, SenML_CBOR, SenML_JSON]
+
+serialization_surrogates:
+  - shape_id: S0_single_opaque_test_resource
+    resource_count: 1
+    object_id: 42769
+    object_instance_id: 0
+    resource_ids: [0]
+    resource_type: Opaque
+    senml_name_strategy: full_name
+    lwm2m_cbor_structure: single_path_array_key
+    interpretation: >-
+      Compact synthetic serialization surrogate: all benchmark application octets are represented as one
+      Opaque Resource at /42769/0/0. This is not a claim that a real candidate application uses one Resource.
+
+  - shape_id: S1_three_opaque_test_resources
+    resource_count: 3
+    object_id: 42769
+    object_instance_id: 0
+    resource_ids: [0, 1, 2]
+    resource_type: Opaque
+    payload_split: deterministic_even_first_resources_receive_remainder
+    senml_name_strategy: common_base_name_then_relative_names
+    lwm2m_cbor_structure: compact_hierarchical_map
+    interpretation: >-
+      Structured synthetic stress surrogate: the same total benchmark application octets are split across
+      three Opaque Resources under one Object Instance. Three records mirror the multi-Resource nature of
+      the OMA Send example, but the binary values and test Object are STACKWISE sensitivity constructs.
+
+standards_evidence:
+  - evidence_id: oma_lwm2m_send_multiple_resources
+    source_type: normative_specification
+    source_identifier: OMA LwM2M Core 1.2.2, Send operation
+    source_url: https://www.openmobilealliance.org/release/lightweightm2m/V1_2_2-20240613-A/HTML-Version/OMA-TS-LightweightM2M_Core-V1_2_2-20240613-A.html
+    access_date: '2026-08-12'
+    claim: Send may report Resource and Resource Instance values and accepts LwM2M CBOR, SenML JSON or SenML CBOR; the specification includes a three-Resource Send example.
+  - evidence_id: oma_lwm2m_opaque_mapping
+    source_type: normative_specification
+    source_identifier: OMA LwM2M Core 1.2.2 Appendix C
+    source_url: https://www.openmobilealliance.org/release/lightweightm2m/V1_2_2-20240613-A/HTML-Version/OMA-TS-LightweightM2M_Core-V1_2_2-20240613-A.html
+    access_date: '2026-08-12'
+    claim: Opaque is a sequence of binary octets; CBOR/LwM2M-CBOR/SenML-CBOR use a CBOR byte string and SenML JSON uses URL-safe Base64 with padding omitted.
+  - evidence_id: oma_lwm2m_cbor_structure
+    source_type: normative_specification
+    source_identifier: OMA LwM2M Core 1.2.2 Section 7.5.4
+    source_url: https://www.openmobilealliance.org/release/lightweightm2m/V1_2_2-20240613-A/HTML-Version/OMA-TS-LightweightM2M_Core-V1_2_2-20240613-A.html
+    access_date: '2026-08-12'
+    claim: LwM2M CBOR encodes Resource information in CBOR maps keyed by Object/Object-Instance/Resource identifiers; both path-array and hierarchical representations are permitted by the syntax/examples.
+  - evidence_id: oma_test_object_range
+    source_type: normative_specification
+    source_identifier: OMA LwM2M Core 1.2.2 Appendix D.2.1
+    source_url: https://www.openmobilealliance.org/release/lightweightm2m/V1_2_2-20240613-A/HTML-Version/OMA-TS-LightweightM2M_Core-V1_2_2-20240613-A.html
+    access_date: '2026-08-12'
+    claim: Object IDs 42769-42800 are reserved for testing and must not be used in production; STACKWISE uses 42769 only as a serialization benchmark identifier.
+  - evidence_id: rfc8428_senml_data_value
+    source_type: standards_track_rfc
+    source_identifier: RFC 8428 SenML
+    source_url: https://www.rfc-editor.org/info/rfc8428/
+    access_date: '2026-08-12'
+    claim: SenML Data Value uses label vd/CBOR key 8; JSON represents binary data as unpadded base64url while CBOR uses a definite-length byte string.
+  - evidence_id: rfc8949_cbor_lengths
+    source_type: internet_standard
+    source_identifier: RFC 8949 CBOR
+    source_url: https://www.rfc-editor.org/info/rfc8949/
+    access_date: '2026-08-12'
+    claim: CBOR definite-length byte/text strings, arrays and maps encode their length in the initial item header; Stage 5M uses these deterministic length rules.
+
+expected:
+  source_variant_rows: 90
+  surrogate_shape_designs: 2
+  serialization_rows: 180
+  single_resource_rows: 90
+  three_resource_rows: 90
+  lwm2m_cbor_rows: 20
+  senml_cbor_rows: 140
+  senml_json_rows: 20
+  rows_with_exact_surrogate_serialization: 180
+  rows_with_canonical_application_serialization: 0
+  rows_where_strict_surrogate_raw_volume_exceeds_nominal_allowance: 57
+  rows_where_strict_surrogate_raw_volume_is_within_nominal_allowance: 123
+  rows_where_anchor_surrogate_raw_volume_exceeds_nominal_allowance: 69
+  rows_where_anchor_surrogate_raw_volume_is_within_nominal_allowance: 111
+  mqtt_tracking_rows_strictly_exceeding_nominal_allowance: 54
+  coap_tracking_three_resource_senml_json_rows_strictly_exceeding_nominal_allowance: 3

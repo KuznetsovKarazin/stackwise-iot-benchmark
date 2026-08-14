@@ -1,0 +1,103 @@
+stage: Stage-4F hard-feasibility closure with explicit profile/boundary unknowns
+stage4_status: closed_with_explicit_profile_and_boundary_unknowns
+scientific_policy:
+  force_resolution_of_remaining_blockers: false
+  infer_thread_latency_from_qualitative_low_latency: false
+  infer_whole_device_energy_from_radio_only_energy: false
+  transfer_4byte_lrfhss_energy_to_16byte_scenario_without_model: false
+  select_lrfhss_operating_mode_post_hoc: false
+  unresolved_hard_fact_can_become_feasible_by_preference: false
+  stage4_feasibility_layer_closed: true
+  stage5_operating_profile_contract_authorised: true
+  publication_mcda_authorised: false
+
+blocker_resolution_policy:
+  - blocker_id: thread_stack_latency_500ms
+    scenario_id: industrial_private_ipv6_low_latency
+    stack_id: thread_coap_dtls_lwm2m
+    constraint_id: latency_ceiling
+    resolution_class: frozen_unresolved_profile_and_stack_test_gap
+    stage4_resolution: unresolved
+    reason: >-
+      Public Thread material describes low-latency operation but does not identify a guaranteed
+      500 ms end-to-end bound for the frozen Thread+DTLS+CoAP+LwM2M candidate. Latency also
+      depends on operating profile (device role/sleep behaviour, topology/path and retry policy).
+    primary_support:
+      authority: Thread Group
+      identifier: Thread Network Fundamentals v3, May 2020
+      url: https://www.threadgroup.org/Portals/0/documents/support/Thread%20Network%20Fundamentals_v3.pdf
+    operating_profile_fields_required:
+      - thread_device_role
+      - sleepy_poll_or_wake_interval_ms
+      - route_hop_count_or_topology
+      - mac_retry_policy
+      - application_retry_policy
+      - border_router_path
+    future_resolution_evidence: matched end-to-end latency measurement or validated stack-level latency model under a frozen operating profile
+
+  - blocker_id: lorawan_lora_whole_device_energy_0p2j
+    scenario_id: remote_agriculture_energy_budget
+    stack_id: lorawan_lora_lwm2m_nonip
+    constraint_id: whole_device_energy_budget
+    resolution_class: frozen_unresolved_missing_whole_device_energy_and_profile
+    stage4_resolution: unresolved
+    reason: >-
+      Core-four classical-LoRa evidence is reception-side LoED link evidence and contains no
+      device energy. A 0.2 J whole-device/report predicate cannot be evaluated without a matched
+      energy source or validated component model under a frozen LoRaWAN operating profile.
+    primary_support:
+      authority: STACKWISE core-four evidence
+      identifier: LoED reception-side evidence boundary
+      url: null
+    operating_profile_fields_required:
+      - data_rate_or_spreading_factor
+      - confirmation_mode
+      - tx_power_dbm
+      - application_payload_bytes
+      - retry_policy
+      - receive_window_policy
+      - end_device_hardware
+      - reporting_cycle_definition
+    future_resolution_evidence: matched whole-device per-report measurement or validated whole-device component model
+
+  - blocker_id: lorawan_lrfhss_whole_device_energy_0p2j
+    scenario_id: remote_agriculture_energy_budget
+    stack_id: lorawan_lrfhss_lwm2m_nonip
+    constraint_id: whole_device_energy_budget
+    resolution_class: frozen_unresolved_radio_boundary_and_profile_mismatch
+    stage4_resolution: unresolved
+    reason: >-
+      Validated LR-FHSS energy is radio-interface-only and measured for 4-byte payloads at +14 dBm
+      over DR8-DR11 with confirmed/unconfirmed variants. The benchmark requires 16-byte
+      whole-device energy/report. The existing measurements are informative lower-bound/profile
+      diagnostics but do not identify the benchmark hard fact.
+    primary_support:
+      authority: STACKWISE core-four evidence
+      identifier: LR-FHSS Stage-2 radio-interface evidence
+      url: https://zenodo.org/records/13838241
+    operating_profile_fields_required:
+      - lrfhss_data_rate
+      - confirmation_mode
+      - tx_power_dbm
+      - application_payload_bytes
+      - retry_policy
+      - receive_window_policy
+      - end_device_hardware
+      - reporting_cycle_definition
+    future_resolution_evidence: matched whole-device 16-byte per-report measurement or validated radio-to-whole-device bridge under a frozen operating profile
+
+expected:
+  refined_scenarios: 7
+  candidates: 9
+  screening_rows: 63
+  feasible_rows: 21
+  infeasible_rows: 39
+  unresolved_rows: 3
+  frozen_decision_blockers: 3
+  blockers_resolved_by_stage4f: 0
+  blocker_dimensions: 2
+  blockers_requiring_operating_profile: 3
+  lrfhss_radio_bound_rows: 8
+  lrfhss_radio_energy_exceeds_budget_rows: 3
+  lrfhss_same_payload_as_scenario_rows: 0
+  lrfhss_whole_device_feasibility_resolved_rows: 0

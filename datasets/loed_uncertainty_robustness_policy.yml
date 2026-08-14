@@ -1,0 +1,48 @@
+version: 1
+dataset_id: loed_lorawan_edge_2020
+stage: Stage-3G scenario-indexed block-length robustness family
+campaign_semantics:
+  campaigns_are_fixed_observed_deployment_scenarios: true
+  campaign_probability_weights_assigned: false
+  cross_campaign_pooling_authorised: false
+  cross_campaign_joint_distribution_asserted: false
+  campaign_random_effect_authorised: false
+  reason: >-
+    Stage-3D/3E identify two temporally separated, gateway-composition-confounded acquisition
+    campaigns. They are observed deployment scenarios, not exchangeable draws from a campaign population.
+block_length_model_uncertainty:
+  candidate_block_lengths_days: [3, 7, 14]
+  single_block_length_selected: false
+  block_length_probability_weights_assigned: false
+  rationale: >-
+    Stage-3F shows material width sensitivity to block length. A single 7-day or 14-day sampler
+    would therefore overstate methodological certainty. The three lengths are retained as a robustness set.
+bootstrap_draw_policy:
+  resampler: noncircular_overlapping_moving_block_source_day
+  source_day_cluster_preserved: true
+  gateway_composition_preserved_within_sampled_day: true
+  rss_snr_and_cross_phy_jointness_preserved_within_campaign_block_length: true
+  replicate_joint_scope: campaign_id_x_block_length_days
+  replicate_ids_have_cross_campaign_meaning: false
+  replicate_ids_have_cross_block_length_meaning: false
+  structural_missingness_preserved: true
+  centering_rule: point_estimate_plus_raw_draw_minus_raw_draw_mean
+  centering_purpose: finite_sample_edge_location_bias_removal
+  centering_claims_stationarity_correction: false
+  centering_claims_gateway_confounding_resolution: false
+support_reporting:
+  observed_source_days_required: true
+  source_day_support_fraction_required: true
+  reception_count_is_not_temporal_replication: true
+robustness_envelope:
+  materialise_outer_q025_q975_envelope_across_block_lengths: true
+  envelope_is_probability_interval: false
+  model_scenario_probabilities_assigned: false
+publication_guardrails:
+  publication_uncertainty_sampling_authorised: false
+  hierarchical_sampling_authorised: false
+  publication_mcda_authorised: false
+  reason: >-
+    LoED now supports a conditional campaign x block-length robustness family, not a single
+    publication-wide probability distribution. Remaining InSecTT/LR-FHSS single-trace uncertainty
+    gaps must also be resolved before publication-wide stochastic sampling.

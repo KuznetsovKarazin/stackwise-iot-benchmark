@@ -1,0 +1,20 @@
+stage: Stage-4A typed stack and hard-feasibility contract
+stage4_status: contract_defined_catalog_pending
+expected:
+  contract_fixture_components: 9
+  contract_fixture_stacks: 4
+  structurally_compatible_fixtures: 2
+  structurally_incompatible_fixtures: 2
+  hard_constraint_fixture_cases: 3
+  hard_constraint_feasible_cases: 1
+  hard_constraint_infeasible_cases: 1
+  hard_constraint_unresolved_cases: 1
+scientific_guards:
+  real_protocol_catalog_authorised_in_this_patch: false
+  standards_claims_authorised_without_primary_source_verification: false
+  unknown_hard_fact_counts_as_feasible: false
+  mcda_authorised: false
+  ranking_authorised: false
+  stakeholder_weights_authorised: false
+  default_stochastic_priors_authorised: false
+next_scientific_step: Stage-4B primary-source-verified component catalog and compatibility edges for the candidate IoT protocol families represented by the evidence matrix; still no ranking.

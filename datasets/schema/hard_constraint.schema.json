@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "STACKWISE hard feasibility constraint",
+  "description": "A non-compensatory feasibility predicate evaluated before any preference model. Unknown facts block a positive feasibility claim.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "constraint_id",
+    "dimension",
+    "fact_key",
+    "operator",
+    "unknown_policy",
+    "severity",
+    "provenance_status"
+  ],
+  "properties": {
+    "constraint_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_.-]*$"},
+    "dimension": {
+      "enum": [
+        "coverage",
+        "payload",
+        "latency",
+        "regulatory",
+        "infrastructure",
+        "power",
+        "ownership",
+        "security",
+        "protocol_compatibility",
+        "placement",
+        "deployment"
+      ]
+    },
+    "fact_key": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_.-]*$"},
+    "operator": {"enum": ["eq", "ne", "in", "not_in", "gte", "lte", "exists", "truthy"]},
+    "value": {},
+    "unit": {"type": ["string", "null"]},
+    "unknown_policy": {"const": "block"},
+    "severity": {"const": "hard"},
+    "provenance_status": {
+      "enum": ["scenario_requirement", "primary_source_verified", "pending_verification", "contract_fixture"]
+    },
+    "rationale": {"type": ["string", "null"]}
+  }
+}

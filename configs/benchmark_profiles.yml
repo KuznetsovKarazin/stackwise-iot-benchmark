@@ -1,0 +1,42 @@
+profiles:
+  periodic_telemetry:
+    payload_bytes: [24, 64]
+    reporting_interval_s: [900, 3600]
+    session_policy: reused
+    confirmation_mode: unconfirmed
+    required_metrics: [energy_j, latency_ms, delivery_success]
+
+  frequent_monitoring:
+    payload_bytes: [16, 64]
+    reporting_interval_s: [1, 10]
+    session_policy: reused
+    confirmation_mode: application_ack
+    required_metrics: [energy_j, latency_ms, delivery_success]
+
+  rare_alarm:
+    payload_bytes: [32, 128]
+    reporting_interval_s: [86400]
+    session_policy: fresh
+    confirmation_mode: confirmed
+    required_metrics: [energy_j, latency_ms, delivery_success]
+
+  bulk_update:
+    payload_bytes: [1024, 4096, 10240]
+    reporting_interval_s: [86400]
+    session_policy: fresh
+    confirmation_mode: application_ack
+    required_metrics: [energy_j, latency_ms, delivery_success, upper_layer_bytes]
+
+  mobile_tracking:
+    payload_bytes: [32, 64]
+    reporting_interval_s: [30, 300]
+    session_policy: reused
+    confirmation_mode: application_ack
+    required_metrics: [energy_j, latency_ms, delivery_success, rssi_dbm]
+
+  deep_indoor_metering:
+    payload_bytes: [24, 64]
+    reporting_interval_s: [3600, 21600]
+    session_policy: fresh
+    confirmation_mode: confirmed
+    required_metrics: [energy_j, delivery_success, rsrp_dbm, retries]

@@ -1,0 +1,75 @@
+version: 1
+stage: Stage-3 mixed uncertainty closure
+stage3_status: closed_with_explicit_nonidentifiability
+publication_uncertainty_sampling_authorised: false
+publication_mcda_authorised: false
+stage4_stack_definition_authorised: true
+notes:
+  - Stage 3 closes the uncertainty-characterisation layer for the validated core-four evidence; it does not imply that every metric has a probability distribution.
+  - A non-identifiable population variance remains an explicit epistemic gap rather than receiving a default CV, SD, or fabricated prior.
+  - LoED campaigns and block lengths remain unweighted robustness scenarios rather than draws from one population distribution.
+  - Publication-wide stochastic sampling remains blocked until downstream bridge models define which uncertainty semantics are admissible for each decision estimand.
+resolution_by_calibration_status:
+  calibrated_nonparametric:
+    resolution_class: empirical_probability
+    stage3_resolution_status: resolved_for_current_evidence
+    probability_semantics: within_study_empirical_nonparametric
+    future_sampling_rule: use_only_the_materialised_dependence_preserving_empirical_draws
+  scenario_robustness_materialised:
+    resolution_class: scenario_robustness
+    stage3_resolution_status: resolved_for_current_evidence_as_robustness
+    probability_semantics: unweighted_scenario_family_no_probability_measure
+    future_sampling_rule: keep_campaign_and_block_length_indices_explicit_and_unweighted
+  external_prior_required:
+    resolution_class: explicit_epistemic_gap
+    stage3_resolution_status: closed_with_nonidentifiability
+    probability_semantics: no_population_probability_distribution_identified
+    future_sampling_rule: no_stochastic_sampling_without_new_repeatability_evidence_or_an_explicit_model_sensitivity_scenario
+  descriptive_only:
+    resolution_class: descriptive_nonprobability
+    stage3_resolution_status: resolved_as_nonprobabilistic
+    probability_semantics: descriptive_quantity_only
+    future_sampling_rule: do_not_promote_to_population_distribution
+expected:
+  evidence_records: 398
+  metric_families: 14
+  dependence_groups: 8
+  residual_gaps: 6
+  calibration_status_counts:
+    calibrated_nonparametric: 2
+    descriptive_only: 4
+    external_prior_required: 6
+    scenario_robustness_materialised: 2
+  resolution_class_counts:
+    empirical_probability: 2
+    scenario_robustness: 2
+    explicit_epistemic_gap: 6
+    descriptive_nonprobability: 4
+  single_trace_numeric_population_priors: 0
+  loed_joint_scenario_batches: 6
+  vomhoff_bootstrapped_evidence_records: 52
+residual_gap_ownership:
+  vomhoff_implementation_context_not_structured:
+    closure_blocking: false
+    deferred_owner: future_evidence_if_device_or_implementation_effect_is_required
+  insectt_between_run_repeatability:
+    closure_blocking: false
+    deferred_owner: new_replication_or_explicit_nonprobabilistic_sensitivity
+  insectt_voltage_distribution:
+    closure_blocking: false
+    deferred_owner: future_metrology_or_shared_parameter_sensitivity
+  lrfhss_between_run_repeatability:
+    closure_blocking: false
+    deferred_owner: new_replication_or_explicit_nonprobabilistic_sensitivity
+  cross_study_variance_not_identified:
+    closure_blocking: false
+    deferred_owner: future_cross_study_evidence_or_robustness_analysis
+  bridge_structural_uncertainty_pending:
+    closure_blocking: false
+    deferred_owner: Stage-4/Stage-5 bridge_and_scenario_models
+handoff_rules:
+  - Stage 4 may define candidate communication stacks and hard compatibility constraints without assigning MCDA scores or ranks.
+  - Future energy/latency/link/cost bridges must consume the uncertainty semantics attached to the parent evidence rather than coercing all inputs to one distribution family.
+  - LoED campaign and block-length scenarios must not receive probability weights unless a later, separately justified model supplies them.
+  - InSecTT/LR-FHSS single-trace point evidence may be used for deterministic feasibility/bridge construction, but population stochastic sampling remains disabled unless new evidence or an explicitly labelled sensitivity assumption is introduced.
+  - Instrument metrology statements must remain distinct from between-run or between-device population variability.

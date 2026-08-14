@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "STACKWISE evidence-to-decision bridge contract",
+  "description": "A typed contract defining which evidence/model may map a source estimand and boundary into a decision-target estimand under a frozen operating profile. The contract itself does not authorise a numerical bridge.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "bridge_id", "scenario_id", "stack_id", "target_metric_id", "bridge_class",
+    "source_evidence", "boundary_mapping", "required_profile_fields",
+    "uncertainty_transfer_policy", "scientific_status"
+  ],
+  "properties": {
+    "bridge_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_.-]*$"},
+    "scenario_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_.-]*$"},
+    "stack_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_.-]*$"},
+    "target_metric_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_.-]*$"},
+    "bridge_class": {"enum": ["stack_latency_model", "whole_device_energy_model", "radio_to_whole_device_energy_model"]},
+    "source_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "dataset_id", "metric_ids", "source_boundary", "observed_profile"],
+      "properties": {
+        "status": {"enum": ["matched_source_available", "source_available_boundary_mismatch", "no_matched_source"]},
+        "dataset_id": {"type": ["string", "null"]},
+        "metric_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "source_boundary": {"type": ["object", "null"], "additionalProperties": true},
+        "observed_profile": {"type": ["object", "null"], "additionalProperties": true},
+        "notes": {"type": ["string", "null"]}
+      }
+    },
+    "boundary_mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "target_boundary", "allowed_operations", "forbidden_inferences"],
+      "properties": {
+        "status": {"enum": ["matched", "explicit_transform_required", "unavailable"]},
+        "target_boundary": {"type": "object", "additionalProperties": true},
+        "allowed_operations": {"type": "array", "items": {"type": "string"}},
+        "forbidden_inferences": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "required_profile_fields": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+    "uncertainty_transfer_policy": {"type": "string", "minLength": 1},
+    "scientific_status": {"enum": ["contract_defined_blocked", "validated_bridge_ready", "contract_fixture"]},
+    "notes": {"type": ["string", "null"]}
+  }
+}

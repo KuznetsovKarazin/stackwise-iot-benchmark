@@ -1,0 +1,147 @@
+schema_version: 1
+stage: Stage-5A operating-profile and bridge-contract materialisation
+stage5_status: contracts_materialised_bridges_blocked_pending_profiles_or_evidence
+scientific_policy:
+  preserve_stage4_matrix: true
+  infer_missing_profile_from_protocol_defaults: false
+  infer_missing_profile_from_best_case_mode: false
+  activate_bridge_with_unresolved_required_field: false
+  treat_scenario_context_as_empirical_evidence: false
+  reuse_radio_only_energy_as_whole_device_energy: false
+  extrapolate_4byte_lrfhss_energy_to_16byte_without_validated_model: false
+  coerce_single_trace_uncertainty_to_population_distribution: false
+  numeric_bridge_outputs_authorised: false
+  preference_scoring_authorised: false
+  publication_mcda_authorised: false
+
+operating_profiles:
+  - profile_id: profile_thread_industrial_latency
+    scenario_id: industrial_private_ipv6_low_latency
+    stack_id: thread_coap_dtls_lwm2m
+    scientific_status: benchmark_profile_partial
+    notes: Scenario payload and reporting interval are known; all topology/sleep/retry/path fields required for a stack-level latency bridge remain unresolved.
+    fields:
+      - {field_id: application_payload_bytes, status: known, value: 128, unit: B, provenance_status: scenario_derived, provenance_ref: stage4_benchmark_scenarios:industrial_private_ipv6_low_latency, required_for_numeric_bridge: true}
+      - {field_id: reporting_interval_s, status: known, value: 1, unit: s, provenance_status: scenario_derived, provenance_ref: stage4_benchmark_scenarios:industrial_private_ipv6_low_latency, required_for_numeric_bridge: true}
+      - {field_id: thread_device_role, status: unresolved, provenance_status: unresolved, required_for_numeric_bridge: true}
+      - {field_id: sleepy_poll_or_wake_interval_ms, status: unresolved, unit: ms, provenance_status: unresolved, required_for_numeric_bridge: true}
+      - {field_id: route_hop_count_or_topology, status: unresolved, provenance_status: unresolved, required_for_numeric_bridge: true}
+      - {field_id: mac_retry_policy, status: unresolved, provenance_status: unresolved, required_for_numeric_bridge: true}
+      - {field_id: application_retry_policy, status: unresolved, provenance_status: unresolved, required_for_numeric_bridge: true}
+      - {field_id: border_router_path, status: unresolved, provenance_status: unresolved, required_for_numeric_bridge: true}
+
+  - profile_id: profile_lorawan_lora_agriculture_energy
+    scenario_id: remote_agriculture_energy_budget
+    stack_id: lorawan_lora_lwm2m_nonip
+    scientific_status: benchmark_profile_partial
+    notes: Payload and reporting interval are scenario-derived. Classical-LoRa radio/device operating mode and hardware are not frozen by the benchmark.
+    fields:
+      - {field_id: application_payload_bytes, status: known, value: 16, unit: B, provenance_status: scenario_derived, provenance_ref: stage4_benchmark_scenarios:remote_agriculture_energy_budget, required_for_numeric_bridge: true}
+      - {field_id: reporting_interval_s, status: known, value: 600, unit: s, provenance_status: scenario_derived, provenance_ref: stage4_benchmark_scenarios:remote_agriculture_energy_budget, required_for_numeric_bridge: true}
+      - {field_id: data_rate_or_spreading_factor, status: unresolved, provenance_status: unresolved, required_for_numeric_bridge: true}
+      - {field_id: confirmation_mode, status: unresolved, provenance_status: unresolved, required_for_numeric_bridge: true}
+      - {field_id: tx_power_dbm, status: unresolved, unit: dBm, provenance_status: unresolved, required_for_numeric_bridge: true}
+      - {field_id: retry_policy, status: unresolved, provenance_status: unresolved, required_for_numeric_bridge: true}
+      - {field_id: receive_window_policy, status: unresolved, provenance_status: unresolved, required_for_numeric_bridge: true}
+      - {field_id: end_device_hardware, status: unresolved, provenance_status: unresolved, required_for_numeric_bridge: true}
+      - {field_id: reporting_cycle_definition, status: unresolved, provenance_status: unresolved, required_for_numeric_bridge: true}
+
+  - profile_id: profile_lorawan_lrfhss_agriculture_energy
+    scenario_id: remote_agriculture_energy_budget
+    stack_id: lorawan_lrfhss_lwm2m_nonip
+    scientific_status: benchmark_profile_partial
+    notes: Payload and reporting interval are scenario-derived. The existing LR-FHSS capture profile is evidence metadata, not an automatically selected benchmark operating mode.
+    fields:
+      - {field_id: application_payload_bytes, status: known, value: 16, unit: B, provenance_status: scenario_derived, provenance_ref: stage4_benchmark_scenarios:remote_agriculture_energy_budget, required_for_numeric_bridge: true}
+      - {field_id: reporting_interval_s, status: known, value: 600, unit: s, provenance_status: scenario_derived, provenance_ref: stage4_benchmark_scenarios:remote_agriculture_energy_budget, required_for_numeric_bridge: true}
+      - {field_id: lrfhss_data_rate, status: unresolved, provenance_status: unresolved, required_for_numeric_bridge: true}
+      - {field_id: confirmation_mode, status: unresolved, provenance_status: unresolved, required_for_numeric_bridge: true}
+      - {field_id: tx_power_dbm, status: unresolved, unit: dBm, provenance_status: unresolved, required_for_numeric_bridge: true}
+      - {field_id: retry_policy, status: unresolved, provenance_status: unresolved, required_for_numeric_bridge: true}
+      - {field_id: receive_window_policy, status: unresolved, provenance_status: unresolved, required_for_numeric_bridge: true}
+      - {field_id: end_device_hardware, status: unresolved, provenance_status: unresolved, required_for_numeric_bridge: true}
+      - {field_id: reporting_cycle_definition, status: unresolved, provenance_status: unresolved, required_for_numeric_bridge: true}
+
+bridge_contracts:
+  - bridge_id: bridge_thread_stack_latency
+    scenario_id: industrial_private_ipv6_low_latency
+    stack_id: thread_coap_dtls_lwm2m
+    target_metric_id: end_to_end_application_latency_ms
+    bridge_class: stack_latency_model
+    source_evidence:
+      status: no_matched_source
+      dataset_id: null
+      metric_ids: []
+      source_boundary: null
+      observed_profile: null
+      notes: InSecTT OpenThread evidence is power/energy context, not end-to-end latency evidence.
+    boundary_mapping:
+      status: unavailable
+      target_boundary: {system_scope: end_to_end_application, temporal_scope: application_transaction, endpoint: application_to_application, unit: ms}
+      allowed_operations: [matched_stack_test, validated_stack_latency_model]
+      forbidden_inferences: [infer_latency_from_power_trace, infer_500ms_guarantee_from_qualitative_low_latency]
+    required_profile_fields: [application_payload_bytes, reporting_interval_s, thread_device_role, sleepy_poll_or_wake_interval_ms, route_hop_count_or_topology, mac_retry_policy, application_retry_policy, border_router_path]
+    uncertainty_transfer_policy: A future matched test/model must define latency variability and preserve any profile/model structural uncertainty; no uncertainty distribution is available from the current core-four source.
+    scientific_status: contract_defined_blocked
+
+  - bridge_id: bridge_lorawan_lora_whole_device_energy
+    scenario_id: remote_agriculture_energy_budget
+    stack_id: lorawan_lora_lwm2m_nonip
+    target_metric_id: expected_device_energy_per_application_report_j
+    bridge_class: whole_device_energy_model
+    source_evidence:
+      status: no_matched_source
+      dataset_id: loed_lorawan_edge_2020
+      metric_ids: []
+      source_boundary: {system_scope: gateway_reception, energy_measurement_available: false}
+      observed_profile: null
+      notes: LoED supplies reception-side link evidence and no device-energy metric.
+    boundary_mapping:
+      status: unavailable
+      target_boundary: {system_scope: whole_device, temporal_scope: application_report_cycle, accounting_basis: total_device_energy, unit: J}
+      allowed_operations: [matched_whole_device_measurement, validated_whole_device_component_model]
+      forbidden_inferences: [infer_device_energy_from_rssi_snr, infer_energy_from_crc_fraction]
+    required_profile_fields: [application_payload_bytes, reporting_interval_s, data_rate_or_spreading_factor, confirmation_mode, tx_power_dbm, retry_policy, receive_window_policy, end_device_hardware, reporting_cycle_definition]
+    uncertainty_transfer_policy: A future energy source/model must provide its own uncertainty semantics; LoED link robustness scenarios cannot be reinterpreted as device-energy uncertainty.
+    scientific_status: contract_defined_blocked
+
+  - bridge_id: bridge_lrfhss_radio_to_whole_device_energy
+    scenario_id: remote_agriculture_energy_budget
+    stack_id: lorawan_lrfhss_lwm2m_nonip
+    target_metric_id: expected_device_energy_per_application_report_j
+    bridge_class: radio_to_whole_device_energy_model
+    source_evidence:
+      status: source_available_boundary_mismatch
+      dataset_id: lorawan_lrfhss_energy_2024
+      metric_ids: [radio_incremental_transaction_energy_j]
+      source_boundary: {system_scope: radio_interface_only, temporal_scope: captured_radio_transaction, payload_bytes: 4, tx_power_dbm: 14}
+      observed_profile: {data_rate_modes: [DR8, DR9, DR10, DR11], confirmation_modes: [confirmed, unconfirmed], payload_bytes: 4, tx_power_dbm: 14}
+      notes: Eight single-trace capture configurations exist; none matches the benchmark payload or whole-device boundary.
+    boundary_mapping:
+      status: explicit_transform_required
+      target_boundary: {system_scope: whole_device, temporal_scope: application_report_cycle, accounting_basis: total_device_energy, payload_bytes: 16, unit: J}
+      allowed_operations: [validated_payload_energy_model, validated_radio_to_whole_device_accounting_model, matched_whole_device_measurement]
+      forbidden_inferences: [linear_payload_scaling_without_validation, select_best_dr_post_hoc, treat_radio_energy_as_whole_device_energy, coerce_single_trace_point_to_population_distribution]
+    required_profile_fields: [application_payload_bytes, reporting_interval_s, lrfhss_data_rate, confirmation_mode, tx_power_dbm, retry_policy, receive_window_policy, end_device_hardware, reporting_cycle_definition]
+    uncertainty_transfer_policy: Preserve the LR-FHSS explicit single-trace epistemic gap. A validated bridge may propagate deterministic point evidence or explicitly labelled sensitivity assumptions, but population stochastic sampling remains blocked without new repeatability evidence.
+    scientific_status: contract_defined_blocked
+
+expected:
+  stage4_feasible_rows: 21
+  stage4_infeasible_rows: 39
+  stage4_unresolved_rows: 3
+  operating_profiles: 3
+  operating_profile_field_rows: 26
+  known_profile_fields: 6
+  unresolved_profile_fields: 20
+  stage4f_required_fields: 22
+  stage4f_required_fields_satisfied_from_scenario: 2
+  stage4f_required_fields_unresolved: 20
+  complete_profiles: 0
+  partial_profiles: 3
+  bridge_contracts: 3
+  bridges_ready_for_numeric_evaluation: 0
+  bridges_blocked_by_unresolved_profile: 3
+  bridges_with_no_matched_source: 2
+  bridges_with_boundary_transform_required: 1
+  numeric_bridge_outputs: 0

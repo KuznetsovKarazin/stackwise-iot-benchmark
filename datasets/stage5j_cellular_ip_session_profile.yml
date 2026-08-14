@@ -1,0 +1,198 @@
+schema_version: 1
+stage: Stage-5J cellular IP session/transport profile contract
+stage5_status: common_lwm2m_send_semantics_frozen_exact_wire_volume_and_energy_context_unresolved
+
+scientific_policy:
+  inherited_cost_evidence: datasets/stage5i_dated_cellular_cost_evidence.yml
+  inherited_energy_bridge: datasets/stage5f_cellular_ip_energy_bridge.yml
+  standards_review_date: '2026-08-12'
+  benchmark_payload_semantics: pre_lwm2m_application_data
+  benchmark_lwm2m_operation: Send
+  benchmark_operation_is_empirical_measurement: false
+  infer_ip_version: false
+  infer_security_cipher_suite_or_aead: false
+  infer_security_context_lifetime: false
+  infer_mqtt_qos_or_keepalive: false
+  infer_coap_confirmability: false
+  infer_endpoint_or_tenant_identifier_length: false
+  infer_retry_or_retransmission_rate: false
+  assume_one_1kb_billing_unit_per_report: false
+  treat_protocol_minimum_as_observed_usage: false
+  exact_tariff_volume_authorised: false
+  canonical_report_energy_authorised: false
+  publication_mcda_authorised: false
+
+benchmark_transaction:
+  transaction_id: lwm2m_send_telemetry_report
+  operation: Send
+  direction: client_to_server_with_server_response_accounted
+  rationale: >-
+    Freeze one cross-binding telemetry transaction semantic for the synthetic benchmark. LwM2M Send is an
+    unsolicited client-to-server Information Reporting operation available in both CoAP and MQTT bindings.
+    This is a benchmark definition, not an empirical claim about deployed applications.
+  application_payload_boundary: >-
+    Scenario payload_bytes denotes application data before LwM2M representation, MQTT/CoAP framing,
+    transport, security and IP overhead. No serialized payload length is inferred until an encoding is frozen.
+
+ip_cellular_stack_bindings:
+  nbiot_ip_coap_dtls_lwm2m:
+    binding_family: coap_dtls_udp
+    access_technology: NB-IoT
+    transport_protocol: UDP
+    security_protocol: DTLS 1.3
+    application_transport: CoAP
+  ltem_ip_coap_dtls_lwm2m:
+    binding_family: coap_dtls_udp
+    access_technology: LTE-M
+    transport_protocol: UDP
+    security_protocol: DTLS 1.3
+    application_transport: CoAP
+  nbiot_ip_mqtt_tls_lwm2m:
+    binding_family: mqtt_tls_tcp
+    access_technology: NB-IoT
+    transport_protocol: TCP
+    security_protocol: TLS 1.3
+    application_transport: MQTT 5.0
+  ltem_ip_mqtt_tls_lwm2m:
+    binding_family: mqtt_tls_tcp
+    access_technology: LTE-M
+    transport_protocol: TCP
+    security_protocol: TLS 1.3
+    application_transport: MQTT 5.0
+
+common_profile_fields:
+  - field_id: application_payload_bytes
+    status_source: stage5i_scenario_profile
+    required_for_tariff_volume: true
+    required_for_energy_bridge: true
+  - field_id: reporting_interval_s
+    status_source: stage5i_scenario_profile
+    required_for_tariff_volume: true
+    required_for_energy_bridge: true
+  - field_id: application_payload_boundary
+    status_source: benchmark_frozen
+    value: pre_lwm2m_application_data
+    required_for_tariff_volume: true
+    required_for_energy_bridge: true
+  - field_id: lwm2m_operation
+    status_source: benchmark_frozen
+    value: Send
+    required_for_tariff_volume: true
+    required_for_energy_bridge: true
+  - field_id: transport_binding_family
+    status_source: stack_derived
+    required_for_tariff_volume: true
+    required_for_energy_bridge: true
+  - field_id: security_protocol
+    status_source: stack_derived
+    required_for_tariff_volume: true
+    required_for_energy_bridge: true
+  - field_id: account_uplink_and_downlink
+    status_source: tariff_contract_frozen
+    value: true
+    required_for_tariff_volume: true
+    required_for_energy_bridge: false
+  - field_id: lwm2m_payload_encoding
+    status_source: unresolved
+    allowed_values: [LwM2M_CBOR, SenML_CBOR, SenML_JSON]
+    required_for_tariff_volume: true
+    required_for_energy_bridge: true
+  - field_id: ip_version
+    status_source: unresolved
+    allowed_values: [IPv4, IPv6]
+    required_for_tariff_volume: true
+    required_for_energy_bridge: false
+  - field_id: security_context_lifecycle
+    status_source: unresolved
+    required_for_tariff_volume: true
+    required_for_energy_bridge: true
+  - field_id: session_reestablishment_or_resumption_cadence
+    status_source: unresolved
+    required_for_tariff_volume: true
+    required_for_energy_bridge: true
+  - field_id: failure_retry_retransmission_profile
+    status_source: unresolved
+    required_for_tariff_volume: true
+    required_for_energy_bridge: true
+
+binding_specific_fields:
+  coap_dtls_udp:
+    - {field_id: coap_message_type, status_source: unresolved, allowed_values: [CON, NON], required_for_tariff_volume: true, required_for_energy_bridge: true}
+    - {field_id: coap_token_length_bytes, status_source: unresolved, required_for_tariff_volume: true, required_for_energy_bridge: false}
+    - {field_id: coap_response_exchange_mode, status_source: unresolved, required_for_tariff_volume: true, required_for_energy_bridge: true}
+    - {field_id: dtls_connection_id_length_bytes, status_source: unresolved, required_for_tariff_volume: true, required_for_energy_bridge: false}
+    - {field_id: dtls_sequence_number_length_bytes, status_source: unresolved, allowed_values: [1, 2], required_for_tariff_volume: true, required_for_energy_bridge: false}
+    - {field_id: dtls_length_field_present, status_source: unresolved, allowed_values: [true, false], required_for_tariff_volume: true, required_for_energy_bridge: false}
+    - {field_id: dtls_aead_expansion_bytes, status_source: unresolved, required_for_tariff_volume: true, required_for_energy_bridge: false}
+    - {field_id: dtls_padding_bytes, status_source: unresolved, required_for_tariff_volume: true, required_for_energy_bridge: false}
+  mqtt_tls_tcp:
+    - {field_id: mqtt_endpoint_name_bytes, status_source: unresolved, required_for_tariff_volume: true, required_for_energy_bridge: false}
+    - {field_id: mqtt_prefix_bytes, status_source: unresolved, required_for_tariff_volume: true, required_for_energy_bridge: false}
+    - {field_id: mqtt_qos, status_source: unresolved, allowed_values: [0, 1, 2], required_for_tariff_volume: true, required_for_energy_bridge: true}
+    - {field_id: mqtt_keep_alive_s, status_source: unresolved, required_for_tariff_volume: true, required_for_energy_bridge: true}
+    - {field_id: lwm2m_mqtt_token_cbor_bytes, status_source: unresolved, required_for_tariff_volume: true, required_for_energy_bridge: false}
+    - {field_id: tcp_header_options_bytes, status_source: unresolved, required_for_tariff_volume: true, required_for_energy_bridge: false}
+    - {field_id: tls_aead_expansion_bytes, status_source: unresolved, required_for_tariff_volume: true, required_for_energy_bridge: false}
+    - {field_id: tls_padding_bytes, status_source: unresolved, required_for_tariff_volume: true, required_for_energy_bridge: false}
+
+standards_evidence:
+  - evidence_id: oma_lwm2m_transport_1_2_2_send
+    source_type: normative_specification
+    source_identifier: OMA LwM2M Transport Bindings 1.2.2
+    source_url: https://www.openmobilealliance.org/release/LightweightM2M/V1_2_2-20240613-A/HTML-Version/OMA-TS-LightweightM2M_Transport-V1_2_2-20240613-A.html
+    access_date: '2026-08-12'
+    claim: LwM2M Send is an Information Reporting operation in both CoAP and MQTT bindings; CoAP Send may use a Non-Confirmable message.
+  - evidence_id: oma_lwm2m_transport_1_2_2_mqtt
+    source_type: normative_specification
+    source_identifier: OMA LwM2M Transport Bindings 1.2.2
+    source_url: https://www.openmobilealliance.org/release/LightweightM2M/V1_2_2-20240613-A/HTML-Version/OMA-TS-LightweightM2M_Transport-V1_2_2-20240613-A.html
+    access_date: '2026-08-12'
+    claim: LwM2M over MQTT uses a topic containing deployment-specific ENDPOINT and optional PREFIX; it does not require MQTT v5-only features.
+  - evidence_id: rfc7252_coap_variable_message_overhead
+    source_type: standards_track_rfc
+    source_identifier: RFC 7252 CoAP
+    source_url: https://www.rfc-editor.org/info/rfc7252/
+    access_date: '2026-08-12'
+    claim: CoAP has a fixed four-byte base header followed by variable token, options and payload fields; one universal CoAP byte overhead must not be assumed.
+  - evidence_id: rfc9147_dtls13_variable_record_header
+    source_type: standards_track_rfc
+    source_identifier: RFC 9147 DTLS 1.3
+    source_url: https://www.rfc-editor.org/info/rfc9147/
+    access_date: '2026-08-12'
+    claim: DTLS 1.3 uses a variable-length unified record header; CID, sequence-number length and length-field presence affect record size.
+  - evidence_id: rfc9846_tls13_aead_expansion
+    source_type: standards_track_rfc
+    source_identifier: RFC 9846 TLS 1.3
+    source_url: https://www.rfc-editor.org/info/rfc9846/
+    access_date: '2026-08-12'
+    claim: TLS 1.3 encrypted-record expansion depends on the selected AEAD and optional padding, so one universal TLS record overhead is not standards-identified.
+  - evidence_id: mqtt5_packet_structure
+    source_type: normative_specification
+    source_identifier: MQTT Version 5.0 OASIS Standard
+    source_url: https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html
+    access_date: '2026-08-12'
+    claim: MQTT Control Packets contain fixed and potentially variable headers; PUBLISH size depends on topic, QoS and other fields.
+  - evidence_id: rfc9293_tcp_header_variability
+    source_type: internet_standard
+    source_identifier: RFC 9293 TCP
+    source_url: https://www.rfc-editor.org/info/rfc9293/
+    access_date: '2026-08-12'
+    claim: TCP has a fixed base header with optional fields; candidate wire bytes depend on the selected TCP option profile and connection behavior.
+  - evidence_id: one_nce_data_accounting_2026_08_12
+    source_type: official_operator_support
+    source_identifier: 1NCE Customer Support / Data Consumption
+    source_url: https://www.1nce.com/en-eu/support
+    access_date: '2026-08-12'
+    claim: Included data accounting covers both uplink and downlink transport data and protocol overhead; exact session traffic must therefore account for both directions.
+
+expected:
+  feasible_ip_cellular_profile_rows: 10
+  coap_dtls_profile_rows: 5
+  mqtt_tls_profile_rows: 5
+  field_rows: 200
+  known_or_frozen_field_rows: 70
+  unresolved_field_rows: 130
+  profiles_complete_for_exact_tariff_volume: 0
+  profiles_complete_for_canonical_report_energy: 0
+  canonical_tariff_volume_rows: 0
+  canonical_report_energy_rows: 0

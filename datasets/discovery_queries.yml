@@ -1,0 +1,15 @@
+queries:
+  - 'IoT power consumption BLE Thread measurement'
+  - 'NB-IoT LTE-M energy measurement'
+  - 'LoRaWAN current trace energy'
+  - 'LoRaWAN RSSI SNR field measurement'
+  - 'MQTT CoAP HTTP energy testbed'
+  - 'Wi-Fi IoT energy secure session measurement'
+  - '5G RedCap energy measurement IoT'
+  - 'WirelessHART ISA100 measurement dataset'
+review_rules:
+  require_raw_files: true
+  require_stable_landing_page: true
+  reject_simulation_from_empirical_core: true
+  reject_protocol_unrelated_device_energy: true
+  preserve_restrictive_licences_separately: true

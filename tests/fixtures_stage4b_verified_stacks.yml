@@ -1,0 +1,92 @@
+stacks:
+  thread_coap_dtls:
+    stack_id: verify_thread_coap_dtls
+    name: Thread + UDP + DTLS 1.3 + CoAP
+    component_instances:
+      - {instance_id: access, component_id: thread_ipv6_mesh, placement: device}
+      - {instance_id: udp, component_id: udp, placement: device}
+      - {instance_id: dtls, component_id: dtls13, placement: device}
+      - {instance_id: coap, component_id: coap, placement: device}
+    bindings:
+      - {from_instance_id: access, to_instance_id: udp, interface: ip_packet_service, relation: carries}
+      - {from_instance_id: udp, to_instance_id: dtls, interface: datagram_service, relation: secures}
+      - {from_instance_id: dtls, to_instance_id: coap, interface: secure_datagram_service, relation: carries}
+    environment_capabilities: []
+    primary_access_instance_id: access
+    scientific_status: verified_candidate
+    notes: Structural verification stack only; not a benchmark alternative.
+  nbiot_mqtt_tls:
+    stack_id: verify_nbiot_mqtt_tls
+    name: NB-IoT IP + TCP + TLS 1.3 + MQTT 5
+    component_instances:
+      - {instance_id: access, component_id: 3gpp_nbiot_eps_ip, placement: device}
+      - {instance_id: tcp, component_id: tcp, placement: device}
+      - {instance_id: tls, component_id: tls13, placement: device}
+      - {instance_id: mqtt, component_id: mqtt5_tls, placement: device}
+    bindings:
+      - {from_instance_id: access, to_instance_id: tcp, interface: ip_packet_service, relation: carries}
+      - {from_instance_id: tcp, to_instance_id: tls, interface: reliable_stream_service, relation: secures}
+      - {from_instance_id: tls, to_instance_id: mqtt, interface: secure_stream_service, relation: carries}
+    environment_capabilities: []
+    primary_access_instance_id: access
+    scientific_status: verified_candidate
+    notes: Structural verification stack only; operator/network feasibility not evaluated here.
+  lrfhss_lwm2m_nonip:
+    stack_id: verify_lrfhss_lwm2m_nonip
+    name: LoRaWAN LR-FHSS + LwM2M Non-IP binding
+    component_instances:
+      - {instance_id: access, component_id: lorawan_lrfhss_access, placement: device}
+      - {instance_id: lwm2m, component_id: lwm2m12, placement: device}
+    bindings:
+      - {from_instance_id: access, to_instance_id: lwm2m, interface: lorawan_nonip_transport_service, relation: carries}
+    environment_capabilities: []
+    primary_access_instance_id: access
+    scientific_status: verified_candidate
+    notes: Structural binding is supported by OMA LwM2M Transport; performance evidence remains boundary-limited.
+  ble_ipsp_coap:
+    stack_id: verify_ble_ipsp_coap
+    name: Bluetooth LE + IPSP IPv6 + UDP + CoAP
+    component_instances:
+      - {instance_id: access, component_id: bluetooth_le_access, placement: device}
+      - {instance_id: ipsp, component_id: bluetooth_ipsp_ipv6, placement: device}
+      - {instance_id: udp, component_id: udp, placement: device}
+      - {instance_id: coap, component_id: coap, placement: device}
+    bindings:
+      - {from_instance_id: access, to_instance_id: ipsp, interface: ble_le_l2cap_service, relation: carries}
+      - {from_instance_id: ipsp, to_instance_id: udp, interface: ip_packet_service, relation: carries}
+      - {from_instance_id: udp, to_instance_id: coap, interface: datagram_service, relation: carries}
+    environment_capabilities: []
+    primary_access_instance_id: access
+    scientific_status: verified_candidate
+    notes: Structural verification only; InSecTT BLE energy is not treated as IPSP energy.
+  invalid_lorawan_udp_direct:
+    stack_id: verify_invalid_lorawan_udp_direct
+    name: Invalid direct UDP over LoRaWAN access
+    component_instances:
+      - {instance_id: access, component_id: lorawan_lora_access, placement: device}
+      - {instance_id: udp, component_id: udp, placement: device}
+    bindings:
+      - {from_instance_id: access, to_instance_id: udp, interface: ip_packet_service, relation: carries}
+    environment_capabilities: []
+    primary_access_instance_id: access
+    scientific_status: draft_candidate
+    notes: "Deliberately invalid: no IP service has been established by the selected LoRaWAN access component."
+  invalid_ble_udp_without_ipsp:
+    stack_id: verify_invalid_ble_udp_without_ipsp
+    name: Invalid direct UDP over bare Bluetooth LE
+    component_instances:
+      - {instance_id: access, component_id: bluetooth_le_access, placement: device}
+      - {instance_id: udp, component_id: udp, placement: device}
+    bindings:
+      - {from_instance_id: access, to_instance_id: udp, interface: ip_packet_service, relation: carries}
+    environment_capabilities: []
+    primary_access_instance_id: access
+    scientific_status: draft_candidate
+    notes: "Deliberately invalid: IPSP/IPv6 adaptation is missing."
+expected_status:
+  thread_coap_dtls: compatible
+  nbiot_mqtt_tls: compatible
+  lrfhss_lwm2m_nonip: compatible
+  ble_ipsp_coap: compatible
+  invalid_lorawan_udp_direct: incompatible
+  invalid_ble_udp_without_ipsp: incompatible

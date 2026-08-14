@@ -1,0 +1,127 @@
+schema_version: 1
+stage: Stage-4D quantitative benchmark scenarios and hard feasibility
+scientific_policy:
+  scenarios_are_empirical_deployments: false
+  scenarios_are_synthetic_reproducible_benchmarks: true
+  quantitative_context_implies_hard_constraint: false
+  missing_verified_candidate_capability_is_pass: false
+  infeasible_can_be_compensated_by_preference: false
+  feasible_means_fully_empirically_supported: false
+  mcda_authorised: false
+  ranking_authorised: false
+  stakeholder_weights_authorised: false
+
+scenarios:
+  - scenario_id: environmental_private_lorawan
+    name: Battery environmental sensing with private LoRaWAN service
+    archetype: battery_environmental_sensing
+    assumption_status: synthetic_reproducible_benchmark
+    quantitative_context:
+      payload_bytes: 24
+      reporting_interval_s: 900
+      target_end_to_end_latency_ms: 60000
+      whole_device_energy_budget_per_report_j: null
+      notes: Latency is recorded as context in Stage-4D but is not a hard predicate for this scenario.
+    deployment_facts:
+      cellular_access_service_available_at_site: false
+      lorawan_access_service_available_at_site: true
+      thread_border_router_available_at_site: false
+    hard_constraints:
+      - {constraint_id: access_service, dimension: infrastructure, fact_key: access_infrastructure_satisfied, operator: eq, value: true, unknown_policy: block, severity: hard, provenance_status: scenario_requirement, rationale: The selected access path must have its required site infrastructure/service available.}
+      - {constraint_id: device_management, dimension: deployment, fact_key: lwm2m_management_available, operator: eq, value: true, unknown_policy: block, severity: hard, provenance_status: scenario_requirement, rationale: Remote device management is mandatory.}
+
+  - scenario_id: smart_meter_public_cellular
+    name: Smart metering with site-available cellular service and no local LPWAN/Thread infrastructure
+    archetype: smart_metering
+    assumption_status: synthetic_reproducible_benchmark
+    quantitative_context:
+      payload_bytes: 200
+      reporting_interval_s: 900
+      target_end_to_end_latency_ms: 30000
+      whole_device_energy_budget_per_report_j: null
+      notes: Payload and latency are quantitative context only in this Stage-4D screen.
+    deployment_facts:
+      cellular_access_service_available_at_site: true
+      lorawan_access_service_available_at_site: false
+      thread_border_router_available_at_site: false
+    hard_constraints:
+      - {constraint_id: access_service, dimension: infrastructure, fact_key: access_infrastructure_satisfied, operator: eq, value: true, unknown_policy: block, severity: hard, provenance_status: scenario_requirement, rationale: The selected access path must have its required site infrastructure/service available.}
+      - {constraint_id: device_management, dimension: deployment, fact_key: lwm2m_management_available, operator: eq, value: true, unknown_policy: block, severity: hard, provenance_status: scenario_requirement, rationale: Remote device management is mandatory.}
+
+  - scenario_id: industrial_private_ipv6_low_latency
+    name: Private industrial IPv6 monitoring with explicit transport security and hard latency ceiling
+    archetype: industrial_monitoring_control
+    assumption_status: synthetic_reproducible_benchmark
+    quantitative_context:
+      payload_bytes: 128
+      reporting_interval_s: 1
+      target_end_to_end_latency_ms: 500
+      whole_device_energy_budget_per_report_j: null
+      notes: The 500 ms ceiling is intentionally hard and is unresolved unless a verified stack-level latency capability exists.
+    deployment_facts:
+      cellular_access_service_available_at_site: false
+      lorawan_access_service_available_at_site: false
+      thread_border_router_available_at_site: true
+    hard_constraints:
+      - {constraint_id: access_service, dimension: infrastructure, fact_key: access_infrastructure_satisfied, operator: eq, value: true, unknown_policy: block, severity: hard, provenance_status: scenario_requirement, rationale: Required access infrastructure must be available at the site.}
+      - {constraint_id: device_ip_mode, dimension: protocol_compatibility, fact_key: device_network_mode, operator: eq, value: ip, unknown_policy: block, severity: hard, provenance_status: scenario_requirement, rationale: The device-side reference path must expose IP service.}
+      - {constraint_id: explicit_transport_security, dimension: security, fact_key: explicit_tls_or_dtls_present, operator: eq, value: true, unknown_policy: block, severity: hard, provenance_status: scenario_requirement, rationale: TLS or DTLS is required explicitly in the candidate graph.}
+      - {constraint_id: device_management, dimension: deployment, fact_key: lwm2m_management_available, operator: eq, value: true, unknown_policy: block, severity: hard, provenance_status: scenario_requirement, rationale: Remote device management is mandatory.}
+      - {constraint_id: latency_ceiling, dimension: latency, fact_key: guaranteed_max_end_to_end_latency_ms, operator: lte, value: 500, unit: ms, unknown_policy: block, severity: hard, provenance_status: scenario_requirement, rationale: No verified end-to-end latency capability is currently materialised for the candidates.}
+
+  - scenario_id: urban_nonip_dual_access
+    name: Urban non-IP telemetry with both cellular and LoRaWAN access services available
+    archetype: urban_infrastructure
+    assumption_status: synthetic_reproducible_benchmark
+    quantitative_context:
+      payload_bytes: 32
+      reporting_interval_s: 300
+      target_end_to_end_latency_ms: 60000
+      whole_device_energy_budget_per_report_j: null
+      notes: The benchmark requires a non-IP device-side path but does not hard-screen the contextual latency target yet.
+    deployment_facts:
+      cellular_access_service_available_at_site: true
+      lorawan_access_service_available_at_site: true
+      thread_border_router_available_at_site: false
+    hard_constraints:
+      - {constraint_id: access_service, dimension: infrastructure, fact_key: access_infrastructure_satisfied, operator: eq, value: true, unknown_policy: block, severity: hard, provenance_status: scenario_requirement, rationale: Required access service must be available.}
+      - {constraint_id: device_nonip_mode, dimension: protocol_compatibility, fact_key: device_network_mode, operator: eq, value: nonip, unknown_policy: block, severity: hard, provenance_status: scenario_requirement, rationale: The benchmark intentionally constrains the device path to a non-IP binding.}
+      - {constraint_id: device_management, dimension: deployment, fact_key: lwm2m_management_available, operator: eq, value: true, unknown_policy: block, severity: hard, provenance_status: scenario_requirement, rationale: Remote device management is mandatory.}
+
+  - scenario_id: asset_tracking_mobility
+    name: Operator-served asset tracking with hard mobility requirement
+    archetype: asset_tracking
+    assumption_status: synthetic_reproducible_benchmark
+    quantitative_context:
+      payload_bytes: 64
+      reporting_interval_s: 60
+      target_end_to_end_latency_ms: 10000
+      whole_device_energy_budget_per_report_j: null
+      notes: Mobility is deliberately hard; Stage-4B did not materialise a verified mobility capability for the frozen candidates.
+    deployment_facts:
+      cellular_access_service_available_at_site: true
+      lorawan_access_service_available_at_site: false
+      thread_border_router_available_at_site: false
+    hard_constraints:
+      - {constraint_id: access_service, dimension: infrastructure, fact_key: access_infrastructure_satisfied, operator: eq, value: true, unknown_policy: block, severity: hard, provenance_status: scenario_requirement, rationale: Required access service must be available.}
+      - {constraint_id: device_management, dimension: deployment, fact_key: lwm2m_management_available, operator: eq, value: true, unknown_policy: block, severity: hard, provenance_status: scenario_requirement, rationale: Remote device management is mandatory.}
+      - {constraint_id: mobility, dimension: deployment, fact_key: mobility_supported_verified, operator: eq, value: true, unknown_policy: block, severity: hard, provenance_status: scenario_requirement, rationale: Mobility support must be verified at the candidate level; no such capability is yet materialised.}
+
+  - scenario_id: remote_agriculture_energy_budget
+    name: Remote agricultural sensing with private LoRaWAN service and hard whole-device report-energy budget
+    archetype: remote_agricultural_sensing
+    assumption_status: synthetic_reproducible_benchmark
+    quantitative_context:
+      payload_bytes: 16
+      reporting_interval_s: 600
+      target_end_to_end_latency_ms: 120000
+      whole_device_energy_budget_per_report_j: 0.2
+      notes: The 0.2 J value is a benchmark requirement, not an empirical claim. Core-four evidence does not yet supply a common whole-device per-report energy bridge for LoRaWAN candidates.
+    deployment_facts:
+      cellular_access_service_available_at_site: false
+      lorawan_access_service_available_at_site: true
+      thread_border_router_available_at_site: false
+    hard_constraints:
+      - {constraint_id: access_service, dimension: infrastructure, fact_key: access_infrastructure_satisfied, operator: eq, value: true, unknown_policy: block, severity: hard, provenance_status: scenario_requirement, rationale: Required access service must be available.}
+      - {constraint_id: device_management, dimension: deployment, fact_key: lwm2m_management_available, operator: eq, value: true, unknown_policy: block, severity: hard, provenance_status: scenario_requirement, rationale: Remote device management is mandatory.}
+      - {constraint_id: whole_device_energy_budget, dimension: power, fact_key: expected_device_energy_per_report_j, operator: lte, value: 0.2, unit: J, unknown_policy: block, severity: hard, provenance_status: scenario_requirement, rationale: A common whole-device per-report energy estimand is required to resolve this predicate.}

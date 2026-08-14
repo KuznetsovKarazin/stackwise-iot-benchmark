@@ -1,0 +1,127 @@
+stage: Stage-5D LR-FHSS variant-selection identifiability and robustness closure
+stage5_status: lrfhss_unweighted_variant_robustness_family_frozen_selection_unidentified
+variant_family_id: lrfhss_agriculture_source_aligned_v1
+stack_id: lorawan_lrfhss_lwm2m_nonip
+scenario_id: remote_agriculture_energy_budget
+
+primary_source_review:
+  - claim_id: lorawan_l2_confirmed_unconfirmed_message_semantics
+    authority: LoRa Alliance
+    source_type: primary_standard
+    identifier: TS001-1.0.4
+    source_url: https://resources.lora-alliance.org/document/ts001-1-0-4-lorawan-l2-1-0-4-specification
+    claim: LoRaWAN defines separate confirmed and unconfirmed data message types; confirmed data requires acknowledgement while unconfirmed data does not.
+    downstream_use: Confirmation mode is a real operating-profile dimension, not a nuisance label or an energy-derived choice.
+  - claim_id: lorawan_linkadrreq_controls_dr_power_nbtrans
+    authority: Semtech
+    source_type: official_implementation_guidance
+    identifier: LinkADRReq processing guidance
+    source_url: https://learn.semtech.com/mod/book/view.php?chapterid=158&id=174
+    claim: LinkADRReq can request changes to data rate, TX output power, channel mask and number of transmissions per uplink frame.
+    downstream_use: A standards-compatible control mechanism exists for DR/TX-power/NbTrans, but this does not identify the value used in the benchmark deployment.
+  - claim_id: lorawan_adr_profile_coordination
+    authority: LoRa Alliance
+    source_type: official_development_guidance
+    identifier: TR007 Developing LoRaWAN Devices 1.0
+    source_url: https://lora-alliance.org/wp-content/uploads/2021/05/TR007_Developing_LoRaWAN_Devices-v1.0.0.pdf
+    claim: ADR should be supported and the device owner should coordinate with the network operator on a device-management profile, especially for varying RF conditions.
+    downstream_use: Deployment/network policy is part of profile selection; generic standard support is not deployment-selection evidence.
+  - claim_id: current_regional_parameters_reference
+    authority: LoRa Alliance
+    source_type: primary_standard
+    identifier: RP002-1.0.5
+    source_url: https://resources.lora-alliance.org/document/rp002-1-0-5-lorawan-regional-parameters
+    claim: Regional parameters define region-specific LoRaWAN data-rate and RF parameter constraints.
+    downstream_use: A real deployment must identify its applicable regional/channel-plan context before a generic DR-selection rule can be asserted.
+
+selection_dimensions:
+  - dimension_id: lrfhss_data_rate
+    selection_authority_or_mechanism: network_server_adr_or_explicit_device_profile
+    standards_mechanism_verified: true
+    deployment_specific_value_available: false
+    selection_identifiability_status: mechanism_known_selection_unidentified
+    required_deployment_evidence: ADR enablement state plus network-server/device-profile policy and observed/assigned DR history or an explicit fixed-DR benchmark declaration.
+    notes: LinkADRReq provides a control mechanism, but Stage-5C has no deployment-specific ADR policy or link history from which DR8-DR11 can be selected.
+  - dimension_id: confirmation_mode
+    selection_authority_or_mechanism: application_or_device_message_policy
+    standards_mechanism_verified: true
+    deployment_specific_value_available: false
+    selection_identifiability_status: protocol_choices_known_selection_unidentified
+    required_deployment_evidence: Explicit benchmark/application policy stating confirmed, unconfirmed, or a rule for choosing between them.
+    notes: Confirmed and unconfirmed are distinct LoRaWAN message semantics. Energy results must not choose the message type post hoc.
+  - dimension_id: tx_power_dbm
+    selection_authority_or_mechanism: adr_or_explicit_device_profile
+    standards_mechanism_verified: true
+    deployment_specific_value_available: false
+    selection_identifiability_status: source_model_value_not_deployment_selected
+    required_deployment_evidence: Deployment/device-profile TX-power setting or policy demonstrating alignment with +14 dBm.
+    notes: +14 dBm is retained only because it is the Stage-5B source-model domain; it is not a generic deployment fact.
+  - dimension_id: radio_hardware
+    selection_authority_or_mechanism: deployment_hardware_choice
+    standards_mechanism_verified: false
+    deployment_specific_value_available: false
+    selection_identifiability_status: source_hardware_not_generic_candidate
+    required_deployment_evidence: Deployment hardware identity or validated transfer evidence to another radio/platform.
+    notes: LR1121 source alignment is required for the validated component model and does not make the eight variants exhaustive for all LR-FHSS implementations.
+
+unweighted_robustness_contract:
+  probability_weights_assigned: false
+  frequencies_inferred_from_enumeration: false
+  variants_exchangeable: false
+  robust_feasible_requires_all_variants_feasible: true
+  robust_infeasible_requires_all_relevant_variants_infeasible: true
+  any_variant_below_budget_implies_generic_feasibility: false
+  any_variant_above_budget_implies_generic_infeasibility: false
+  preserve_generic_candidate_unresolved: true
+  preserve_frozen_stage4_matrix: true
+
+# These are evidence requirements, not claims that every item must be known in all deployments.
+deployment_selection_requirements:
+  - requirement_id: regional_context
+    required_for: data_rate_and_rf_parameter_interpretation
+    current_status: unresolved
+    sufficient_evidence: Applicable LoRaWAN regional/channel plan and version for the deployment.
+  - requirement_id: adr_or_fixed_dr_policy
+    required_for: lrfhss_data_rate_selection
+    current_status: unresolved
+    sufficient_evidence: ADR enablement plus server/device-profile rule and assigned/observed DR history, or an explicit fixed DR declaration.
+  - requirement_id: confirmation_policy
+    required_for: confirmation_mode_selection
+    current_status: unresolved
+    sufficient_evidence: Application/device policy selecting confirmed/unconfirmed messages or a deterministic rule tied to message class.
+  - requirement_id: tx_power_policy
+    required_for: source_model_domain_alignment
+    current_status: unresolved
+    sufficient_evidence: Explicit +14 dBm configuration or a validated transformation for another TX-power policy.
+  - requirement_id: radio_hardware_alignment
+    required_for: source_model_domain_alignment
+    current_status: unresolved
+    sufficient_evidence: LR1121 deployment hardware or validated transfer to the deployed radio/platform.
+
+scientific_policy:
+  treat_variants_as_unweighted_robustness_family: true
+  variant_probability_weights_assigned: false
+  infer_variant_frequency_from_adr: false
+  infer_dr_from_energy_result: false
+  infer_confirmation_mode_from_energy_result: false
+  assume_adr_selects_lowest_energy_dr: false
+  project_family_to_generic_candidate: false
+  update_frozen_stage4_matrix: false
+  whole_device_numeric_bridge_authorised: false
+  preference_scoring_authorised: false
+  publication_mcda_authorised: false
+
+expected:
+  stage4_feasible_rows: 21
+  stage4_infeasible_rows: 39
+  stage4_unresolved_rows: 3
+  profile_variants: 8
+  conditionally_infeasible_variants: 2
+  conditionally_feasible_variants: 0
+  unresolved_variants: 6
+  selection_dimensions: 4
+  deployment_selection_requirements: 5
+  primary_source_claims: 4
+  selected_variants: 0
+  weighted_variants: 0
+  generic_candidate_status: unresolved

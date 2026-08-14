@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "STACKWISE operating profile",
+  "description": "Scenario-specific operating parameters for one frozen stack candidate. Unknown fields remain explicit and block numeric bridge activation when required.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile_id",
+    "scenario_id",
+    "stack_id",
+    "scientific_status",
+    "fields"
+  ],
+  "properties": {
+    "profile_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+    },
+    "scenario_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+    },
+    "stack_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+    },
+    "scientific_status": {
+      "enum": [
+        "benchmark_profile_partial",
+        "benchmark_profile_complete",
+        "contract_fixture",
+        "benchmark_profile_variant_partial"
+      ]
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "fields": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "field_id",
+          "status",
+          "provenance_status",
+          "required_for_numeric_bridge"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+          },
+          "status": {
+            "enum": [
+              "known",
+              "unresolved",
+              "not_applicable"
+            ]
+          },
+          "value": {},
+          "unit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "provenance_status": {
+            "enum": [
+              "scenario_derived",
+              "candidate_derived",
+              "primary_source_verified",
+              "empirical_observed",
+              "explicit_model_assumption",
+              "unresolved"
+            ]
+          },
+          "provenance_ref": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "required_for_numeric_bridge": {
+            "type": "boolean"
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+version: 1
+stage: Stage-3B Vomhoff joint nonparametric mean bootstrap
+replicates: 10000
+master_seed: 20260811
+resampling_unit: physical_run_id
+statistic: arithmetic_mean
+rectangular_block_policy: shared_physical_run_resample_complete_rectangular
+partial_overlap_policy: union_run_resampling_preserve_structural_missingness
+missing_values: preserve_observed_structural_missingness_no_imputation
+interval_summary_quantiles: [0.025, 0.05, 0.5, 0.95, 0.975]
+cross_block_dependence: not_identified_no_cross_block_joint_distribution
+notes:
+  - Bootstrap replicate IDs are meaningful only within one experimental block.
+  - The partial NB-IoT/MQTT block retains the full union of physical runs; a run with a missing phase remains missing for that phase when sampled.
+  - No listwise deletion is used merely to force a rectangular matrix.
+  - No parametric family is fitted.
+  - These draws quantify uncertainty of conditional within-study means, not generic cross-device or cross-study variability.

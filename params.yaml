@@ -1,0 +1,5 @@
+seed: 26
+bootstrap_samples: 2000
+smaa_samples: 20000
+minimum_evidence_grade: B
+allow_mixed_measurement_boundaries: false

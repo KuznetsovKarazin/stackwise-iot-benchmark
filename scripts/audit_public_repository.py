@@ -11,6 +11,7 @@ MAX_PUBLIC_FILE_BYTES = 20 * 1024 * 1024
 
 BLOCKED_PREFIXES = (
     "backups/",
+    ".stackwise_backups/",
     "payload/",
     "results/",
     "release/",
@@ -70,7 +71,7 @@ def _git_staged_files() -> list[Path]:
 def _working_tree_candidates() -> list[Path]:
     excluded_roots = {
         ".git", ".venv", "venv", ".pytest_cache", ".ruff_cache", ".mypy_cache",
-        "backups", "payload", "results", "release", "dist", "paper",
+        "backups", ".stackwise_backups", "payload", "results", "release", "dist", "paper",
     }
     candidates: list[Path] = []
     for dirpath, dirnames, filenames in os.walk(ROOT):

@@ -83,13 +83,21 @@ python -m pip install --upgrade pip
 python -m pip install -e ".[dev]"
 ```
 
-Run the source-only regression suite:
+Run the self-contained public CI suite on a fresh clone:
+
+```bash
+python scripts/run_public_ci.py
+```
+
+This suite exercises package installation, registries, schemas, core modelling utilities, evidence contracts and publication packaging without requiring locally materialised research outputs.
+
+The full local regression suite is:
 
 ```bash
 pytest -q
 ```
 
-Tests that require locally downloaded upstream data are designed to skip when those data are absent; the repository never silently substitutes synthetic evidence for missing empirical measurements.
+It is intended for a complete research workspace in which the upstream datasets and generated `results/` dependencies have already been materialised. Some historical regression tests depend on those frozen local artifacts and therefore are not part of fresh-clone CI. Missing empirical inputs are never replaced with synthetic evidence.
 
 ## Use the frozen benchmark
 

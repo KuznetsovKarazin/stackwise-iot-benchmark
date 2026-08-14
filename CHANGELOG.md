@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.61 — Public-repository hygiene and CI correction
+
+- Removed the hidden local checkpoint directory `.stackwise_backups/` from the intended public tree and added it to `.gitignore`.
+- Strengthened the public-repository audit so both `backups/` and `.stackwise_backups/` are rejected if staged.
+- Replaced the fresh-clone GitHub Actions `pytest -q` step with an explicit 32-test self-contained public CI suite that does not require generated `results/` artifacts.
+- Clarified that the complete local regression suite is run in the full research workspace after validated inputs/results have been materialised.
+- Updated software citation/version metadata and Code Availability to public release `v0.1.61`.
+- Benchmark v1.0.0 and Experiments 1–5 scientific results are unchanged.
+
+
 ## 0.1.60 — Public GitHub research-code release
 
 - Prepared the repository for its first public GitHub release linked to STACKWISE Empirical Evidence Benchmark v1.0.0 (DOI: 10.5281/zenodo.21937093).

@@ -1,10 +1,13 @@
-.PHONY: install test lint smoke audit clean
+.PHONY: install test test-public lint smoke audit clean
 
 install:
 	python -m pip install -e ".[dev]"
 
 test:
 	pytest
+
+test-public:
+	python scripts/run_public_ci.py
 
 lint:
 	ruff check src tests scripts

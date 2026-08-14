@@ -3,7 +3,7 @@
   "@type": "SoftwareSourceCode",
   "name": "STACKWISE",
   "description": "Reproducible software for layer-aware, feasibility-first and uncertainty-aware analysis of IoT communication stacks.",
-  "version": "0.1.60",
+  "version": "0.1.61",
   "dateCreated": "2026-08-06",
   "dateModified": "2026-08-14",
   "license": "https://spdx.org/licenses/Apache-2.0",

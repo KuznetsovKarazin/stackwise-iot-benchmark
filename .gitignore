@@ -39,6 +39,7 @@ artifacts/
 
 # Local research checkpoints / patch machinery (never publish)
 backups/
+.stackwise_backups/
 payload/
 PATCH_APPLY.txt
 PROJECT_INVENTORY.txt

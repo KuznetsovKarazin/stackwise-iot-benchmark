@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.62 - Paper B external validation and independent admissibility audit
+
+- Added a checksum-pinned Paper B external-validation protocol and fail-closed pre-data freeze workflow.
+- Added five independently authored external use cases (HINTS x3; Vannieuwenborg x2) for ontology-portability and abstention stress validation.
+- Added held-out adapters for the Kousias NB-IoT operational dataset, Povalac LoRaWAN sniffer dataset and Leenders/Callebaut NB-IoT power measurements; raw third-party inputs are not redistributed.
+- Added the pre-specified LoRaWAN delivery-probability negative control and machine-readable held-out evidence transitions.
+- Extended preference-ordering robustness to weighted sum, TOPSIS and weighted Chebyshev operators plus leave-one-feature-out sensitivity.
+- Extended accounting robustness to 1,350 workload/tariff regimes and 388,800 deterministic states and added exact reproduction of the original 288-state point.
+- Added benchmark-family leave-one-scenario-out portfolio sensitivity; external portfolio analysis remains withheld by the frozen Tier-C rule.
+- Added a blinded admissibility audit using four independent expert groups; frozen classifier labels were not changed after the audit.
+- Added compact public validation outputs and manuscript traceability while excluding publisher PDFs, third-party raw datasets, original expert-return files and free-text rationales.
+- Benchmark v1.0.0 is unchanged. Global stochastic ranking and matched four-stack cellular whole-device report-energy claims remain blocked.
+
 ## 0.1.61 — Public-repository hygiene and CI correction
 
 - Removed the hidden local checkpoint directory `.stackwise_backups/` from the intended public tree and added it to `.gitignore`.

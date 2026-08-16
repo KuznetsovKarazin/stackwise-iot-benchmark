@@ -773,3 +773,32 @@ Decision: stop after Experiment 5. No Experiment 6 is justified by the current c
 ## D-PUB-02 — Close coding after deterministic deposit packaging
 
 Decision: after v0.1.59, do not create Experiment 6. Treat Benchmark v1.0.0 and Experiments 1–5 as frozen inputs to two distinct manuscripts. Dataset creators must be confirmed manually before Zenodo publication; article authorship is a separate decision.
+
+## D-PUB-B-EXT-01 - Freeze Paper B external validation before outcome analysis
+**Date:** 2026-08-16
+
+**Decision:** Treat external scenario definitions, held-out source list, admissibility policy, candidate catalogue and Tier-C portfolio rule as frozen confirmatory inputs before outcome-producing scripts. Do not extend the ontology or relabel the classifier to improve external outcomes.
+
+**Reason:** The primary threat to Paper B was self-validation on an authored benchmark. A pre-specified fail-closed campaign is required to distinguish external stress validation from post-hoc adaptation.
+
+## D-PUB-B-EXT-02 - Interpret external use cases as portability/abstention tests, not winner reproduction
+**Date:** 2026-08-16
+
+**Decision:** Do not compare STACKWISE winners with HINTS/Vannieuwenborg winners because the candidate technology universes and decision targets differ. Report unmapped/conflicting requirements and explicit abstention states as outcomes.
+
+**Reason:** Forcing a common candidate universe after source inspection would invalidate the external test and overstate decision portability.
+
+## D-PUB-B-EXT-03 - Keep frozen classifier after independent audit
+**Date:** 2026-08-16
+
+**Decision:** Use four independent expert groups for the primary semantic audit. Do not change confirmatory C0/C1/C2/E0 labels after observing expert responses. Publish anonymised primary labels/aggregate statistics only; retain original returns and free-text rationales privately.
+
+**Reason:** Expert disagreement is external construct-validity evidence. Relabelling after the audit would convert validation into tuning.
+
+## D-PUB-B-EXT-04 - Demote fleet portfolio to a benchmark-specific secondary result
+**Date:** 2026-08-16
+
+**Decision:** Retain the internal set-cover result and leave-one-scenario-out sensitivity, but remove the two-family portfolio claim from headline contributions. Withhold external set-cover because the frozen Tier-C portability requirement is not met.
+
+**Reason:** The minimum family result depends on the scenario universe; external scenario portability is insufficient for a confirmatory portfolio claim.
+

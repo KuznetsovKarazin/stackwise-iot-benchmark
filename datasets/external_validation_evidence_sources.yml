@@ -1,0 +1,59 @@
+schema_version: 1
+selection_policy:
+  selected_before_outcome_inspection: true
+  replacement_only_if_technically_unusable: true
+  held_out_sources_do_not_modify_benchmark_v1_0_0: true
+sources:
+- external_source_id: EV_E1_KOUSIAS_NBIOT_4G_5G_2023
+  title: A Large-Scale Dataset of 4G, NB-IoT, and 5G Non-Standalone Network Measurements
+  doi: 10.5281/zenodo.8224890
+  version: '1.0'
+  publisher: Zenodo
+  selected_file: NB-IoT - Passive Measurements.csv
+  selected_file_size_mb: 74.4
+  selected_file_md5: c9da425b57b325a56f7ca0944c9d05b4
+  role: positive_or_partial_coverage_link_evidence
+  pre_registered_expected_targets:
+  - feasible_link_probability
+  pre_registered_prohibited_direct_targets:
+  - expected_device_energy_per_application_report_j
+  - lifecycle_cost_eur
+  notes: Operational networks, Rome, two MNOs; passive NB-IoT measurements. Exact
+    relation class remains rule-derived.
+  local_validation_filename: kousias_nb_iot_passive.csv
+- external_source_id: EV_E2_POVALAC_LORAWAN_TRAFFIC_2023
+  title: LoRaWAN Traffic Analysis Dataset
+  doi: 10.5281/zenodo.8090619
+  version: v2
+  publisher: Zenodo
+  selected_file: csv.zip
+  selected_file_size_mb: 265.2
+  selected_file_md5: 075503abc397454901ed0e4457e5b998
+  role: semantic_negative_control_and_lorawan_traffic_context
+  pre_registered_expected_targets:
+  - feasible_link_probability
+  pre_registered_prohibited_direct_targets:
+  - delivery_probability
+  negative_control_rule: No C0_DIRECT delivery_probability without attempted-transmission
+    denominator.
+  notes: Sniffer observations from Liege, Graz, Vienna and Brno; receive-side/decoded
+    packet material must retain observation boundary.
+  local_validation_filename: povalac_lorawan_csv.zip
+- external_source_id: EV_E3_LEENDERS_NBIOT_POWER_2019
+  title: NB-IoT Power Measurements
+  doi: 10.5281/zenodo.3557239
+  version: v1.0
+  publisher: Zenodo
+  selected_file: guusleenders/NB-IoT-Power-Measurements-v1.0.zip
+  selected_file_size_mb: 4.8
+  selected_file_md5: a146818e92f2b6c775a9a80cb200e814
+  associated_publication_doi: 10.1109/WF-IoT48130.2020.9221010
+  role: positive_or_partial_nbiot_energy_evidence
+  pre_registered_expected_targets:
+  - expected_device_energy_per_application_report_j
+  pre_registered_prohibited_direct_targets:
+  - delivery_probability
+  - lifecycle_cost_eur
+  notes: Exact device/system boundary and reporting-cycle semantics must be established
+    from source artefacts before classification.
+  local_validation_filename: leenders_nbiot_power_v1.0.zip

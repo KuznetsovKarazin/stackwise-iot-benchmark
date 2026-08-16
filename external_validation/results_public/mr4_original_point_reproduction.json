@@ -1,0 +1,21 @@
+{
+  "diagnostic": "generalized_MR4_reproduces_frozen_Experiment4_original_point",
+  "payload_bytes": 64,
+  "reporting_interval_s": 60,
+  "horizon_years": 5,
+  "allowance_mb": 500,
+  "billing_increment_mb": 500,
+  "expected_state_rows": 288,
+  "merged_state_rows": 288,
+  "all_keys_matched": true,
+  "exact_rows_all_levels": 288,
+  "all_rows_exact_all_levels": true,
+  "max_abs_difference_bytes_by_level": {
+    "L0": 0.0,
+    "L1": 0.0,
+    "L2": 0.0,
+    "L3": 0.0,
+    "L4": 0.0
+  },
+  "interpretation": "The factorial MR4 generalization changes the workload/tariff grid only; at the frozen original point it reproduces every L0-L4 byte total exactly for all 288 protocol/billing states."
+}

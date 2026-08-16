@@ -1,12 +1,19 @@
 # STACKWISE project status
 
-Last updated: 11 August 2026
+Last updated: 16 August 2026
 
 ## Research objective
 
 STACKWISE is developing an open, layer-aware and uncertainty-aware framework for selecting end-to-end IoT communication stacks and heterogeneous fleet architectures from empirical evidence under hard feasibility constraints, correlated uncertainty and lifecycle cost.
 
 **Stage 2 — Empirical Evidence Matrix is complete for the validated core-four.** v0.1.16 fixed the **Stage 3 — Uncertainty specification and identifiability** contract. v0.1.17–v0.1.18 close the identifiable within-study Vomhoff uncertainty layer with physical-run nonparametric resampling. v0.1.19 materialises the LoED source-day × gateway × PHY grouped calibration layer, and v0.1.20 audits the two separated acquisition campaigns, multi-lag temporal dependence and gateway-set stability before any LoED block sampler is selected. No publication-wide stochastic decision model or publication-level MCDA ranking is authorised yet.
+
+
+## Paper B external-validation closure - v0.1.62
+
+The Paper B methodology validation campaign is closed under a checksum-pinned pre-data freeze. Five independently authored use cases were evaluated without post-outcome ontology extension; 46 hard requirements yielded 10 exact mappings, 11 interpretable mappings and 25 unavailable mappings, and the resulting 45 case-candidate assessments were 38 `UNRESOLVED` and 7 `INFEASIBLE` with no forced `DECISION_READY` state. Three held-out public sources were evaluated under frozen boundary rules; the LoRaWAN reception negative control produced no inappropriate direct delivery-probability transition. Preference-ordering robustness now covers weighted sum, TOPSIS and weighted Chebyshev. Boundary-aware accounting was expanded to 1,350 regimes / 388,800 deterministic states and reproduces the original 288-state point exactly. A blinded semantic audit with four independent expert groups achieved Fleiss kappa 0.537; 32/35 items had at least 3/4 expert consensus and 27/32 of those consensus labels matched the frozen classifier.
+
+The benchmark dataset itself remains **v1.0.0 unchanged**. External scenario validation demonstrates ontology portability/abstention behavior rather than winner reproduction. External portfolio analysis was withheld because no case met the pre-specified Tier-C portability rule. Global stochastic ranking and matched four-stack cellular whole-device report-energy claims remain blocked.
 
 ## Current core evidence status
 

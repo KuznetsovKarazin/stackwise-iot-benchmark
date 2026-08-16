@@ -20,6 +20,10 @@ BLOCKED_PREFIXES = (
     "venv/",
     ".pytest_cache/",
     "paper/",
+    "external_validation/sources/",
+    "external_validation/source_documents/",
+    "external_validation/independent_audit/responses/",
+    "external_validation/independent_audit/private/",
     "data/raw/",
     "data/interim/",
     "data/processed/",
@@ -80,6 +84,12 @@ def _working_tree_candidates() -> list[Path]:
             dirnames[:] = []
             continue
         if rel_dir.parts[:1] == ("data",) and len(rel_dir.parts) > 1 and rel_dir.parts[1] != "examples":
+            dirnames[:] = []
+            continue
+        if len(rel_dir.parts) >= 2 and rel_dir.parts[0] == "external_validation" and rel_dir.parts[1] in {"sources", "source_documents"}:
+            dirnames[:] = []
+            continue
+        if len(rel_dir.parts) >= 3 and rel_dir.parts[0] == "external_validation" and rel_dir.parts[1] == "independent_audit" and rel_dir.parts[2] in {"responses", "private"}:
             dirnames[:] = []
             continue
         dirnames[:] = [d for d in dirnames if d not in excluded_roots and d != "__pycache__"]

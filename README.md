@@ -42,6 +42,13 @@ The repository contains the code and machine-readable definitions used to:
 
 No publication-grade global stochastic ranking across all candidate stacks is claimed. Matched whole-device energy-per-report evidence for the four cellular IP candidates remains a documented future-validation limitation.
 
+
+## Paper B external validation
+
+Release v0.1.62 adds the validation layer used by the STACKWISE methodology paper. It includes a checksum-pinned protocol, five independently authored external use cases, held-out evidence adapters, robustness analyses and compact public result tables under `external_validation/results_public/`. Large third-party datasets, publisher PDFs and original expert-return files are deliberately excluded; their source identifiers/checksums or anonymised aggregate results are retained instead.
+
+The external campaign tests **evidence readiness, ontology portability and abstention**, not winner reproduction across incompatible candidate universes. The frozen benchmark remains v1.0.0. See `docs/PAPER_B_EXTERNAL_VALIDATION_REPORT_v2.md` and `docs/PAPER_B_RESULTS_TRACEABILITY_v2.md`.
+
 ## Repository layout
 
 ```text
@@ -202,5 +209,6 @@ A manuscript-ready code-availability statement is provided in `docs/CODE_AVAILAB
 - Benchmark v1.0.0: frozen and published.
 - Benchmark QA: passed.
 - Experiments 1–5: closed.
+- Paper B external-validation campaign and independent semantic audit: closed (v0.1.62).
 - Global publication-grade stochastic MCDA: not claimed.
 - Matched whole-device cellular report-energy comparison: not claimed; future validation.

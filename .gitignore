@@ -57,3 +57,9 @@ a.dvc/
 *.bak
 *.swp
 ~*
+# Paper B external-validation private/raw inputs (retrieve from cited public sources)
+external_validation/sources/**
+external_validation/source_documents/**
+external_validation/independent_audit/responses/**
+external_validation/independent_audit/private/**
+

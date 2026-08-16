@@ -1,0 +1,6 @@
+source_case_id,source_family,title,requirements_total,hard_requirements,hard_exact,hard_interpretable,hard_unavailable,hard_mapped_fraction,hard_source_conflicts,schema_extensions_made,full_representation_unmapped_hard_fields,tier_a_included,tier_b_included,tier_c_eligible
+HINTS_A_SMART_BUILDING,HINTS,Smart building,13,12,3,3,6,0.5,2,0,6,True,True,False
+HINTS_B_EVENT_VIDEO_SURVEILLANCE,HINTS,Event video-surveillance,13,12,4,3,5,0.5833333333333334,1,0,5,True,True,False
+HINTS_C_PRECISION_AGRICULTURE,HINTS,Precision agriculture,14,13,3,3,7,0.46153846153846156,3,0,7,True,True,False
+VANNIEUWENBORG_SMART_CONTAINERS,VANNIEUWENBORG_2018,Smart shipping containers — Port of Antwerp,5,5,0,1,4,0.2,0,0,4,True,True,False
+VANNIEUWENBORG_SMART_PARKING,VANNIEUWENBORG_2018,Shop'n Go smart parking,6,4,0,1,3,0.25,0,0,3,True,True,False

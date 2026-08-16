@@ -1,0 +1,584 @@
+schema_version: 1
+policy:
+  no_silent_imputation: true
+  mapping_status_values:
+  - exact
+  - interpretable
+  - unavailable
+  portfolio_min_hard_requirement_recovery_fraction: 0.7
+  exclude_if_ambiguity_can_flip_multiple_families: true
+use_cases:
+- source_case_id: HINTS_A_SMART_BUILDING
+  source_family: HINTS
+  title: Smart building
+  source_publication_doi: 10.1016/j.iot.2023.100678
+  source_repository: https://github.com/SamirSim/Selection-Methodology-IoT
+  source_repository_artifacts:
+  - building-automation.txt
+  - building-automation (copie 1).txt
+  source_definition: Network technology and topology decision at design phase of a tailored smart-building
+    solution with potentially growing end-device count.
+  requirements_status: EXTRACTED_AND_REVIEWED
+  requirements:
+  - requirement_id: HINTS_A_01
+    source_reference: Section 5.1; Table 13
+    source_text_or_faithful_paraphrase: Minimal deployment contains 50 sensors.
+    stackwise_field: external.device_count_min
+    value: 50
+    unit: devices
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Device count is an explicit HINTS scalability input but is absent from the frozen
+      STACKWISE scenario schema.
+  - requirement_id: HINTS_A_02
+    source_reference: Section 5.1; Table 13
+    source_text_or_faithful_paraphrase: Maximal deployment contains 100 sensors.
+    stackwise_field: external.device_count_max
+    value: 100
+    unit: devices
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Maximum device count is not represented by the frozen STACKWISE scenario schema.
+  - requirement_id: HINTS_A_03
+    source_reference: Section 5.1; Table 13
+    source_text_or_faithful_paraphrase: Sensors use 2,400 mAh batteries at 3 V.
+    stackwise_field: external.battery_capacity_and_voltage
+    value: 2.4 Ah @ 3 V
+    unit: battery_context
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Battery context cannot be converted to a per-report whole-device energy budget
+      without an explicit bridge and non-communication accounting.
+  - requirement_id: HINTS_A_04
+    source_reference: Section 5.1; Table 13
+    source_text_or_faithful_paraphrase: Traffic direction is upstream.
+    stackwise_field: external.traffic_direction
+    value: upstream
+    unit: categorical
+    mapping_status: interpretable
+    hard_or_preference: hard
+    interpretation_note: Direction semantics are recoverable but no dedicated frozen scenario field exists.
+  - requirement_id: HINTS_A_05
+    source_reference: Section 5.1; Table 13
+    source_text_or_faithful_paraphrase: Each message is 100 bytes.
+    stackwise_field: quantitative_context.payload_bytes
+    value: 100
+    unit: bytes
+    mapping_status: exact
+    hard_or_preference: hard
+    interpretation_note: Direct match to the frozen payload field.
+  - requirement_id: HINTS_A_06
+    source_reference: Section 5.1; Table 13
+    source_text_or_faithful_paraphrase: Sensors send one packet per second in both minimal and maximal
+      workload.
+    stackwise_field: quantitative_context.reporting_interval_s
+    value: 1.0
+    unit: s
+    mapping_status: exact
+    hard_or_preference: hard
+    interpretation_note: Periodic workload maps exactly to a one-second reporting interval.
+  - requirement_id: HINTS_A_07
+    source_reference: Section 5.1; Table 13
+    source_text_or_faithful_paraphrase: The radio environment is indoor.
+    stackwise_field: external.radio_environment
+    value: indoor
+    unit: categorical
+    mapping_status: interpretable
+    hard_or_preference: hard
+    interpretation_note: Environment semantics are explicit but not a frozen hard-screen field.
+  - requirement_id: HINTS_A_08
+    source_reference: Section 5.1 versus Table 13
+    source_text_or_faithful_paraphrase: The narrative states a deployment scope of 100 m, whereas Table
+      13 reports 50 m.
+    stackwise_field: external.deployment_scope_m
+    value: source_conflict_100_vs_50
+    unit: m
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Published sources conflict; no exact value is admitted to the frozen hard screen.
+    source_conflict: true
+  - requirement_id: HINTS_A_09
+    source_reference: Section 5.1; Table 13
+    source_text_or_faithful_paraphrase: Expected scenario lifetime is two years (730 days).
+    stackwise_field: external.expected_lifetime_days
+    value: 730
+    unit: days
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Expected project lifetime is not a frozen scenario field.
+  - requirement_id: HINTS_A_10
+    source_reference: Section 5.1; Tables 10 and 14
+    source_text_or_faithful_paraphrase: Message delivery target is greater than 90%.
+    stackwise_field: decision_target.delivery_probability
+    value: 0.9
+    unit: probability_minimum
+    mapping_status: interpretable
+    hard_or_preference: hard
+    interpretation_note: The evidence target exists in STACKWISE, but the threshold is not a direct frozen
+      scenario field.
+  - requirement_id: HINTS_A_11
+    source_reference: Section 5.1 versus Tables 10 and 14
+    source_text_or_faithful_paraphrase: The narrative requests at least about three months of battery
+      life, while Tables 10 and 14 evaluate an 80-day threshold.
+    stackwise_field: external.battery_lifetime_goal_days
+    value: source_conflict_three_months_vs_80_days
+    unit: days_minimum
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Conflicting published requirement; no exact energy-budget bridge is created.
+    source_conflict: true
+  - requirement_id: HINTS_A_12
+    source_reference: Section 5.1; Tables 10 and 14
+    source_text_or_faithful_paraphrase: Message latency target is below 100 ms.
+    stackwise_field: quantitative_context.target_end_to_end_latency_ms
+    value: 100
+    unit: ms
+    mapping_status: exact
+    hard_or_preference: hard
+    interpretation_note: Direct match to the frozen end-to-end latency target field.
+  - requirement_id: HINTS_A_13
+    source_reference: Section 5.1; Table 14
+    source_text_or_faithful_paraphrase: Financial cost is a preference criterion without a hard threshold.
+    stackwise_field: decision_target.lifecycle_cost_eur
+    value: minimise
+    unit: objective
+    mapping_status: interpretable
+    hard_or_preference: preference
+    interpretation_note: Cost is represented as a decision target but not as a hard scenario constraint.
+  source_artifact_reference: HINTS (2023), Section 5.1, Tables 10, 13 and 14; Table 5 for application-model
+    structure; companion repository retained as implementation evidence only.
+  source_document_policy: Published case-study narrative and final case tables define the external case.
+    Repository artefacts are implementation evidence and do not silently override the paper. Conflicting
+    published values are retained as source discrepancies and are not used as exact hard-screen inputs.
+  validation_role: external_scenario_portability_and_decision_readiness_not_winner_replication
+- source_case_id: HINTS_B_EVENT_VIDEO_SURVEILLANCE
+  source_family: HINTS
+  title: Event video-surveillance
+  source_publication_doi: 10.1016/j.iot.2023.100678
+  source_repository: https://github.com/SamirSim/Selection-Methodology-IoT
+  source_repository_artifacts:
+  - surveillance.txt
+  source_definition: Network technology/topology and configuration decision for the published event video-surveillance
+    case.
+  requirements_status: EXTRACTED_AND_REVIEWED
+  requirements:
+  - requirement_id: HINTS_B_01
+    source_reference: Section 5.2; Table 13
+    source_text_or_faithful_paraphrase: Minimal and maximal deployments both contain 30 cameras.
+    stackwise_field: external.device_count_min_max
+    value: 30 / 30
+    unit: devices
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Device count is absent from the frozen scenario schema.
+  - requirement_id: HINTS_B_02
+    source_reference: Section 5.2
+    source_text_or_faithful_paraphrase: Cameras use 2,400 mAh batteries at 3 V.
+    stackwise_field: external.battery_capacity_and_voltage
+    value: 2.4 Ah @ 3 V
+    unit: battery_context
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Battery context cannot be converted to per-report whole-device energy without
+      an explicit bridge.
+  - requirement_id: HINTS_B_03
+    source_reference: Section 5.2; Table 13
+    source_text_or_faithful_paraphrase: Traffic direction is upstream.
+    stackwise_field: external.traffic_direction
+    value: upstream
+    unit: categorical
+    mapping_status: interpretable
+    hard_or_preference: hard
+    interpretation_note: Direction semantics are recoverable but no dedicated frozen scenario field exists.
+  - requirement_id: HINTS_B_04
+    source_reference: Section 5.2; Table 13
+    source_text_or_faithful_paraphrase: Each camera packet is 1,500 bytes.
+    stackwise_field: quantitative_context.payload_bytes
+    value: 1500
+    unit: bytes
+    mapping_status: exact
+    hard_or_preference: hard
+    interpretation_note: Direct match to the frozen payload field.
+  - requirement_id: HINTS_B_05
+    source_reference: Section 5.2; Table 13
+    source_text_or_faithful_paraphrase: Minimal workload is 200 packets per second.
+    stackwise_field: quantitative_context.reporting_interval_s_min_workload
+    value: 0.005
+    unit: s
+    mapping_status: exact
+    hard_or_preference: hard
+    interpretation_note: 200 packets/s corresponds to 0.005 s per packet; retained separately because
+      HINTS defines min/max workload.
+  - requirement_id: HINTS_B_06
+    source_reference: Section 5.2; Table 13
+    source_text_or_faithful_paraphrase: Maximal workload is 300 packets per second.
+    stackwise_field: quantitative_context.reporting_interval_s_max_workload
+    value: 0.0033333333333333335
+    unit: s
+    mapping_status: exact
+    hard_or_preference: hard
+    interpretation_note: 300 packets/s corresponds to 1/300 s per packet; frozen STACKWISE has one reporting
+      interval, so the two HINTS workload endpoints remain distinct external values.
+  - requirement_id: HINTS_B_07
+    source_reference: Section 5.2; Table 13
+    source_text_or_faithful_paraphrase: Environment is outdoor urban.
+    stackwise_field: external.radio_environment
+    value: urban
+    unit: categorical
+    mapping_status: interpretable
+    hard_or_preference: hard
+    interpretation_note: Environment is explicit but not a frozen hard-screen field.
+  - requirement_id: HINTS_B_08
+    source_reference: Section 5.2 versus Table 13 and companion surveillance.txt
+    source_text_or_faithful_paraphrase: The narrative states a deployment scope of about 60 m; Table 13
+      and surveillance.txt use 30 m.
+    stackwise_field: external.deployment_scope_m
+    value: source_conflict_60_vs_30
+    unit: m
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Published/implementation representations conflict; no exact hard-screen value
+      is used.
+    source_conflict: true
+  - requirement_id: HINTS_B_09
+    source_reference: Section 5.2; Table 13
+    source_text_or_faithful_paraphrase: Expected scenario lifetime is two months (60 days).
+    stackwise_field: external.expected_lifetime_days
+    value: 60
+    unit: days
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Expected project lifetime is not a frozen scenario field.
+  - requirement_id: HINTS_B_10
+    source_reference: Section 5.2; Tables 11 and 14
+    source_text_or_faithful_paraphrase: Message delivery target is greater than 95%.
+    stackwise_field: decision_target.delivery_probability
+    value: 0.95
+    unit: probability_minimum
+    mapping_status: interpretable
+    hard_or_preference: hard
+    interpretation_note: The evidence target exists but its threshold is not a direct frozen scenario
+      field.
+  - requirement_id: HINTS_B_11
+    source_reference: Section 5.2; Tables 11 and 14
+    source_text_or_faithful_paraphrase: Battery lifetime target is greater than 7 days.
+    stackwise_field: external.battery_lifetime_goal_days
+    value: 7
+    unit: days_minimum
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: No direct frozen battery-lifetime target exists and no per-report energy bridge
+      is assumed.
+  - requirement_id: HINTS_B_12
+    source_reference: Section 5.2; Tables 11 and 14
+    source_text_or_faithful_paraphrase: Message latency target is below 10 ms.
+    stackwise_field: quantitative_context.target_end_to_end_latency_ms
+    value: 10
+    unit: ms
+    mapping_status: exact
+    hard_or_preference: hard
+    interpretation_note: Direct match to the frozen latency field.
+  - requirement_id: HINTS_B_13
+    source_reference: Section 5.2; Table 14
+    source_text_or_faithful_paraphrase: Financial cost is a preference criterion without a hard threshold.
+    stackwise_field: decision_target.lifecycle_cost_eur
+    value: minimise
+    unit: objective
+    mapping_status: interpretable
+    hard_or_preference: preference
+    interpretation_note: Cost is an objective, not a hard feasibility constraint.
+  source_artifact_reference: HINTS (2023), Section 5.2, Tables 11, 13 and 14; companion surveillance.txt
+    retained as implementation evidence only.
+  source_document_policy: Published case-study narrative and final case tables define the external case.
+    Repository artefacts are implementation evidence and do not silently override the paper. Conflicting
+    published values are retained as source discrepancies and are not used as exact hard-screen inputs.
+  validation_role: external_scenario_portability_and_decision_readiness_not_winner_replication
+- source_case_id: HINTS_C_PRECISION_AGRICULTURE
+  source_family: HINTS
+  title: Precision agriculture
+  source_publication_doi: 10.1016/j.iot.2023.100678
+  source_repository: https://github.com/SamirSim/Selection-Methodology-IoT
+  source_repository_artifacts:
+  - No case-specific text artefact identified; published Section 5.3 and Tables 12–14 are primary.
+  - repository contains smart-grid.txt (empty) but it is not identified by the paper as the precision-agriculture
+    case
+  source_definition: Published HINTS precision-agriculture case derived from a real-life example.
+  requirements_status: EXTRACTED_AND_REVIEWED
+  requirements:
+  - requirement_id: HINTS_C_01
+    source_reference: Section 5.3; Table 13
+    source_text_or_faithful_paraphrase: Minimal deployment contains 200 sensors.
+    stackwise_field: external.device_count_min
+    value: 200
+    unit: devices
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Device count is absent from the frozen scenario schema.
+  - requirement_id: HINTS_C_02
+    source_reference: Section 5.3; Table 13
+    source_text_or_faithful_paraphrase: Maximal deployment contains 300 sensors.
+    stackwise_field: external.device_count_max
+    value: 300
+    unit: devices
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Maximum device count is absent from the frozen scenario schema.
+  - requirement_id: HINTS_C_03
+    source_reference: Section 5.3
+    source_text_or_faithful_paraphrase: Sensors use 2,400 mAh batteries at 3 V.
+    stackwise_field: external.battery_capacity_and_voltage
+    value: 2.4 Ah @ 3 V
+    unit: battery_context
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: No direct energy-budget conversion is introduced.
+  - requirement_id: HINTS_C_04
+    source_reference: Section 5.3; Table 13
+    source_text_or_faithful_paraphrase: Traffic direction is upstream.
+    stackwise_field: external.traffic_direction
+    value: upstream
+    unit: categorical
+    mapping_status: interpretable
+    hard_or_preference: hard
+    interpretation_note: Direction is recoverable but not a dedicated frozen hard-screen field.
+  - requirement_id: HINTS_C_05
+    source_reference: Section 5.3; Table 13
+    source_text_or_faithful_paraphrase: Each packet is 30 bytes.
+    stackwise_field: quantitative_context.payload_bytes
+    value: 30
+    unit: bytes
+    mapping_status: exact
+    hard_or_preference: hard
+    interpretation_note: Direct match to the frozen payload field.
+  - requirement_id: HINTS_C_06
+    source_reference: Section 5.3; Table 13
+    source_text_or_faithful_paraphrase: Sensors send one packet every three minutes in both deployment
+      endpoints.
+    stackwise_field: quantitative_context.reporting_interval_s
+    value: 180
+    unit: s
+    mapping_status: exact
+    hard_or_preference: hard
+    interpretation_note: Periodic workload maps exactly to a 180-s reporting interval.
+  - requirement_id: HINTS_C_07
+    source_reference: Section 5.3; Table 13
+    source_text_or_faithful_paraphrase: Environment is outdoor rural.
+    stackwise_field: external.radio_environment
+    value: rural
+    unit: categorical
+    mapping_status: interpretable
+    hard_or_preference: hard
+    interpretation_note: Environment is explicit but not a frozen hard-screen field.
+  - requirement_id: HINTS_C_08
+    source_reference: Section 5.3 versus Table 13
+    source_text_or_faithful_paraphrase: The narrative states a deployment scope of 3,000 m; Table 13 reports
+      1,500 m.
+    stackwise_field: external.deployment_scope_m
+    value: source_conflict_3000_vs_1500
+    unit: m
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Published values conflict; no exact hard-screen value is used.
+    source_conflict: true
+  - requirement_id: HINTS_C_09
+    source_reference: Section 5.3; Table 13
+    source_text_or_faithful_paraphrase: Expected scenario lifetime is ten years (3,650 days).
+    stackwise_field: external.expected_lifetime_days
+    value: 3650
+    unit: days
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Expected project lifetime is not a frozen scenario field.
+  - requirement_id: HINTS_C_10
+    source_reference: Section 5.3 versus Tables 12 and 14
+    source_text_or_faithful_paraphrase: Narrative wording says message delivery "at most 90%", whereas
+      Tables 12 and 14 use a greater-than-90% goal.
+    stackwise_field: decision_target.delivery_probability
+    value: source_conflict_at_most_vs_greater_than_0.90
+    unit: probability_threshold
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Direction of the published threshold conflicts; no exact delivery hard constraint
+      is admitted.
+    source_conflict: true
+  - requirement_id: HINTS_C_11
+    source_reference: Section 5.3 versus Tables 12 and 14
+    source_text_or_faithful_paraphrase: Narrative and Table 14 specify a one-year/365-day battery-lifetime
+      goal; Table 12 displays a 730-day goal.
+    stackwise_field: external.battery_lifetime_goal_days
+    value: source_conflict_365_vs_730
+    unit: days_minimum
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Published threshold conflict; no exact energy-budget bridge is introduced.
+    source_conflict: true
+  - requirement_id: HINTS_C_12
+    source_reference: Section 5.3; Tables 12 and 14
+    source_text_or_faithful_paraphrase: Message latency target is below 1 s (1,000 ms).
+    stackwise_field: quantitative_context.target_end_to_end_latency_ms
+    value: 1000
+    unit: ms
+    mapping_status: exact
+    hard_or_preference: hard
+    interpretation_note: Direct match to the frozen latency field.
+  - requirement_id: HINTS_C_13
+    source_reference: Section 5.3
+    source_text_or_faithful_paraphrase: The network technology is already fixed to LoRaWAN; the decision
+      concerns network configuration.
+    stackwise_field: external.candidate_access_family_fixed
+    value: LoRaWAN
+    unit: categorical
+    mapping_status: interpretable
+    hard_or_preference: hard
+    interpretation_note: This restricts the external decision universe but does not map to a frozen scenario
+      field.
+  - requirement_id: HINTS_C_14
+    source_reference: Section 5.3; Table 14
+    source_text_or_faithful_paraphrase: Financial cost is a preference criterion.
+    stackwise_field: decision_target.lifecycle_cost_eur
+    value: minimise
+    unit: objective
+    mapping_status: interpretable
+    hard_or_preference: preference
+    interpretation_note: Cost is an objective, not a hard feasibility constraint.
+  source_artifact_reference: HINTS (2023), Section 5.3, Tables 12, 13 and 14; no case-specific repository
+    requirement file was relied upon.
+  source_document_policy: Published case-study narrative and final case tables define the external case.
+    Repository artefacts are implementation evidence and do not silently override the paper. Conflicting
+    published values are retained as source discrepancies and are not used as exact hard-screen inputs.
+  validation_role: external_scenario_portability_and_decision_readiness_not_winner_replication
+- source_case_id: VANNIEUWENBORG_SMART_CONTAINERS
+  source_family: VANNIEUWENBORG_2018
+  title: Smart shipping containers — Port of Antwerp
+  source_publication_doi: 10.1002/ett.3308
+  source_repository: https://biblio.ugent.be/publication/8565242
+  source_definition: Published connectivity-selection case for smart shipping containers in the Port of
+    Antwerp.
+  requirements_status: EXTRACTED_AND_REVIEWED
+  requirements:
+  - requirement_id: VC_SC_01
+    source_reference: Section 3.1
+    source_text_or_faithful_paraphrase: Approximately 100,000 containers are to be equipped with temporary
+      IoT end nodes while on site.
+    stackwise_field: external.device_count
+    value: 100000
+    unit: devices
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Exact source requirement; frozen benchmark scenario ontology has no device-count
+      field.
+  - requirement_id: VC_SC_02
+    source_reference: Section 3.1
+    source_text_or_faithful_paraphrase: The port site covers approximately 120 square kilometres.
+    stackwise_field: external.coverage_area_km2
+    value: 120
+    unit: km2
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Exact source requirement; no coverage-area field exists in the frozen scenario
+      schema.
+  - requirement_id: VC_SC_03
+    source_reference: Section 3.1
+    source_text_or_faithful_paraphrase: Area-based container location is required together with monitoring
+      of door openings, humidity, indoor temperature and acceleration.
+    stackwise_field: external.localization_requirement
+    value: area_based_location_required
+    unit: categorical
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Localization capability is explicitly important in the source but is not a frozen
+      STACKWISE scenario field.
+  - requirement_id: VC_SC_04
+    source_reference: Section 3.1
+    source_text_or_faithful_paraphrase: A real-time connection is not required; threshold alerts trigger
+      transmission events.
+    stackwise_field: external.traffic_trigger_mode
+    value: event_driven_non_realtime
+    unit: categorical
+    mapping_status: interpretable
+    hard_or_preference: hard
+    interpretation_note: Semantics are recoverable, but the source does not provide a numeric reporting
+      interval or latency ceiling required for an exact frozen-field mapping.
+  - requirement_id: VC_SC_05
+    source_reference: Section 3.1
+    source_text_or_faithful_paraphrase: Desired device lifetime is at least five years to reduce handling
+      costs.
+    stackwise_field: external.device_lifetime_years
+    value: 5
+    unit: years_minimum
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Cannot be converted to per-report energy budget without battery capacity and
+      workload accounting; no imputation is permitted.
+  source_artifact_reference: Vannieuwenborg et al. (2018), Section 3.1 and Table 4
+- source_case_id: VANNIEUWENBORG_SMART_PARKING
+  source_family: VANNIEUWENBORG_2018
+  title: Shop'n Go smart parking
+  source_publication_doi: 10.1002/ett.3308
+  source_repository: https://biblio.ugent.be/publication/8565242
+  source_definition: Published connectivity-selection case for Shop'n Go vehicle-presence parking spaces.
+  requirements_status: EXTRACTED_AND_REVIEWED
+  requirements:
+  - requirement_id: VC_SP_01
+    source_reference: Section 3.2
+    source_text_or_faithful_paraphrase: Parking sensors register vehicle arrival and departure and send
+      an alert when the allowed parking time is exceeded.
+    stackwise_field: external.traffic_trigger_mode
+    value: event_driven_alerting
+    unit: categorical
+    mapping_status: interpretable
+    hard_or_preference: hard
+    interpretation_note: Event-driven semantics are recoverable; no exact reporting interval is stated.
+  - requirement_id: VC_SP_02
+    source_reference: Section 3.2
+    source_text_or_faithful_paraphrase: Sensor lifetime must be at least five years.
+    stackwise_field: external.device_lifetime_years
+    value: 5
+    unit: years_minimum
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Cannot be translated to whole-device energy per report without battery/workload
+      assumptions.
+  - requirement_id: VC_SP_03
+    source_reference: Section 3.2
+    source_text_or_faithful_paraphrase: No more than 50 parking places are expected within an area of
+      at most 1.5 square kilometres.
+    stackwise_field: external.device_density_context
+    value: 50_devices_per_1.5_km2_max
+    unit: categorical
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Exact source density/area context; frozen scenario schema has no device-density
+      field.
+  - requirement_id: VC_SP_04
+    source_reference: Section 3.2
+    source_text_or_faithful_paraphrase: A midsized city is assumed to contain six such areas, for 300
+      parking places in total.
+    stackwise_field: external.fleet_size
+    value: 300
+    unit: devices
+    mapping_status: unavailable
+    hard_or_preference: preference
+    interpretation_note: Useful deployment-scale context, but not a current hard-screen field.
+  - requirement_id: VC_SP_05
+    source_reference: Section 3.2
+    source_text_or_faithful_paraphrase: Downlink capability is not required for the parking sensors.
+    stackwise_field: external.downlink_required
+    value: false
+    unit: boolean
+    mapping_status: unavailable
+    hard_or_preference: hard
+    interpretation_note: Explicit source requirement; frozen scenario schema does not expose a downlink-capability
+      constraint.
+  - requirement_id: VC_SP_06
+    source_reference: Section 3.2
+    source_text_or_faithful_paraphrase: Public IoT service may be used; if reliable public service is
+      unavailable, a local base station with cellular uplink is an alternative.
+    stackwise_field: external.access_service_deployment_mode
+    value: public_or_local_gateway_fallback
+    unit: categorical
+    mapping_status: interpretable
+    hard_or_preference: preference
+    interpretation_note: Can inform service-availability interpretation, but it is not a single Boolean
+      site-availability requirement.
+  source_artifact_reference: Vannieuwenborg et al. (2018), Section 3.2 and Table 7

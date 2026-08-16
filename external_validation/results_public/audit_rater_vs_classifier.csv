@@ -1,0 +1,13 @@
+expert,partition,n,agreements,exact_agreement,cohen_kappa
+Rater A,all,35,28,0.8,0.5577617328519856
+Rater A,internal_frozen_benchmark,20,16,0.8,0.5375722543352603
+Rater A,held_out_external_source,15,12,0.8,0.5754716981132076
+Rater B,all,35,28,0.8,0.5429104477611941
+Rater B,internal_frozen_benchmark,20,16,0.8,0.5505617977528091
+Rater B,held_out_external_source,15,12,0.8,0.5360824742268042
+Rater C,all,35,23,0.6571428571428571,0.3322734499205088
+Rater C,internal_frozen_benchmark,20,13,0.65,0.306930693069307
+Rater C,held_out_external_source,15,10,0.6666666666666666,0.353448275862069
+Rater D,all,35,30,0.8571428571428571,0.6846846846846846
+Rater D,internal_frozen_benchmark,20,16,0.8,0.5530726256983243
+Rater D,held_out_external_source,15,14,0.9333333333333332,0.8557692307692308

@@ -1,0 +1,12 @@
+{
+  "factorial_state_rows": 388800,
+  "workload_tariff_regimes": 1350,
+  "tariff_class_error_fraction_over_all_states": 0.17212448559670782,
+  "regimes_with_any_tariff_class_error_fraction": 0.8333333333333334,
+  "regimes_with_majority_tariff_class_error_fraction": 0.1711111111111111,
+  "median_relative_billed_volume_error": 0.744,
+  "q05_relative_billed_volume_error": 0.20620225235781273,
+  "q95_relative_billed_volume_error": 0.9720401721664276,
+  "max_relative_billed_volume_error": 0.9999614921780987,
+  "probability_interpretation": false
+}

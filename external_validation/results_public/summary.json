@@ -1,0 +1,97 @@
+{
+  "campaign_id": "paper_b_external_validation_v1",
+  "protocol_freeze_created_utc": "2026-08-16T11:33:49.808703+00:00",
+  "protocol_freeze_state": "PRE_DATA_FROZEN",
+  "external_scenarios": 5,
+  "tier_a_cases": 5,
+  "tier_b_cases": 5,
+  "tier_c_cases": 0,
+  "hard_requirement_mapping": {
+    "exact": 10,
+    "interpretable": 11,
+    "unavailable": 25,
+    "source_conflicts": 6
+  },
+  "external_candidate_readiness_states": {
+    "UNRESOLVED": 38,
+    "INFEASIBLE": 7
+  },
+  "external_source_target_relation_classes": {
+    "E0_MISSING": 10,
+    "C1_BRIDGEABLE": 3,
+    "C2_CONDITIONAL": 2
+  },
+  "candidate_target_transition_counts": {
+    "E0_MISSING->C1_BRIDGEABLE": 3,
+    "C1_BRIDGEABLE->C1_BRIDGEABLE": 3,
+    "E0_MISSING->C2_CONDITIONAL": 1,
+    "C2_CONDITIONAL->C2_CONDITIONAL": 1
+  },
+  "negative_control_pass": true,
+  "inappropriate_direct_transition_count": 0,
+  "external_portfolio_status": {
+    "tier_c_eligible_cases": 0,
+    "tier_c_source_families": 0,
+    "external_portfolio_analysis_authorised": false,
+    "result": "WITHHELD_BY_PRE_REGISTERED_TIER_C_RULE",
+    "interpretation": "External set-cover claim is withheld rather than extending the frozen ontology or resolving source conflicts post hoc."
+  },
+  "mr1_full_feature_simplex": [
+    {
+      "feature_subset_id": "full",
+      "feature_count": 4,
+      "preference_operator": "weighted_sum",
+      "weight_design": "simplex_step_0.25",
+      "evaluations": 245,
+      "evaluable_with_feasible_candidate": 175,
+      "any_infeasible_at_top_fraction": 0.7877551020408163,
+      "all_infeasible_at_top_fraction": 0.6489795918367347,
+      "unique_infeasible_winner_fraction": 0.34285714285714286,
+      "evaluable_any_infeasible_at_top_fraction": 0.8114285714285714,
+      "evaluable_all_infeasible_at_top_fraction": 0.6571428571428571,
+      "evaluable_unique_infeasible_winner_fraction": 0.4
+    },
+    {
+      "feature_subset_id": "full",
+      "feature_count": 4,
+      "preference_operator": "topsis",
+      "weight_design": "simplex_step_0.25",
+      "evaluations": 245,
+      "evaluable_with_feasible_candidate": 175,
+      "any_infeasible_at_top_fraction": 0.7591836734693878,
+      "all_infeasible_at_top_fraction": 0.6204081632653061,
+      "unique_infeasible_winner_fraction": 0.2938775510204082,
+      "evaluable_any_infeasible_at_top_fraction": 0.7714285714285715,
+      "evaluable_all_infeasible_at_top_fraction": 0.6171428571428571,
+      "evaluable_unique_infeasible_winner_fraction": 0.34285714285714286
+    },
+    {
+      "feature_subset_id": "full",
+      "feature_count": 4,
+      "preference_operator": "weighted_chebyshev",
+      "weight_design": "simplex_step_0.25",
+      "evaluations": 245,
+      "evaluable_with_feasible_candidate": 175,
+      "any_infeasible_at_top_fraction": 0.8448979591836735,
+      "all_infeasible_at_top_fraction": 0.5224489795918368,
+      "unique_infeasible_winner_fraction": 0.22040816326530613,
+      "evaluable_any_infeasible_at_top_fraction": 0.8514285714285714,
+      "evaluable_all_infeasible_at_top_fraction": 0.5142857142857142,
+      "evaluable_unique_infeasible_winner_fraction": 0.2571428571428571
+    }
+  ],
+  "mr4": {
+    "factorial_state_rows": 388800,
+    "workload_tariff_regimes": 1350,
+    "tariff_class_error_fraction_over_all_states": 0.17212448559670782,
+    "regimes_with_any_tariff_class_error_fraction": 0.8333333333333334,
+    "regimes_with_majority_tariff_class_error_fraction": 0.1711111111111111,
+    "median_relative_billed_volume_error": 0.744,
+    "q05_relative_billed_volume_error": 0.20620225235781273,
+    "q95_relative_billed_volume_error": 0.9720401721664276,
+    "max_relative_billed_volume_error": 0.9999614921780987,
+    "probability_interpretation": false
+  },
+  "rules_changed_after_outcome_inspection": false,
+  "benchmark_v1_0_0_modified": false
+}

@@ -1,0 +1,7 @@
+omitted_scenario,universe_size,minimum_family_cardinality,minimum_family_portfolios
+NONE,5,2,cellular|lorawan
+asset_tracking_connected_handover,4,2,cellular|lorawan
+asset_tracking_periodic_cross_cell,4,2,cellular|lorawan
+environmental_private_lorawan,4,1,cellular
+smart_meter_public_cellular,4,2,cellular|lorawan
+urban_nonip_dual_access,4,2,cellular|lorawan

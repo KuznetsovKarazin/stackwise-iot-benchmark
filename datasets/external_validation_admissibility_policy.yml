@@ -1,0 +1,35 @@
+schema_version: 1
+frozen_comparison_classes:
+  C0_DIRECT: Same target metric/estimand, canonical unit, fully specified compatible
+    boundary and matched required conditions.
+  C1_BRIDGEABLE: Target recoverable only through an explicit provenance-preserving
+    bridge.
+  C2_CONDITIONAL: Can characterize/model the target conditionally but is not score-ready
+    at the target boundary.
+  E0_MISSING: Required estimand evidence absent from the source.
+critical_fields:
+- metric_id
+- system_scope
+- temporal_scope
+- accounting_basis
+- conditioning
+- payload_basis
+- baseline_accounting
+- ack_rx_accounting
+- retry_accounting
+- path_start
+- path_end
+- empirical_unit
+- independence_unit
+negative_controls:
+- source_id: EV_E2_POVALAC_LORAWAN_TRAFFIC_2023
+  target_metric_id: delivery_probability
+  forbidden_output: C0_DIRECT
+  unless: attempted_transmission_denominator_explicitly_present_and_endpoint_matched
+external_schema_policy:
+  new_canonical_field_allowed_after_freeze: false
+  schema_extension_required_action: exclude_from_primary_validation_and_report
+human_judgement_policy:
+  primary_classifier: deterministic_rules
+  human_role: source_semantics_transcription_and_ambiguity_audit
+  blind_independent_audit_recommended: true

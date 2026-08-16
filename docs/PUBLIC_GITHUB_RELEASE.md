@@ -11,6 +11,6 @@ This repository is prepared for a public scientific-software release. Before the
 6. Inspect `git status --short` manually.
 7. Confirm that no raw data, generated results, backup directories, patch ZIPs, credentials or local manuscript files are staged.
 8. Commit and push to an empty GitHub repository.
-9. Create the immutable tag `v0.1.61` and a GitHub Release from that tag.
+9. Create the immutable tag `v0.1.62` and a GitHub Release from that tag.
 
 The public repository intentionally excludes local `data/`, `results/`, `release/`, `dist/`, `backups/`, `.stackwise_backups/`, `payload/`, root-level ZIP diagnostics and the manuscript workspace. The benchmark itself is already archived at https://doi.org/10.5281/zenodo.21937093.

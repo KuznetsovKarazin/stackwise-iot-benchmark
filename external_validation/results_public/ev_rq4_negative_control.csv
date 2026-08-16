@@ -1,0 +1,2 @@
+external_source_id,target_metric_id,relation_class,rule_reason,negative_control_pass
+EV_E2_POVALAC_LORAWAN_TRAFFIC_2023,delivery_probability,C2_CONDITIONAL,"LoRaWAN sniffer records are observed receptions; without all attempted transmissions the delivery denominator is absent, so only conditional traffic/reception characterization is admissible.",True

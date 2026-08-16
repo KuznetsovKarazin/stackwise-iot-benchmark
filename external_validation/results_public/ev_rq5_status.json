@@ -1,0 +1,7 @@
+{
+  "tier_c_eligible_cases": 0,
+  "tier_c_source_families": 0,
+  "external_portfolio_analysis_authorised": false,
+  "result": "WITHHELD_BY_PRE_REGISTERED_TIER_C_RULE",
+  "interpretation": "External set-cover claim is withheld rather than extending the frozen ontology or resolving source conflicts post hoc."
+}

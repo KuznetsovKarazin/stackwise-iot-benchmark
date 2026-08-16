@@ -1,0 +1,9 @@
+source_case_id,field,source_a,value_a,unit_a,source_b,value_b,unit_b,status,pre_data_resolution
+HINTS_A_SMART_BUILDING,deployment_scope_m,Section 5.1 narrative,100,m,Table 13,50,m,unresolved_source_conflict,Not used as exact hard-screen input
+HINTS_A_SMART_BUILDING,battery_lifetime_goal_days,Section 5.1 narrative,about 3 months,duration,Tables 10 and 14,80,days,unresolved_source_conflict,No per-report energy bridge introduced
+HINTS_A_SMART_BUILDING,repository_workload,published Section 5.1/Table 13,1 packet/s,frequency,building-automation (copie 1).txt,packet_period=60,s,implementation_snapshot_mismatch,Published case remains primary; repository file not used to overwrite it
+HINTS_B_EVENT_VIDEO_SURVEILLANCE,deployment_scope_m,Section 5.2 narrative,60,m,Table 13 + surveillance.txt,30,m,unresolved_source_conflict,Not used as exact hard-screen input
+HINTS_B_EVENT_VIDEO_SURVEILLANCE,repository_min_packet_frequency,published Section 5.2/Table 13,200,packets/s,surveillance.txt,packet_period=0.0057,s,implementation_snapshot_mismatch,Published case remains primary
+HINTS_C_PRECISION_AGRICULTURE,deployment_scope_m,Section 5.3 narrative,3000,m,Table 13,1500,m,unresolved_source_conflict,Not used as exact hard-screen input
+HINTS_C_PRECISION_AGRICULTURE,delivery_goal_direction,Section 5.3 narrative,at most 90,percent,Tables 12 and 14,greater than 90,percent,unresolved_source_conflict,No exact delivery threshold admitted
+HINTS_C_PRECISION_AGRICULTURE,battery_lifetime_goal_days,Section 5.3 + Table 14,365,days,Table 12,730,days,unresolved_source_conflict,No exact battery-lifetime bridge admitted

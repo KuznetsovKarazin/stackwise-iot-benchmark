@@ -47,3 +47,16 @@ def test_public_audit_accepts_normal_source(tmp_path: Path) -> None:
         assert warnings == []
     finally:
         module.ROOT = original
+
+def test_public_audit_blocks_external_validation_raw_inputs_if_staged(tmp_path: Path) -> None:
+    original = module.ROOT
+    try:
+        module.ROOT = tmp_path
+        blocked = tmp_path / "external_validation" / "sources" / "heldout.csv"
+        blocked.parent.mkdir(parents=True)
+        blocked.write_text("safe", encoding="utf-8")
+        errors, _ = module.audit([blocked], staged=True)
+        assert any("blocked path staged" in item for item in errors)
+    finally:
+        module.ROOT = original
+

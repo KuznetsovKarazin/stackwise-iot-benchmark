@@ -1,0 +1,4 @@
+partition,n_items,n_raters_per_item,fleiss_kappa,observed_pairwise_agreement_Pbar,chance_agreement_Pe
+all,35,4,0.5366735934734087,0.7952380952380952,0.5580612244897959
+internal_frozen_benchmark,20,4,0.4972067039106146,0.775,0.5525
+held_out_external_source,15,4,0.5870967741935487,0.8222222222222223,0.5694444444444443

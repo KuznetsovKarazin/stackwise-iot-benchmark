@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "documents": [
+    {
+      "path": "external_validation/source_documents/HINTS_2023_published.pdf",
+      "role": "primary_external_use_case_publication",
+      "bytes": 1539152,
+      "md5": "05a6d329d52b990d479886578e493d25",
+      "sha256": "1257e6bc4c0bbe5d07becf1c17354787859f6dc281c15f27ec1698ee45af7d48"
+    },
+    {
+      "path": "external_validation/source_documents/HINTS_repository_snapshot.zip",
+      "role": "companion_repository_snapshot",
+      "bytes": 105460983,
+      "md5": "89cdc1eaae5952bb948621c145c061d8",
+      "sha256": "f79369d0ae640267ec7c258f1aaa1959c7d4c71b6428ded978815effb01e9400"
+    }
+  ]
+}

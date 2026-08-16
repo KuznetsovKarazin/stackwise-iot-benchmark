@@ -1,0 +1,145 @@
+{
+  "created_utc": "2026-08-16T11:41:29.928655+00:00",
+  "command": "python scripts/run_external_validation.py",
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "platform": "Linux-6.18.35-x86_64-with-glibc2.41",
+  "parameters": {
+    "freeze_state": "PRE_DATA_FROZEN",
+    "probability_interpretation": false,
+    "external_portfolio_tier_c_rule": "3 cases / 2 publication families"
+  },
+  "inputs": [
+    {
+      "path": "/mnt/data/stackwise_extval_full/external_validation/protocol_manifest.json",
+      "size_bytes": 3950,
+      "sha256": "340ef7a3d934f4a79159550e28b71d0033449e63c66c45ed08d0b1c476b15f89"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/datasets/external_validation_use_cases.yml",
+      "size_bytes": 27315,
+      "sha256": "b685359540638596da898913ff0dfc95c37108a497b4a550c941d004ef79f0e0"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/datasets/external_validation_evidence_sources.yml",
+      "size_bytes": 2511,
+      "sha256": "7b52e92167ebf777ecab35acdc65ff7cfbf9dd6feb3cb0f49072dfe25c5c2359"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/datasets/external_validation_admissibility_policy.yml",
+      "size_bytes": 1237,
+      "sha256": "3f3f2dd0b67e6127331560ad2b01553b5413230f9ed39667af003cafa3864654"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/external_validation/sources/kousias_nb_iot_passive.csv",
+      "size_bytes": 74398421,
+      "sha256": "6a2a42d1f60abdc7c3d625bb9d91d2e9cbeb4f26cd4975370db004ee3a15c975"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/external_validation/sources/povalac_lorawan_csv.zip",
+      "size_bytes": 265164055,
+      "sha256": "25a092ff893eaf607971f07cc1cbba8655fdf71eda3a1bee70a997be5ad64cea"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/external_validation/sources/leenders_nbiot_power_v1.0.zip",
+      "size_bytes": 4807147,
+      "sha256": "7fa4b0de09955f8ce418034eac2ac8e20933d62239defe326b3b7fbcb099ee84"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/mnt/data/stackwise_extval_full/results/external_validation/paper_b_external_validation_v1/ev_rq2_scenario_state_counts.csv",
+      "size_bytes": 276,
+      "sha256": "f439fe08abeb86c1623adf249377dd02750379194e6372f364a49659d8d5e5fd"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/results/external_validation/paper_b_external_validation_v1/mr1_preference_operator_robustness.csv",
+      "size_bytes": 4265,
+      "sha256": "7044ed9668f2ecd7cce090e31b0001b9d20657a960cba93e772af25711092d35"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/results/external_validation/paper_b_external_validation_v1/ev_rq5_external_portfolio_eligibility.csv",
+      "size_bytes": 385,
+      "sha256": "f6c5379da0c07d9a90097c66e457a3233ebc5c73a40dfad8b97b3377e64143be"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/results/external_validation/paper_b_external_validation_v1/mr1_preference_operator_detail.csv",
+      "size_bytes": 246991,
+      "sha256": "a7c64967352013f16155c1cf7e3768f059f3f1cf7189133b16ee33ebd6aa6ad4"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/results/external_validation/paper_b_external_validation_v1/ev_rq2_candidate_readiness.csv",
+      "size_bytes": 11607,
+      "sha256": "891c1c70c71fb1a884d732de0d1d73405fc365dfdfed2f5327710e60df906c91"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/results/external_validation/paper_b_external_validation_v1/mr4_accounting_factorial_overall.json",
+      "size_bytes": 549,
+      "sha256": "4c621f36e454838d93043461126a66a8ccfca30b08c4d5119b6a4d832fc5ae50"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/results/external_validation/paper_b_external_validation_v1/mr2_admissibility_audit.csv",
+      "size_bytes": 3244,
+      "sha256": "b14b52eb1155bd43a3b59aa9665f3377440063b4f7d63fe39da4b2057513cde9"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/results/external_validation/paper_b_external_validation_v1/heldout_source_profiles.csv",
+      "size_bytes": 1556,
+      "sha256": "19e2e8770c6bf7c776e69680ad5ca4c75eee8094e5d5522627251b3eb22940a3"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/results/external_validation/paper_b_external_validation_v1/ev_rq3_external_source_target_relations.csv",
+      "size_bytes": 2670,
+      "sha256": "06e870bfaa306db70f41cc9ebb29c826f1d9c155258051dcbd8f48b3b47e0ad9"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/results/external_validation/paper_b_external_validation_v1/ev_rq4_negative_control.csv",
+      "size_bytes": 354,
+      "sha256": "4b4b07a3c6610fd0160009cc4f9a827738896c708062cd855f01b8169d3abff4"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/results/external_validation/paper_b_external_validation_v1/ev_rq3_candidate_target_transitions.csv",
+      "size_bytes": 1729,
+      "sha256": "d9ae84076377168ddcf58d76f1ee772bd33542633792de2d30955c35748d495a"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/results/external_validation/paper_b_external_validation_v1/mr4_accounting_factorial_detail.csv",
+      "size_bytes": 103900840,
+      "sha256": "f3052afd6f47b61127269013dfaeb8075ef3243985d95b7a2b2ac887abb438a3"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/results/external_validation/paper_b_external_validation_v1/ev_rq5_status.json",
+      "size_bytes": 311,
+      "sha256": "f9b321245e2c7116fa6b1f3af054820d1289f1c7b872597133ab050240055a5a"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/results/external_validation/paper_b_external_validation_v1/mr5_internal_family_leave_one_out.csv",
+      "size_bytes": 358,
+      "sha256": "9087872fb2c32a46b97e7f0540805ab9eefee29e73540c32a390ff30850673e5"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/results/external_validation/paper_b_external_validation_v1/mr4_accounting_factorial_summary.csv",
+      "size_bytes": 133675,
+      "sha256": "a6be4f9ebee9a4a42b2f5859f3c2ab2738c14bcdd5e9870a8c086708c9251941"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/results/external_validation/paper_b_external_validation_v1/mr3_uncertainty_contracts.csv",
+      "size_bytes": 1291,
+      "sha256": "f569359bab0b00c1c2e7ad8c3640b3bbde24ef93978b3db3cc91c4aec101f991"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/results/external_validation/paper_b_external_validation_v1/ev_rq1_scenario_portability.csv",
+      "size_bytes": 829,
+      "sha256": "136ac0b8d120f8e212ca0d649d779bfdcc1f167f67b72e2b1ed4199bb7d0a273"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/results/external_validation/paper_b_external_validation_v1/summary.json",
+      "size_bytes": 3822,
+      "sha256": "b57d2e00f8162f09d01cfe2ec89a13b852270b6a3e3c95e882a4db5ce9af986b"
+    },
+    {
+      "path": "/mnt/data/stackwise_extval_full/results/external_validation/paper_b_external_validation_v1/leenders_payload_energy_reproduction.csv",
+      "size_bytes": 360,
+      "sha256": "980cbc5f431ee22d2f59489ce136ae8df744c46efddb07b307c893e7b11f281d"
+    }
+  ]
+}

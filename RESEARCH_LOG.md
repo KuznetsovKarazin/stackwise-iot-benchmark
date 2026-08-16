@@ -539,3 +539,16 @@ Experiment 5 closed the original heterogeneous-fleet contribution: 4/5 best sing
 ### 2026-08-13 — v0.1.59 publication handoff
 
 Added deterministic Zenodo deposit packaging and separate manuscript outlines after final consolidation of Experiments 1–5. No benchmark data or experimental result changed.
+
+## 2026-08-16 - Paper B external-validation campaign closed
+
+- Froze the external-validation protocol and method inputs before outcome-producing analysis.
+- Transcribed three HINTS and two Vannieuwenborg published use cases without post-outcome schema extension.
+- Evaluated three held-out public sources (Kousias NB-IoT operational measurements, Povalac LoRaWAN sniffer data, Leenders/Callebaut NB-IoT power measurements) under frozen evidence-boundary rules.
+- Passed the pre-specified LoRaWAN delivery-probability negative control: no receive-side sniffer evidence was promoted to direct delivery probability.
+- Extended Experiment 1 ordering robustness across weighted sum, TOPSIS and weighted Chebyshev and added leave-one-feature-out sensitivity.
+- Extended Experiment 4 accounting robustness to 1,350 regimes / 388,800 deterministic states and verified exact reproduction of the frozen 288-state point.
+- Performed leave-one-scenario-out sensitivity for the internal family set-cover result; the two-family claim is benchmark-specific and is demoted to a secondary result.
+- Completed a blinded semantic audit with four independent expert groups; retained frozen classifier labels and treated disagreements as construct-validity evidence rather than relabelling.
+- Prepared compact public result artefacts, manuscript traceability and release-candidate v0.1.62 metadata. Benchmark v1.0.0 remains unchanged.
+

@@ -1,0 +1,99 @@
+{
+  "campaign_id": "paper_b_external_validation_v1",
+  "freeze_state": "PRE_DATA_FROZEN",
+  "created_utc": "2026-08-16T11:33:49.808703+00:00",
+  "protocol_files": [
+    {
+      "path": "docs/PAPER_B_EXTERNAL_VALIDATION_PROTOCOL.md",
+      "sha256": "11ca3e1e3fe003a02d3b72562294f4b1e9a1e598ae4bc681484a92818782431e"
+    },
+    {
+      "path": "datasets/external_validation_campaign.yml",
+      "sha256": "39aed8de94b6b57e3fb457d2c0fd99bdd23b6e62c0d47adb87c2de389d72bce1"
+    },
+    {
+      "path": "datasets/external_validation_use_cases.yml",
+      "sha256": "b685359540638596da898913ff0dfc95c37108a497b4a550c941d004ef79f0e0"
+    },
+    {
+      "path": "datasets/external_validation_evidence_sources.yml",
+      "sha256": "7b52e92167ebf777ecab35acdc65ff7cfbf9dd6feb3cb0f49072dfe25c5c2359"
+    },
+    {
+      "path": "datasets/external_validation_admissibility_policy.yml",
+      "sha256": "3f3f2dd0b67e6127331560ad2b01553b5413230f9ed39667af003cafa3864654"
+    },
+    {
+      "path": "external_validation/source_document_manifest.json",
+      "sha256": "66e932730be2dc66a5edfa2ad23f9068f3c4404eb0a0a60a29901f8e5dc1b792"
+    },
+    {
+      "path": "external_validation/annotations/hints_source_discrepancies_predata.csv",
+      "sha256": "ba5bc7d7c532370dde7ba9b959f6daeeaee4a496f812eefaeb0bfef7b01bfc09"
+    }
+  ],
+  "frozen_method_inputs": [
+    {
+      "path": "datasets/evidence_boundary_taxonomy.yml",
+      "sha256": "997fb4f056ba3992aa618e6d90e7a9b1cc4574bc50a1ce6b432de5794ff8caa6"
+    },
+    {
+      "path": "datasets/evidence_metric_catalog.yml",
+      "sha256": "676210cdf125005c1b5c749e8265281f9f4e4913b93773c3498634f3e07c826f"
+    },
+    {
+      "path": "release/stackwise_benchmark_v1.0.0/tables/L3_benchmark_definitions/candidate_stack_catalog.csv",
+      "sha256": "78d3f53c98e3669df6721aa89e801e39080ff07983ec4663c56244cc1db77188"
+    },
+    {
+      "path": "release/stackwise_benchmark_v1.0.0/tables/L3_benchmark_definitions/component_catalog.csv",
+      "sha256": "cf602a94508c7bcbcd868030452e58b873f6259f4586cd0c8150c8ef88512403"
+    },
+    {
+      "path": "release/stackwise_benchmark_v1.0.0/tables/L4_feasibility_and_support/refined_hard_feasibility_matrix.csv",
+      "sha256": "ec338a3c9c87c78f4ce67638591aeef008fb38705839bb6247b469b28f89ef75"
+    }
+  ],
+  "held_out_inputs": [
+    {
+      "source_id": "EV_E1_KOUSIAS_NBIOT_4G_5G_2023",
+      "path": "external_validation/sources/kousias_nb_iot_passive.csv",
+      "bytes": 74398421,
+      "md5": "c9da425b57b325a56f7ca0944c9d05b4",
+      "sha256": "6a2a42d1f60abdc7c3d625bb9d91d2e9cbeb4f26cd4975370db004ee3a15c975"
+    },
+    {
+      "source_id": "EV_E2_POVALAC_LORAWAN_TRAFFIC_2023",
+      "path": "external_validation/sources/povalac_lorawan_csv.zip",
+      "bytes": 265164055,
+      "md5": "075503abc397454901ed0e4457e5b998",
+      "sha256": "25a092ff893eaf607971f07cc1cbba8655fdf71eda3a1bee70a997be5ad64cea"
+    },
+    {
+      "source_id": "EV_E3_LEENDERS_NBIOT_POWER_2019",
+      "path": "external_validation/sources/leenders_nbiot_power_v1.0.zip",
+      "bytes": 4807147,
+      "md5": "a146818e92f2b6c775a9a80cb200e814",
+      "sha256": "7fa4b0de09955f8ce418034eac2ac8e20933d62239defe326b3b7fbcb099ee84"
+    }
+  ],
+  "source_documents": [
+    {
+      "path": "external_validation/source_documents/HINTS_2023_published.pdf",
+      "role": "primary_external_use_case_publication",
+      "bytes": 1539152,
+      "md5": "05a6d329d52b990d479886578e493d25",
+      "sha256": "1257e6bc4c0bbe5d07becf1c17354787859f6dc281c15f27ec1698ee45af7d48"
+    },
+    {
+      "path": "external_validation/source_documents/HINTS_repository_snapshot.zip",
+      "role": "companion_repository_snapshot",
+      "bytes": 105460983,
+      "md5": "89cdc1eaae5952bb948621c145c061d8",
+      "sha256": "f79369d0ae640267ec7c258f1aaa1959c7d4c71b6428ded978815effb01e9400"
+    }
+  ],
+  "benchmark_version": "1.0.0",
+  "rules_changed_after_outcome_inspection": false,
+  "outcome_analysis_permitted": true
+}

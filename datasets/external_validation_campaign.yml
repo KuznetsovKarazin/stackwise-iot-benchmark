@@ -1,0 +1,45 @@
+schema_version: 1
+campaign_id: paper_b_external_validation_v1
+status: PRE_DATA_FREEZE_READY
+benchmark:
+  id: stackwise_empirical_evidence_benchmark
+  version: 1.0.0
+frozen_method_inputs:
+  boundary_taxonomy: datasets/evidence_boundary_taxonomy.yml
+  metric_catalog: datasets/evidence_metric_catalog.yml
+  candidate_stacks: release/stackwise_benchmark_v1.0.0/tables/L3_benchmark_definitions/candidate_stack_catalog.csv
+  component_catalog: release/stackwise_benchmark_v1.0.0/tables/L3_benchmark_definitions/component_catalog.csv
+  hard_feasibility: release/stackwise_benchmark_v1.0.0/tables/L4_feasibility_and_support/refined_hard_feasibility_matrix.csv
+external_use_case_registry: datasets/external_validation_use_cases.yml
+external_evidence_registry: datasets/external_validation_evidence_sources.yml
+admissibility_policy: datasets/external_validation_admissibility_policy.yml
+primary_rqs:
+- EV-RQ1
+- EV-RQ2
+- EV-RQ3
+- EV-RQ4
+- EV-RQ5
+method_robustness:
+- MR1
+- MR2
+- MR3
+- MR4
+- MR5
+prohibited_after_pre_data_freeze:
+- change_comparison_classes
+- relax_boundary_taxonomy_due_to_outcome
+- impute_missing_external_requirements
+- replace_usable_external_source_after_observing_result
+- force_binary_decision_from_unresolved
+- rank_evidence_incomplete_candidate
+pre_data_freeze_requires:
+- all five primary use cases have source artefact references and extracted hard requirements
+- external dataset versions and file checksums are pinned and locally verified against source repository
+  metadata
+- all primary metrics and stop rules unchanged
+- protocol manifest generated
+pre_outcome_refinement_note: Protocol refined after exact HINTS source-document inspection but before
+  any STACKWISE external outcomes. Published/source implementation discrepancies are preserved, unavailable
+  hard requirements conservatively block DECISION_READY, and Tier-C portfolio analysis uses a stricter
+  mapping threshold. No admissibility class, frozen benchmark rule, candidate catalogue, or outcome metric
+  was changed.

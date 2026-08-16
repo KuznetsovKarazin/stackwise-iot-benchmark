@@ -1,0 +1,13 @@
+{
+  "created_utc": "2026-08-16T11:45:00Z",
+  "audit_items": 35,
+  "internal_items": 20,
+  "external_items": 15,
+  "post_freeze_validation_only": true,
+  "files_sha256": {
+    "STACKWISE_admissibility_blind_audit_for_expert.csv": "7b6b1adcea1dbc0f52b790facfb7c0e08af3409145c6e7f793787d34513a1efa",
+    "STACKWISE_admissibility_audit_algorithm_key_DO_NOT_SEND.csv": "13b312b8d287da478eaedce9f16eb35d95d38a9bffe9b8a89da5270ceb56fea0",
+    "README_INDEPENDENT_AUDIT.md": "3787818fe8fcd8e3bdc6b8b3b8099cc51323282ef7a8f8b0608116322871767f",
+    "score_independent_admissibility_audit.py": "6537a1969774b2b6853191b4a1cd3e554c08e3607c5f3a2eccd9484b8337bc3e"
+  }
+}

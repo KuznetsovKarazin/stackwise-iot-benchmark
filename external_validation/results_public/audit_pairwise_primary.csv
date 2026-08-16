@@ -1,0 +1,19 @@
+rater_a,rater_b,partition,n,agreements,exact_agreement,cohen_kappa
+Expert 1,Expert 2,all,35,30,0.8571428571428571,0.6443089430894308
+Expert 1,Expert 2,internal_frozen_benchmark,20,17,0.85,0.6363636363636362
+Expert 1,Expert 2,held_out_external_source,15,13,0.8666666666666667,0.6590909090909092
+Expert 1,Expert 4,all,35,26,0.7428571428571429,0.467005076142132
+Expert 1,Expert 4,internal_frozen_benchmark,20,13,0.65,0.2783505154639175
+Expert 1,Expert 4,held_out_external_source,15,13,0.8666666666666667,0.7142857142857144
+Expert 1,Expert 5,all,35,28,0.8,0.5279383429672447
+Expert 1,Expert 5,internal_frozen_benchmark,20,15,0.75,0.4011976047904191
+Expert 1,Expert 5,held_out_external_source,15,13,0.8666666666666667,0.6938775510204084
+Expert 2,Expert 4,all,35,26,0.7428571428571429,0.4493006993006994
+Expert 2,Expert 4,internal_frozen_benchmark,20,15,0.75,0.4845360824742268
+Expert 2,Expert 4,held_out_external_source,15,11,0.7333333333333333,0.3999999999999998
+Expert 2,Expert 5,all,35,31,0.8857142857142857,0.717171717171717
+Expert 2,Expert 5,internal_frozen_benchmark,20,18,0.9,0.7604790419161677
+Expert 2,Expert 5,held_out_external_source,15,13,0.8666666666666667,0.6511627906976745
+Expert 4,Expert 5,all,35,26,0.7428571428571429,0.467005076142132
+Expert 4,Expert 5,internal_frozen_benchmark,20,15,0.75,0.4791666666666666
+Expert 4,Expert 5,held_out_external_source,15,11,0.7333333333333333,0.4495412844036697

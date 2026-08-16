@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-__version__ = "0.1.61"
+__version__ = "0.1.62"
 
 CANONICAL_COLUMNS = [
     "dataset_id", "study_id", "source_file", "observation_id", "technology",

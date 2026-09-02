@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.63 - Array peer-review robustness analyses
+
+- Added post-review class-specific agreement diagnostics and a four-class frozen-label/expert-vote confusion matrix.
+- Added item-bootstrap uncertainty for Fleiss' kappa (20,000 item resamples; fixed seed 20260816).
+- Added an operational C0/C1 versus C2/E0 boundary analysis.
+- Added majority-consensus and conservative-majority sensitivity without modifying frozen classifier labels.
+- Verified that expert-consensus substitutions change 0/45 external readiness states and 0/42 first-slice criterion states; only 3/120 full Stage-5E non-ready target rows become more conservative, with no decision-ready candidate created or removed.
+- Added uncertainty-label extreme sensitivity (0/120 readiness changes under the current non-probabilistic readiness contract).
+- Added an illustrative readiness-engine overhead benchmark and exact replay tests for frozen external-campaign outputs.
+- Restored the reusable `stackwise.external_validation` module required by the public external-campaign runner.
+- Benchmark v1.0.0 and all frozen confirmatory outcomes remain unchanged.
+
 ## 0.1.62 - Paper B external validation and independent admissibility audit
 
 - Added a checksum-pinned Paper B external-validation protocol and fail-closed pre-data freeze workflow.

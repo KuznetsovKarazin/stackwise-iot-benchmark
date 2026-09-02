@@ -1,0 +1,46 @@
+external_source_id,target_metric_id,relation_class,rule_reason,frozen_relation_class,sensitivity_scheme
+EV_E1_KOUSIAS_NBIOT_4G_5G_2023,delivery_probability,E0_MISSING,Passive radio/network measurements do not contain attempted-transmission outcomes/denominator.,E0_MISSING,FROZEN
+EV_E1_KOUSIAS_NBIOT_4G_5G_2023,end_to_end_application_latency_ms,E0_MISSING,"Selected passive NB-IoT file contains radio/network measurements, not end-to-end application latency.",E0_MISSING,FROZEN
+EV_E1_KOUSIAS_NBIOT_4G_5G_2023,expected_device_energy_per_application_report_j,E0_MISSING,Selected passive NB-IoT file contains no device energy measurement.,E0_MISSING,FROZEN
+EV_E1_KOUSIAS_NBIOT_4G_5G_2023,feasible_link_probability,C1_BRIDGEABLE,"Operational NB-IoT RSRP/RSRQ/SINR and serving-cell context can support a threshold/model bridge to link feasibility, but do not directly measure a probability estimand.",C1_BRIDGEABLE,FROZEN
+EV_E1_KOUSIAS_NBIOT_4G_5G_2023,lifecycle_cost_eur,E0_MISSING,No lifecycle procurement/tariff cost estimand in the selected file.,E0_MISSING,FROZEN
+EV_E2_POVALAC_LORAWAN_TRAFFIC_2023,delivery_probability,C2_CONDITIONAL,"LoRaWAN sniffer records are observed receptions; without all attempted transmissions the delivery denominator is absent, so only conditional traffic/reception characterization is admissible.",C2_CONDITIONAL,FROZEN
+EV_E2_POVALAC_LORAWAN_TRAFFIC_2023,end_to_end_application_latency_ms,E0_MISSING,Sniffer packet observations do not identify matched application end-to-end latency.,E0_MISSING,FROZEN
+EV_E2_POVALAC_LORAWAN_TRAFFIC_2023,expected_device_energy_per_application_report_j,E0_MISSING,No device energy measurement.,E0_MISSING,FROZEN
+EV_E2_POVALAC_LORAWAN_TRAFFIC_2023,feasible_link_probability,C1_BRIDGEABLE,"Received-packet PHY/context can support an explicit observational link-context bridge, not a direct probability of serviceability.",C1_BRIDGEABLE,FROZEN
+EV_E2_POVALAC_LORAWAN_TRAFFIC_2023,lifecycle_cost_eur,E0_MISSING,No lifecycle cost estimand.,E0_MISSING,FROZEN
+EV_E3_LEENDERS_NBIOT_POWER_2019,delivery_probability,E0_MISSING,Energy traces do not identify attempted-versus-delivered message probability.,E0_MISSING,FROZEN
+EV_E3_LEENDERS_NBIOT_POWER_2019,end_to_end_application_latency_ms,E0_MISSING,Trace segmentation does not identify application end-to-end latency.,E0_MISSING,FROZEN
+EV_E3_LEENDERS_NBIOT_POWER_2019,expected_device_energy_per_application_report_j,C1_BRIDGEABLE,Measured NB-IoT modem/device-side energy components and packet energy require an explicit bridge to the STACKWISE whole-device application-report boundary and workload.,C1_BRIDGEABLE,FROZEN
+EV_E3_LEENDERS_NBIOT_POWER_2019,feasible_link_probability,C2_CONDITIONAL,RSRP/RSSI/SINR/RSRQ and coverage-enhancement context accompany energy measurements but do not directly identify operational link-feasibility probability.,C2_CONDITIONAL,FROZEN
+EV_E3_LEENDERS_NBIOT_POWER_2019,lifecycle_cost_eur,E0_MISSING,No procurement/tariff lifecycle cost estimand.,E0_MISSING,FROZEN
+EV_E1_KOUSIAS_NBIOT_4G_5G_2023,delivery_probability,E0_MISSING,Passive radio/network measurements do not contain attempted-transmission outcomes/denominator.,E0_MISSING,MAJORITY_SUBSTITUTION
+EV_E1_KOUSIAS_NBIOT_4G_5G_2023,end_to_end_application_latency_ms,E0_MISSING,"Selected passive NB-IoT file contains radio/network measurements, not end-to-end application latency.",E0_MISSING,MAJORITY_SUBSTITUTION
+EV_E1_KOUSIAS_NBIOT_4G_5G_2023,expected_device_energy_per_application_report_j,E0_MISSING,Selected passive NB-IoT file contains no device energy measurement.,E0_MISSING,MAJORITY_SUBSTITUTION
+EV_E1_KOUSIAS_NBIOT_4G_5G_2023,feasible_link_probability,C1_BRIDGEABLE,"Operational NB-IoT RSRP/RSRQ/SINR and serving-cell context can support a threshold/model bridge to link feasibility, but do not directly measure a probability estimand.",C1_BRIDGEABLE,MAJORITY_SUBSTITUTION
+EV_E1_KOUSIAS_NBIOT_4G_5G_2023,lifecycle_cost_eur,E0_MISSING,No lifecycle procurement/tariff cost estimand in the selected file.,E0_MISSING,MAJORITY_SUBSTITUTION
+EV_E2_POVALAC_LORAWAN_TRAFFIC_2023,delivery_probability,E0_MISSING,"LoRaWAN sniffer records are observed receptions; without all attempted transmissions the delivery denominator is absent, so only conditional traffic/reception characterization is admissible.",C2_CONDITIONAL,MAJORITY_SUBSTITUTION
+EV_E2_POVALAC_LORAWAN_TRAFFIC_2023,end_to_end_application_latency_ms,E0_MISSING,Sniffer packet observations do not identify matched application end-to-end latency.,E0_MISSING,MAJORITY_SUBSTITUTION
+EV_E2_POVALAC_LORAWAN_TRAFFIC_2023,expected_device_energy_per_application_report_j,E0_MISSING,No device energy measurement.,E0_MISSING,MAJORITY_SUBSTITUTION
+EV_E2_POVALAC_LORAWAN_TRAFFIC_2023,feasible_link_probability,C2_CONDITIONAL,"Received-packet PHY/context can support an explicit observational link-context bridge, not a direct probability of serviceability.",C1_BRIDGEABLE,MAJORITY_SUBSTITUTION
+EV_E2_POVALAC_LORAWAN_TRAFFIC_2023,lifecycle_cost_eur,E0_MISSING,No lifecycle cost estimand.,E0_MISSING,MAJORITY_SUBSTITUTION
+EV_E3_LEENDERS_NBIOT_POWER_2019,delivery_probability,E0_MISSING,Energy traces do not identify attempted-versus-delivered message probability.,E0_MISSING,MAJORITY_SUBSTITUTION
+EV_E3_LEENDERS_NBIOT_POWER_2019,end_to_end_application_latency_ms,E0_MISSING,Trace segmentation does not identify application end-to-end latency.,E0_MISSING,MAJORITY_SUBSTITUTION
+EV_E3_LEENDERS_NBIOT_POWER_2019,expected_device_energy_per_application_report_j,C1_BRIDGEABLE,Measured NB-IoT modem/device-side energy components and packet energy require an explicit bridge to the STACKWISE whole-device application-report boundary and workload.,C1_BRIDGEABLE,MAJORITY_SUBSTITUTION
+EV_E3_LEENDERS_NBIOT_POWER_2019,feasible_link_probability,C2_CONDITIONAL,RSRP/RSSI/SINR/RSRQ and coverage-enhancement context accompany energy measurements but do not directly identify operational link-feasibility probability.,C2_CONDITIONAL,MAJORITY_SUBSTITUTION
+EV_E3_LEENDERS_NBIOT_POWER_2019,lifecycle_cost_eur,E0_MISSING,No procurement/tariff lifecycle cost estimand.,E0_MISSING,MAJORITY_SUBSTITUTION
+EV_E1_KOUSIAS_NBIOT_4G_5G_2023,delivery_probability,E0_MISSING,Passive radio/network measurements do not contain attempted-transmission outcomes/denominator.,E0_MISSING,CONSERVATIVE_MAJORITY
+EV_E1_KOUSIAS_NBIOT_4G_5G_2023,end_to_end_application_latency_ms,E0_MISSING,"Selected passive NB-IoT file contains radio/network measurements, not end-to-end application latency.",E0_MISSING,CONSERVATIVE_MAJORITY
+EV_E1_KOUSIAS_NBIOT_4G_5G_2023,expected_device_energy_per_application_report_j,E0_MISSING,Selected passive NB-IoT file contains no device energy measurement.,E0_MISSING,CONSERVATIVE_MAJORITY
+EV_E1_KOUSIAS_NBIOT_4G_5G_2023,feasible_link_probability,C1_BRIDGEABLE,"Operational NB-IoT RSRP/RSRQ/SINR and serving-cell context can support a threshold/model bridge to link feasibility, but do not directly measure a probability estimand.",C1_BRIDGEABLE,CONSERVATIVE_MAJORITY
+EV_E1_KOUSIAS_NBIOT_4G_5G_2023,lifecycle_cost_eur,E0_MISSING,No lifecycle procurement/tariff cost estimand in the selected file.,E0_MISSING,CONSERVATIVE_MAJORITY
+EV_E2_POVALAC_LORAWAN_TRAFFIC_2023,delivery_probability,E0_MISSING,"LoRaWAN sniffer records are observed receptions; without all attempted transmissions the delivery denominator is absent, so only conditional traffic/reception characterization is admissible.",C2_CONDITIONAL,CONSERVATIVE_MAJORITY
+EV_E2_POVALAC_LORAWAN_TRAFFIC_2023,end_to_end_application_latency_ms,E0_MISSING,Sniffer packet observations do not identify matched application end-to-end latency.,E0_MISSING,CONSERVATIVE_MAJORITY
+EV_E2_POVALAC_LORAWAN_TRAFFIC_2023,expected_device_energy_per_application_report_j,E0_MISSING,No device energy measurement.,E0_MISSING,CONSERVATIVE_MAJORITY
+EV_E2_POVALAC_LORAWAN_TRAFFIC_2023,feasible_link_probability,C2_CONDITIONAL,"Received-packet PHY/context can support an explicit observational link-context bridge, not a direct probability of serviceability.",C1_BRIDGEABLE,CONSERVATIVE_MAJORITY
+EV_E2_POVALAC_LORAWAN_TRAFFIC_2023,lifecycle_cost_eur,E0_MISSING,No lifecycle cost estimand.,E0_MISSING,CONSERVATIVE_MAJORITY
+EV_E3_LEENDERS_NBIOT_POWER_2019,delivery_probability,E0_MISSING,Energy traces do not identify attempted-versus-delivered message probability.,E0_MISSING,CONSERVATIVE_MAJORITY
+EV_E3_LEENDERS_NBIOT_POWER_2019,end_to_end_application_latency_ms,E0_MISSING,Trace segmentation does not identify application end-to-end latency.,E0_MISSING,CONSERVATIVE_MAJORITY
+EV_E3_LEENDERS_NBIOT_POWER_2019,expected_device_energy_per_application_report_j,C1_BRIDGEABLE,Measured NB-IoT modem/device-side energy components and packet energy require an explicit bridge to the STACKWISE whole-device application-report boundary and workload.,C1_BRIDGEABLE,CONSERVATIVE_MAJORITY
+EV_E3_LEENDERS_NBIOT_POWER_2019,feasible_link_probability,C2_CONDITIONAL,RSRP/RSSI/SINR/RSRQ and coverage-enhancement context accompany energy measurements but do not directly identify operational link-feasibility probability.,C2_CONDITIONAL,CONSERVATIVE_MAJORITY
+EV_E3_LEENDERS_NBIOT_POWER_2019,lifecycle_cost_eur,E0_MISSING,No procurement/tariff lifecycle cost estimand.,E0_MISSING,CONSERVATIVE_MAJORITY

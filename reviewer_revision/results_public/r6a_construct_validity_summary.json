@@ -1,0 +1,24 @@
+{
+  "four_class": {
+    "fleiss_kappa": 0.5366735934734087,
+    "observed_pairwise_agreement": 0.7952380952380952,
+    "bootstrap_replicates": 20000,
+    "bootstrap_seed": 20260816,
+    "ci95_low": 0.4075848303393213,
+    "ci95_high": 0.6297162728497864
+  },
+  "operational_two_class": {
+    "definition": "C0/C1=no_external_assumption; C2/E0=assumption_or_missing",
+    "expert_fleiss_kappa": 0.6312260536398463,
+    "expert_observed_pairwise_agreement": 0.8952380952380952,
+    "algorithm_vs_all_expert_votes_exact_agreement": 0.9
+  },
+  "items": 35,
+  "independent_raters": 4,
+  "class_distribution_frozen": {
+    "C0_DIRECT": 0,
+    "C1_BRIDGEABLE": 8,
+    "C2_CONDITIONAL": 3,
+    "E0_MISSING": 24
+  }
+}

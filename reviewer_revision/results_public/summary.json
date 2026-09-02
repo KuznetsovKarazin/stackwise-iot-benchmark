@@ -1,0 +1,134 @@
+{
+  "campaign": "reviewer_revision_v6",
+  "baseline_project_version": "0.1.62",
+  "benchmark_version": "1.0.0",
+  "confirmatory_external_campaign_modified": false,
+  "frozen_classifier_modified": false,
+  "r6a": {
+    "four_class": {
+      "fleiss_kappa": 0.5366735934734087,
+      "observed_pairwise_agreement": 0.7952380952380952,
+      "bootstrap_replicates": 20000,
+      "bootstrap_seed": 20260816,
+      "ci95_low": 0.4075848303393213,
+      "ci95_high": 0.6297162728497864
+    },
+    "operational_two_class": {
+      "definition": "C0/C1=no_external_assumption; C2/E0=assumption_or_missing",
+      "expert_fleiss_kappa": 0.6312260536398463,
+      "expert_observed_pairwise_agreement": 0.8952380952380952,
+      "algorithm_vs_all_expert_votes_exact_agreement": 0.9
+    },
+    "items": 35,
+    "independent_raters": 4,
+    "class_distribution_frozen": {
+      "C0_DIRECT": 0,
+      "C1_BRIDGEABLE": 8,
+      "C2_CONDITIONAL": 3,
+      "E0_MISSING": 24
+    }
+  },
+  "r6b": {
+    "schemes": [
+      "FROZEN",
+      "MAJORITY_SUBSTITUTION",
+      "CONSERVATIVE_MAJORITY"
+    ],
+    "internal_relation_class_counts": {
+      "FROZEN": {
+        "E0_MISSING": 14,
+        "C1_BRIDGEABLE": 5,
+        "C2_CONDITIONAL": 1
+      },
+      "MAJORITY_SUBSTITUTION": {
+        "E0_MISSING": 15,
+        "C1_BRIDGEABLE": 3,
+        "C0_DIRECT": 1,
+        "C2_CONDITIONAL": 1
+      },
+      "CONSERVATIVE_MAJORITY": {
+        "E0_MISSING": 15,
+        "C1_BRIDGEABLE": 4,
+        "C2_CONDITIONAL": 1
+      }
+    },
+    "external_relation_class_counts": {
+      "FROZEN": {
+        "E0_MISSING": 10,
+        "C1_BRIDGEABLE": 3,
+        "C2_CONDITIONAL": 2
+      },
+      "MAJORITY_SUBSTITUTION": {
+        "E0_MISSING": 11,
+        "C1_BRIDGEABLE": 2,
+        "C2_CONDITIONAL": 2
+      },
+      "CONSERVATIVE_MAJORITY": {
+        "E0_MISSING": 11,
+        "C1_BRIDGEABLE": 2,
+        "C2_CONDITIONAL": 2
+      }
+    },
+    "candidate_target_transition_rows_changed": {
+      "FROZEN": 0,
+      "MAJORITY_SUBSTITUTION": 0,
+      "CONSERVATIVE_MAJORITY": 0
+    },
+    "external_candidate_readiness_rows_changed": {
+      "FROZEN": 0,
+      "MAJORITY_SUBSTITUTION": 0,
+      "CONSERVATIVE_MAJORITY": 0
+    },
+    "first_slice_candidate_criterion_rows_changed": {
+      "FROZEN": 0,
+      "MAJORITY_SUBSTITUTION": 0,
+      "CONSERVATIVE_MAJORITY": 0
+    },
+    "full_stage5e_candidate_target_status_changes": {
+      "FROZEN": 0,
+      "MAJORITY_SUBSTITUTION": 3,
+      "CONSERVATIVE_MAJORITY": 3
+    },
+    "full_stage5e_first_slice_fully_ready_candidates": {
+      "FROZEN": 0,
+      "MAJORITY_SUBSTITUTION": 0,
+      "CONSERVATIVE_MAJORITY": 0
+    },
+    "canonical_complete_two_criterion_candidates": {
+      "FROZEN": 0,
+      "MAJORITY_SUBSTITUTION": 0,
+      "CONSERVATIVE_MAJORITY": 0
+    },
+    "negative_control": {
+      "FROZEN": "C2_CONDITIONAL",
+      "MAJORITY_SUBSTITUTION": "E0_MISSING",
+      "CONSERVATIVE_MAJORITY": "E0_MISSING"
+    }
+  },
+  "r6c": [
+    {
+      "uncertainty_variant": "BASELINE",
+      "candidate_target_rows": 120,
+      "readiness_status_changes_vs_baseline": 0,
+      "readiness_invariant": true,
+      "interpretation": "Current Stage-5E has no probabilistic precision threshold; uncertainty metadata cannot upgrade/downgrade admissibility or hard feasibility by itself."
+    },
+    {
+      "uncertainty_variant": "ALL_PESSIMISTIC_LABELS",
+      "candidate_target_rows": 120,
+      "readiness_status_changes_vs_baseline": 0,
+      "readiness_invariant": true,
+      "interpretation": "Current Stage-5E has no probabilistic precision threshold; uncertainty metadata cannot upgrade/downgrade admissibility or hard feasibility by itself."
+    },
+    {
+      "uncertainty_variant": "ALL_OPTIMISTIC_LABELS",
+      "candidate_target_rows": 120,
+      "readiness_status_changes_vs_baseline": 0,
+      "readiness_invariant": true,
+      "interpretation": "Current Stage-5E has no probabilistic precision threshold; uncertainty metadata cannot upgrade/downgrade admissibility or hard feasibility by itself."
+    }
+  ],
+  "interpretive_guardrail": "Sensitivity results are post-review/non-confirmatory and do not overwrite frozen labels or primary outcomes.",
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "platform": "Linux-6.18.35-x86_64-with-glibc2.41"
+}

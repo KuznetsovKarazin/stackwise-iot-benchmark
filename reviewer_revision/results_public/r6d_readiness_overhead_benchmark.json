@@ -1,0 +1,14 @@
+{
+  "benchmark_role": "illustrative computational-overhead sanity check; not a cross-hardware performance claim",
+  "iterations": 3000,
+  "candidate_target_rows_per_iteration": 120,
+  "non_infeasible_scenario_candidate_pairs": 24,
+  "decision_targets": 5,
+  "median_ms": 0.2361565,
+  "p05_ms": 0.21856250000000002,
+  "p95_ms": 0.3874813999999998,
+  "mean_ms": 0.26737165199999996,
+  "max_ms": 4.12367,
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "platform": "Linux-6.18.35-x86_64-with-glibc2.41"
+}

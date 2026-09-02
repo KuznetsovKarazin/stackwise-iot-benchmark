@@ -1,0 +1,4 @@
+uncertainty_variant,candidate_target_rows,readiness_status_changes_vs_baseline,readiness_invariant,interpretation
+BASELINE,120,0,True,Current Stage-5E has no probabilistic precision threshold; uncertainty metadata cannot upgrade/downgrade admissibility or hard feasibility by itself.
+ALL_PESSIMISTIC_LABELS,120,0,True,Current Stage-5E has no probabilistic precision threshold; uncertainty metadata cannot upgrade/downgrade admissibility or hard feasibility by itself.
+ALL_OPTIMISTIC_LABELS,120,0,True,Current Stage-5E has no probabilistic precision threshold; uncertainty metadata cannot upgrade/downgrade admissibility or hard feasibility by itself.

@@ -1,0 +1,5 @@
+frozen_class,items,expert_votes,exact_vote_agreement_count,exact_vote_agreement_fraction,items_with_3of4_or_4of4_consensus_matching_frozen,item_level_majority_match_fraction,unanimous_items_matching_frozen
+C0_DIRECT,0,0,0,,0,,0
+C1_BRIDGEABLE,8,32,14,0.4375,2,0.25,0
+C2_CONDITIONAL,3,12,3,0.25,1,0.3333333333333333,0
+E0_MISSING,24,96,92,0.9583333333333334,24,1.0,20

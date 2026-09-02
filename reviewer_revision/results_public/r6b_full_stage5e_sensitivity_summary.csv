@@ -1,0 +1,4 @@
+sensitivity_scheme,candidate_target_rows,candidate_target_readiness_status_changes_vs_frozen,changed_candidate_specific_rules,changed_rule_count,ready_target_rows,feasible_first_slice_fully_ready_candidates,decision_ready_conclusion_changed
+FROZEN,120,0,,0,0,0,False
+MAJORITY_SUBSTITUTION,120,3,classical_lora_delivery:CONDITIONAL_INPUT_ONLY->MISSING,1,0,0,False
+CONSERVATIVE_MAJORITY,120,3,classical_lora_delivery:CONDITIONAL_INPUT_ONLY->MISSING,1,0,0,False

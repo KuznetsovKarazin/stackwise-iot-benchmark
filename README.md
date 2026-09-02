@@ -43,11 +43,15 @@ The repository contains the code and machine-readable definitions used to:
 No publication-grade global stochastic ranking across all candidate stacks is claimed. Matched whole-device energy-per-report evidence for the four cellular IP candidates remains a documented future-validation limitation.
 
 
-## Paper B external validation
+## Paper B external portability and held-out-evidence campaign
 
 Release v0.1.62 adds the validation layer used by the STACKWISE methodology paper. It includes a checksum-pinned protocol, five independently authored external use cases, held-out evidence adapters, robustness analyses and compact public result tables under `external_validation/results_public/`. Large third-party datasets, publisher PDFs and original expert-return files are deliberately excluded; their source identifiers/checksums or anonymised aggregate results are retained instead.
 
 The external campaign tests **evidence readiness, ontology portability and abstention**, not winner reproduction across incompatible candidate universes. The frozen benchmark remains v1.0.0. See `docs/PAPER_B_EXTERNAL_VALIDATION_REPORT_v2.md` and `docs/PAPER_B_RESULTS_TRACEABILITY_v2.md`.
+
+## Array peer-review robustness analyses
+
+Release v0.1.63 adds post-review, non-confirmatory sensitivity analyses requested during peer review. These analyses do not modify Benchmark v1.0.0, the frozen external portability/held-out-evidence campaign, or the frozen admissibility classifier. They add class-specific expert-audit diagnostics, consensus-label downstream sensitivity, uncertainty-label sensitivity, exact replay tests and an illustrative readiness-engine overhead benchmark. See `docs/ARRAY_REVIEWER_REVISION_REPRODUCIBILITY_v6.md` and `reviewer_revision/results_public/`.
 
 ## Repository layout
 
